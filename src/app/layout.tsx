@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Header, Footer } from "@/components/chrome";
 import { ShopProvider } from "@/components/shop-provider";
 import "./globals.css";
-import "./unboxed.css";
-import "./showcase.css";
+import "./atelier.css";
 
 export const metadata: Metadata = {
   title: {

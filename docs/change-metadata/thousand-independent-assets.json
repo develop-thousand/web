@@ -1,0 +1,602 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261010-134334-independent-generated-pie-assets-and-redesigned-",
+  "created_at": "2026-10-10T13:43:34+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "c980eaa1b8ba4241121752651a8749d3bdc69451",
+  "request": "Generate all pie varieties as reference-based transparent PNGs, isolate pies on hover, remove motion control UI and rebuild typography",
+  "title": "Independent generated pie assets and redesigned typography",
+  "purpose": "Replace screenshot hotspots with separate transparent food assets and direct manipulation motion",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 813
+        }
+      ],
+      "working_tree_sha256": "1d069584726e6f7f28d91de91c293f868c4612b59c387e760e587288fd54b0f2",
+      "symbols": [
+        "typography tokens",
+        ".asset-cabinet",
+        ".shelf-product",
+        ".pie-object",
+        ".atelier-selection",
+        "responsive and reduced-motion styles"
+      ],
+      "purpose": "Create unified typography and independent object motion.",
+      "previous_behavior": "No atelier theme; collage and screenshot themes layered onto the base styles.",
+      "new_behavior": "Barlow Condensed headings and Noto Sans KR body text; cabinet composition with isolated hover, responsive shelves and coherent commerce styles.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Fonts need network availability; fallback typography can differ."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/app/globals.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 2,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": "15f649bd624dca2c1062731ae508faa19386f1b15f589cc6aace5482e99148b3",
+      "symbols": [
+        "Google Fonts import"
+      ],
+      "purpose": "Stop fetching unused legacy fonts.",
+      "previous_behavior": "Fetched DM Sans and Libre Caslon Display.",
+      "new_behavior": "Legacy import removed; atelier.css supplies the new font families.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Old token declarations remain as overridden base defaults."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 5,
+          "old_end": 6,
+          "new_start": 5,
+          "new_end": 5
+        }
+      ],
+      "working_tree_sha256": "ab84c2f804cf2b10f8f39b8c44616f0371ba2670b1c186ece0c02d49198af9d2",
+      "symbols": [
+        "RootLayout"
+      ],
+      "purpose": "Load only the current authored theme.",
+      "previous_behavior": "Imported unboxed.css and showcase.css.",
+      "new_behavior": "Imports atelier.css after globals.css.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Global style changes affect all routes."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 1,
+          "new_start": 1,
+          "new_end": 1
+        },
+        {
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 10,
+          "new_end": 10
+        },
+        {
+          "old_start": 13,
+          "old_end": 23,
+          "new_start": 13,
+          "new_end": 15
+        },
+        {
+          "old_start": 27,
+          "old_end": 45,
+          "new_start": 19,
+          "new_end": 20
+        },
+        {
+          "old_start": 47,
+          "old_end": 48,
+          "new_start": 22,
+          "new_end": 23
+        },
+        {
+          "old_start": 50,
+          "old_end": 50,
+          "new_start": 25,
+          "new_end": 25
+        },
+        {
+          "old_start": 52,
+          "old_end": 56,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 58,
+          "old_end": 60,
+          "new_start": 28,
+          "new_end": 28
+        },
+        {
+          "old_start": 62,
+          "old_end": 62,
+          "new_start": 30,
+          "new_end": 30
+        },
+        {
+          "old_start": 64,
+          "old_end": 64,
+          "new_start": 32,
+          "new_end": 32
+        },
+        {
+          "old_start": 67,
+          "old_end": 67,
+          "new_start": 35,
+          "new_end": 35
+        },
+        {
+          "old_start": 69,
+          "old_end": 69,
+          "new_start": 37,
+          "new_end": 37
+        },
+        {
+          "old_start": 71,
+          "old_end": 84,
+          "new_start": 39,
+          "new_end": 40
+        },
+        {
+          "old_start": 86,
+          "old_end": 98,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 44,
+          "new_end": 60
+        },
+        {
+          "old_start": 103,
+          "old_end": 109,
+          "new_start": 63,
+          "new_end": 65
+        },
+        {
+          "old_start": 116,
+          "old_end": 117,
+          "new_start": 72,
+          "new_end": 73
+        },
+        {
+          "old_start": 119,
+          "old_end": 119,
+          "new_start": 75,
+          "new_end": 75
+        },
+        {
+          "old_start": 122,
+          "old_end": 122,
+          "new_start": 78,
+          "new_end": 78
+        },
+        {
+          "old_start": 124,
+          "old_end": 124,
+          "new_start": 80,
+          "new_end": 80
+        },
+        {
+          "old_start": 138,
+          "old_end": 138,
+          "new_start": 94,
+          "new_end": 94
+        },
+        {
+          "old_start": 143,
+          "old_end": 143,
+          "new_start": 99,
+          "new_end": 99
+        }
+      ],
+      "working_tree_sha256": "b3d1c4de07e169472e683434580110863d2efd3346239dee8aceaef1fda80015",
+      "symbols": [
+        "Home",
+        "/"
+      ],
+      "purpose": "Rebuild the page hierarchy around the pie cabinet.",
+      "previous_behavior": "Long English slogans and prior collage remnants below screenshot hero.",
+      "new_behavior": "Compact headings, new cabinet, matching cutout catalog, people story and store photography.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Story section dimensions differ from prior layout."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/app/showcase.css",
+      "change_type": "deleted",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 707,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": null,
+      "symbols": [
+        "old screenshot showcase theme"
+      ],
+      "purpose": "Remove superseded screenshot presentation.",
+      "previous_behavior": "Styled hotspot counter and visible motion controls.",
+      "new_behavior": "Deleted; independent element composition is styled in atelier.css.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Rollback must restore both old CSS imports and files together."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/app/unboxed.css",
+      "change_type": "deleted",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 1357,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": null,
+      "symbols": [
+        "old collage theme"
+      ],
+      "purpose": "Remove conflicting obsolete typography and layout.",
+      "previous_behavior": "Archivo Black and large collage treatments persisted globally.",
+      "new_behavior": "Deleted; new typography is defined in atelier.css.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Any previously inherited styles now fall back to globals or the new theme."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/components/catalog.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 7,
+          "old_end": 7,
+          "new_start": 7,
+          "new_end": 7
+        },
+        {
+          "old_start": 23,
+          "old_end": 23,
+          "new_start": 23,
+          "new_end": 23
+        }
+      ],
+      "working_tree_sha256": "0bafffce84751eef715236b8ba5f6c14dc149c56762f653bdd5d674385ec07ea",
+      "symbols": [
+        "PieCard"
+      ],
+      "purpose": "Use the new standalone product assets consistently.",
+      "previous_behavior": "Product cards used rectangular brand photographs.",
+      "new_behavior": "Each card uses its slug-matched transparent generated PNG.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Generated illustrations can differ from physical serving appearance."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-detail.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 6,
+          "old_end": 6,
+          "new_start": 6,
+          "new_end": 6
+        },
+        {
+          "old_start": 16,
+          "old_end": 16,
+          "new_start": 16,
+          "new_end": 16
+        },
+        {
+          "old_start": 93,
+          "old_end": 94,
+          "new_start": 93,
+          "new_end": 94
+        }
+      ],
+      "working_tree_sha256": "94c1087fd877240822af38275d8b5120261891b1b09c2703e85ca48f3d716e76",
+      "symbols": [
+        "PieDetail"
+      ],
+      "purpose": "Carry generated assets into product detail and accurately describe them.",
+      "previous_behavior": "Hero displayed original photo and photo-source notice.",
+      "new_behavior": "Hero displays transparent pie asset; notice explains reference-based imagery and one-slice unit.",
+      "data_impact": "None: presentation only; static catalog and localStorage cart schema unchanged.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Whole pie illustration must not be mistaken for sold quantity; one-slice text is retained."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 3,
+          "old_end": 3,
+          "new_start": 3,
+          "new_end": 3
+        },
+        {
+          "old_start": 6,
+          "old_end": 14,
+          "new_start": 6,
+          "new_end": 7
+        },
+        {
+          "old_start": 17,
+          "old_end": 26,
+          "new_start": 10,
+          "new_end": 10
+        },
+        {
+          "old_start": 30,
+          "old_end": 30,
+          "new_start": 14,
+          "new_end": 15
+        },
+        {
+          "old_start": 32,
+          "old_end": 34,
+          "new_start": 17,
+          "new_end": 18
+        },
+        {
+          "old_start": 37,
+          "old_end": 44,
+          "new_start": 21,
+          "new_end": 25
+        },
+        {
+          "old_start": 46,
+          "old_end": 48,
+          "new_start": 27,
+          "new_end": 110
+        },
+        {
+          "old_start": 50,
+          "old_end": 53,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 55,
+          "old_end": 58,
+          "new_start": 113,
+          "new_end": 126
+        },
+        {
+          "old_start": 60,
+          "old_end": 62,
+          "new_start": 128,
+          "new_end": 130
+        },
+        {
+          "old_start": 64,
+          "old_end": 65,
+          "new_start": 132,
+          "new_end": 133
+        },
+        {
+          "old_start": 68,
+          "old_end": 198,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": "d839cd55703e346980956336e2ee8e6f4107338a78d4f101b2c84b81dc96b56c",
+      "symbols": [
+        "PieShowcase",
+        "pieAsset",
+        "selected",
+        "hovered",
+        "buttons"
+      ],
+      "purpose": "Make pies independent manipulable objects instead of photograph hotspots.",
+      "previous_behavior": "Five coordinate buttons on a screenshot with motion toggle.",
+      "new_behavior": "Eight transparent pies over a generated empty cabinet; hover/focus isolate and scale, selection persists toward cart, arrows navigate, sold-out item cannot be added. No visible motion switch.",
+      "data_impact": "Reads static catalog; add action uses existing localStorage cart provider for selected product ID and quantity. No server or personal-data writes.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Generated assets add download weight; mobile tap and desktop hover use different input paths."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 10,
+          "new_end": 10
+        },
+        {
+          "old_start": 18,
+          "old_end": 18,
+          "new_start": 18,
+          "new_end": 18
+        },
+        {
+          "old_start": 57,
+          "old_end": 57,
+          "new_start": 57,
+          "new_end": 57
+        },
+        {
+          "old_start": 61,
+          "old_end": 61,
+          "new_start": 61,
+          "new_end": 76
+        },
+        {
+          "old_start": 63,
+          "old_end": 63,
+          "new_start": 78,
+          "new_end": 78
+        },
+        {
+          "old_start": 67,
+          "old_end": 75,
+          "new_start": 82,
+          "new_end": 82
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 89,
+          "new_end": 89
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 91,
+          "new_end": 93
+        },
+        {
+          "old_start": 84,
+          "old_end": 84,
+          "new_start": 95,
+          "new_end": 95
+        },
+        {
+          "old_start": 86,
+          "old_end": 86,
+          "new_start": 97,
+          "new_end": 97
+        },
+        {
+          "old_start": 88,
+          "old_end": 88,
+          "new_start": 99,
+          "new_end": 102
+        },
+        {
+          "old_start": 90,
+          "old_end": 92,
+          "new_start": 104,
+          "new_end": 106
+        }
+      ],
+      "working_tree_sha256": "e49f93c219eb11339390be8f0770aff38e08486f3f7594031501f83f6074f485",
+      "symbols": [
+        "home images, navigation, and responsive layout",
+        "cutout showcase, hover persistence, keyboard, cart and reduced motion"
+      ],
+      "purpose": "Verify the new experience and retain commerce coverage.",
+      "previous_behavior": "Asserted screenshot hotspots and explicit motion switch.",
+      "new_behavior": "Checks eight products, no motion UI, hover isolation and persistence, correct cart identity, keyboard navigation, seasonal disable and OS reduced motion; awaits dialog dismissal before keyboard focus.",
+      "data_impact": "Isolated test browser storage only; no production data access.",
+      "access_control_impact": "None: no roles, authentication or permission checks changed.",
+      "risks": [
+        "Chromium emulation does not cover native Safari or physical touch hardware."
+      ],
+      "rollback": "Revert this commit as one unit to restore prior source, stylesheet imports and screenshot asset; no data migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production operational data read or changed. Eight PNG product assets and one cabinet background generated and copied into project; obsolete supplied screenshot removed from project.",
+    "schema_migration": "None; all data schemas remain compatible.",
+    "external_side_effects": [
+      "Built-in image generation received existing public pie photographs as references. No CLI/API fallback.",
+      "No deployment, payment, orders or messages. Test browsers may load fonts and existing map embeds."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production build compiled and typechecked; 16 static routes generated."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "Final run 10/10 desktop and mobile tests passed in 17.4s. An earlier test race around dialog focus restoration was corrected by awaiting dismissal and focus."
+    },
+    {
+      "command": "Pillow read-only RGBA and alpha histogram inspection of public/images/atelier/*.png",
+      "result": "passed",
+      "evidence": "All eight pie PNGs have real alpha with >10% fully transparent pixels. Source pixels copied unchanged; no image-processing substitutions."
+    },
+    {
+      "command": "node artifacts/record-atelier.cjs",
+      "result": "passed",
+      "evidence": "No horizontal overflow at 360,768,1024px. Recorded hover/cart video and mobile full cabinet screenshot."
+    },
+    {
+      "command": "Visual review of desktop, hover, mobile, tablet and product screenshots",
+      "result": "passed",
+      "evidence": "Independent pie edges render against scene; hover hides surrounding pies; readable new type hierarchy and commerce controls."
+    }
+  ],
+  "residual_risks": [
+    "Generated pie appearances and composition need brand signoff before public commerce; current displayed prices and availability remain samples.",
+    "Ordering/payment/backend inventory remain demo-only.",
+    "External Google Fonts availability can affect fallback typography.",
+    "Physical mobile devices and native Safari not exercised; Chromium touch emulation passed."
+  ],
+  "commit": "same-as-metadata-file"
+}

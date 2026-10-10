@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Plus, ArrowUpRight } from "lucide-react";
-import { pies, photo, money, type Pie } from "@/lib/catalog";
+import { pies, money, type Pie } from "@/lib/catalog";
 import { useShop } from "./shop-provider";
 
 export function PieCard({
@@ -20,7 +20,7 @@ export function PieCard({
       <div className="pie-visual">
         <Link href={`/pies/${pie.slug}`} aria-label={`${pie.name} 상세 보기`}>
           <Image
-            src={photo(pie.image)}
+            src={`/images/atelier/${pie.slug}.png`}
             alt={pie.name}
             fill
             sizes="(max-width: 600px) 50vw, (max-width: 1000px) 33vw, 25vw"

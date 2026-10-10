@@ -1,201 +1,138 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  Plus,
-  Pause,
-  Play,
-} from "lucide-react";
-import { pies, photo, money } from "@/lib/catalog";
+import { ArrowUpRight, Plus } from "lucide-react";
+import { pies, money } from "@/lib/catalog";
 import { useShop } from "./shop-provider";
 
-const display = [
-  { slug: "banana-cream", x: 24, y: 59 },
-  { slug: "mud", x: 63, y: 53 },
-  { slug: "pecan", x: 18, y: 83 },
-  { slug: "blueberry", x: 59, y: 87 },
-  { slug: "pumpkin", x: 79, y: 87 },
-].map((position) => ({
-  ...position,
-  pie: pies.find((p) => p.slug === position.slug)!,
-}));
+export const pieAsset = (slug: string) => `/images/atelier/${slug}.png`;
 
 export function PieShowcase() {
   const [selected, setSelected] = useState(0);
-  const [motion, setMotion] = useState(true);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const { add } = useShop();
-  const item = display[selected];
-  const choose = (direction: number) =>
-    setSelected((i) => (i + direction + display.length) % display.length);
+  const active = hovered ?? selected;
+  const pie = pies[active];
 
   return (
-    <section
-      className={`showroom ${motion ? "" : "motion-off"}`}
-      aria-label="따우전드 파이 진열장"
-    >
-      <div className="showroom-welcome">
-        <div className="welcome-note">
-          <span>From our counter,</span>
-          <span>to your kind of day.</span>
+    <section className="pie-atelier" aria-label="따우전드 파이 진열장">
+      <div className="atelier-heading">
+        <div>
+          <p>서울에서 굽는 아메리칸 클래식</p>
+          <h1>THE PIE ROOM</h1>
         </div>
-        <div className="showroom-title">
-          <p>THOUSAND AMERICAN PIE HOUSE</p>
-          <h1>A little slice of happiness.</h1>
-        </div>
-        <Link href="/stores" className="visit-note">
-          매장에서 만나요
-          <ArrowUpRight size={18} />
-        </Link>
+        <p className="atelier-intro">
+          눈길이 머무는 파이,
+          <br />
+          당신의 한 조각을 골라보세요.
+        </p>
       </div>
-      <div className="counter-frame">
-        <div className="counter-canopy">
-          <span>Homemade spirit. Seoul soul.</span>
-          <p>마음에 드는 파이를 골라보세요.</p>
+      <div
+        className={`asset-cabinet ${hovered !== null ? "is-exploring" : ""}`}
+      >
+        <Image
+          className="empty-cabinet"
+          src="/images/atelier/cabinet.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          aria-hidden="true"
+        />
+        <div className="cabinet-glass" aria-hidden="true" />
+        <div className="asset-shelves" role="group" aria-label="파이 컬렉션">
+          {[0, 1].map((row) => (
+            <div className={`asset-shelf shelf-${row}`} key={row}>
+              {pies.slice(row * 4, row * 4 + 4).map((p, col) => {
+                const index = row * 4 + col;
+                return (
+                  <button
+                    key={p.slug}
+                    ref={(node) => {
+                      buttons.current[index] = node;
+                    }}
+                    className={`shelf-product ${active === index ? "is-active" : ""}`}
+                    aria-label={`${p.name} 선택`}
+                    aria-pressed={selected === index}
+                    onPointerEnter={(e) => {
+                      if (e.pointerType === "mouse") {
+                        setHovered(index);
+                        setSelected(index);
+                      }
+                    }}
+                    onPointerLeave={() => setHovered(null)}
+                    onFocus={() => {
+                      setHovered(index);
+                      setSelected(index);
+                    }}
+                    onBlur={() => setHovered(null)}
+                    onClick={() => setSelected(index)}
+                    onKeyDown={(e) => {
+                      const steps: Record<string, number> = {
+                        ArrowRight: 1,
+                        ArrowLeft: -1,
+                        ArrowDown: 4,
+                        ArrowUp: -4,
+                      };
+                      if (e.key in steps) {
+                        e.preventDefault();
+                        const next =
+                          (index + steps[e.key] + pies.length) % pies.length;
+                        setSelected(next);
+                        buttons.current[next]?.focus();
+                      }
+                    }}
+                  >
+                    <span className="pie-object">
+                      <Image
+                        src={pieAsset(p.slug)}
+                        alt={p.name}
+                        fill
+                        priority={row === 0}
+                        sizes="(max-width:700px) 42vw, 23vw"
+                      />
+                      <span className="object-shadow" />
+                    </span>
+                    <span className="shelf-label">
+                      <strong>{p.name}</strong>
+                      <span>{p.available ? money(p.price) : "시즌 종료"}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+        <div className="cabinet-signature" aria-hidden="true">
+          THOUSAND <span>AMERICAN PIE HOUSE</span>
+        </div>
+      </div>
+      <div className="atelier-selection">
+        <div className="selection-copy" aria-live="polite" aria-atomic="true">
+          <span className="selection-category">{pie.category}</span>
+          <h2>{pie.name}</h2>
+          <p>{pie.note}</p>
+        </div>
+        <div className="selection-actions">
+          <p>
+            {money(pie.price)}
+            <span> / 조각</span>
+          </p>
+          <Link href={`/pies/${pie.slug}`}>
+            자세히 보기 <ArrowUpRight size={16} />
+          </Link>
           <button
-            onClick={() => setMotion((v) => !v)}
-            aria-pressed={!motion}
-            aria-label={motion ? "모션 끄기" : "모션 켜기"}
+            disabled={!pie.available}
+            onClick={() => add(pie.slug)}
+            aria-label={`선택한 ${pie.name} 담기`}
           >
-            {motion ? <Pause size={13} /> : <Play size={13} />}
-            <span>모션 {motion ? "켜짐" : "꺼짐"}</span>
+            {pie.available ? "한 조각 담기" : "시즌 종료"}
+            <Plus size={17} />
           </button>
         </div>
-        <div className="counter-interior">
-          <div
-            className="cabinet-scene"
-            onKeyDown={(e) => {
-              if (e.key === "ArrowRight") {
-                e.preventDefault();
-                choose(1);
-              }
-              if (e.key === "ArrowLeft") {
-                e.preventDefault();
-                choose(-1);
-              }
-            }}
-            role="group"
-            aria-label="진열장의 상품 선택. 좌우 방향키로도 이동할 수 있습니다."
-          >
-            <Image
-              className="cabinet-photo"
-              src="/images/pie-showcase-reference.png"
-              alt="황동 프레임과 따뜻한 조명이 있는 따우전드 실제 파이 진열장"
-              fill
-              priority
-              sizes="(max-width: 800px) 100vw, 72vw"
-            />
-            <div className="cabinet-shade" aria-hidden="true" />
-            <div
-              className="cabinet-focus"
-              style={{ left: `${item.x}%`, top: `${item.y}%` }}
-              aria-hidden="true"
-            />
-            <div className="glass-reflection" aria-hidden="true" />
-            <div className="cabinet-light" aria-hidden="true" />
-            {display.map((entry, i) => (
-              <button
-                key={entry.slug}
-                className={`pie-pin ${selected === i ? "chosen" : ""}`}
-                style={
-                  {
-                    "--pin-x": `${entry.x}%`,
-                    "--pin-y": `${entry.y}%`,
-                  } as CSSProperties
-                }
-                aria-label={`${entry.pie.name} 선택`}
-                aria-pressed={selected === i}
-                onClick={() => setSelected(i)}
-              >
-                <span className="pin-dot">
-                  <Plus size={13} />
-                </span>
-                <span className="pin-name">{entry.pie.name}</span>
-              </button>
-            ))}
-            <div className="counter-hint">
-              <span className="hint-dot" />
-              파이 위의 +를 눌러보세요
-            </div>
-            <button
-              className="cabinet-next"
-              aria-label="다음 진열 파이"
-              onClick={() => choose(1)}
-            >
-              <ArrowRight size={19} />
-            </button>
-          </div>
-          <aside className="counter-product" aria-label="선택한 파이">
-            <div className="counter-product-top">
-              <span>Your pick</span>
-              <div>
-                <button aria-label="이전 진열 파이" onClick={() => choose(-1)}>
-                  <ArrowLeft size={17} />
-                </button>
-                <span>
-                  {selected + 1} / {display.length}
-                </span>
-                <button aria-label="다음 상품" onClick={() => choose(1)}>
-                  <ArrowRight size={17} />
-                </button>
-              </div>
-            </div>
-            <div className="counter-product-reveal" key={item.slug}>
-              <Link
-                className="counter-closeup"
-                href={`/pies/${item.slug}`}
-                aria-label={`${item.pie.name} 상세 보기`}
-              >
-                <Image
-                  src={photo(item.pie.image)}
-                  alt={item.pie.name}
-                  fill
-                  sizes="(max-width: 800px) 44vw, 25vw"
-                />
-                <span>
-                  자세히 보기 <ArrowUpRight size={15} />
-                </span>
-              </Link>
-              <div
-                className="counter-product-copy"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <p className="pie-english">{item.pie.english}</p>
-                <h2>{item.pie.name}</h2>
-                <p className="pie-taste">{item.pie.note}</p>
-                <p className="counter-price">
-                  {money(item.pie.price)}
-                  <span> / 조각</span>
-                </p>
-              </div>
-            </div>
-            <button
-              className="counter-add"
-              onClick={() => add(item.slug)}
-              aria-label={`선택한 ${item.pie.name} 담기`}
-            >
-              이 파이 담기 <Plus size={20} />
-            </button>
-            <Link className="counter-all" href="/shop">
-              전체 파이 메뉴 <ArrowUpRight size={16} />
-            </Link>
-          </aside>
-        </div>
-        <div className="counter-plinth">
-          <span>THOUSAND</span>
-          <p>좋아하는 한 조각을 만나는 곳.</p>
-          <span>Est. Seoul 2022</span>
-        </div>
-      </div>
-      <div className="showroom-foot">
-        <span>군자 · 신사 · 성수</span>
-        <p>따뜻한 공간, 달콤한 취향. 따우전드에 오신 걸 환영합니다.</p>
-        <a href="#collection">메뉴 더 둘러보기 ↓</a>
       </div>
     </section>
   );

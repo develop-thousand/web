@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus } from "lucide-react";
-import { money, photo, type Pie } from "@/lib/catalog";
+import { money, type Pie } from "@/lib/catalog";
 import { useShop } from "./shop-provider";
 
 export function PieDetail({ pie }: { pie: Pie }) {
@@ -13,7 +13,7 @@ export function PieDetail({ pie }: { pie: Pie }) {
     <section className="detail">
       <div className="detail-image">
         <Image
-          src={photo(pie.image)}
+          src={`/images/atelier/${pie.slug}.png`}
           alt={pie.name}
           fill
           priority
@@ -90,8 +90,8 @@ export function PieDetail({ pie }: { pie: Pie }) {
         <details>
           <summary>제품 사진 안내</summary>
           <p>
-            브랜드 공개 사진을 사용했습니다. 홀 파이 또는 연출 사진이 포함되어
-            있으며 선택한 판매 단위는 조각 1개입니다. 실제 크기와 구성은
+            실제 파이 사진을 참고해 제작한 이미지입니다. 홀 파이 이미지는 제품
+            소개용이며 선택한 판매 단위는 조각 1개입니다. 실제 크기와 구성은
             매장에서 확인해 주세요.
           </p>
         </details>

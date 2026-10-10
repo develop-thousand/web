@@ -1,6 +1,6 @@
 # THOUSAND — A pie house from Seoul
 
-따우전드의 실제 파이 사진을 중심으로 만든 Next.js App Router 쇼핑몰입니다. 사용자가 제공한 실제 진열장 사진을 인터랙티브 쇼케이스로 구성했습니다. 황동 프레임과 목재 질감, 유리 반사광, 상품 선택에 따라 이동하는 조명과 상세 사진 전환을 적용했습니다.
+따우전드의 실제 파이 사진을 참고해 생성한 독립적인 투명 PNG 8종과 새로 생성한 빈 진열장을 조합한 Next.js App Router 쇼핑몰입니다. 파이는 배경과 분리된 HTML 요소이며 호버·키보드 포커스 시 해당 파이만 확대되고 주변 요소가 사라집니다. 이전 사진 기반 핫스폿 방식과 화면의 모션 설정 표시는 제거했습니다.
 
 ## 실행
 
@@ -24,7 +24,7 @@ npm run test:e2e
 
 ## 화면과 기능
 
-- `/`: 실제 진열장의 상품 위치 선택, 방향키 탐색, 선택 상품 담기, 모션 켜기/끄기, 상품 목록, 매장과 협업 이야기
+- `/`: 독립 파이 PNG 8종 진열, 호버·포커스 집중 모션, 방향키 탐색, 터치 선택, 선택 상품 담기, 상품 목록, 매장과 협업 이야기
 - `/shop`: 카테고리 필터, 가격 정렬, 빠른 장바구니 담기
 - `/pies/[slug]`: 8개 상품 상세, 수량 선택, 관련 상품, 판매 단위 및 식품 안내
 - 전역 검색: 한글/영문 이름과 재료 검색, 검색 결과 없음 처리
@@ -38,7 +38,9 @@ npm run test:e2e
 
 상품, 가격, 판매 상태, 매장 정보는 `src/lib/catalog.ts`에서 관리합니다. 이미지는 `public/images/`에 보관하며 Next Image에서 반응형 크기 및 WebP/AVIF 최적화를 처리합니다. 출처는 `docs/asset-sources.md`에 기록했습니다.
 
-글꼴은 Google Fonts의 Archivo Black, DM Sans, Libre Caslon Display 등을 사용하며 네트워크 실패 시 시스템 서체로 대체됩니다. `src/app/unboxed.css`가 공통 편집 레이아웃을, `src/app/showcase.css`가 메인 진열장과 소재·모션을 적용합니다. `src/components/pie-showcase.tsx`가 상품 위치 선택과 상세 패널을 관리합니다. 유리 반사광은 최초 진입 시 한 번 재생되며 상품 선택 조명과 상세 전환은 사용자 입력에 반응합니다. 모션 끄기와 prefers-reduced-motion을 지원합니다. 지도는 지도 보기 선택 시 Google Maps iframe을 로드합니다.
+타이포는 Barlow Condensed(영문 간판형 제목)와 Noto Sans KR(상품명·가격·본문)로 재설계했습니다. 글꼴은 Google Fonts로 제공되며 네트워크 실패 시 시스템 서체로 대체됩니다. `src/app/atelier.css`가 공통 타이포와 진열장·모션을 관리합니다. `src/components/pie-showcase.tsx`는 개별 파이 선택을 관리합니다. 유리 반사광은 진입 시 한 번 재생되며 호버 모션은 사용자 입력에 반응합니다. 화면에 모션 제어 UI를 노출하지 않고 prefers-reduced-motion을 따릅니다. 지도는 지도 보기 선택 시 Google Maps iframe을 로드합니다.
+
+생성 에셋은 `public/images/atelier/`에 있습니다. PNG 8종은 RGBA이며 투명 픽셀을 검사했습니다. 생성 도구와 최종 프롬프트는 `docs/generated-assets.md`를 참조하세요. 상품 목록·상세의 기본 이미지에도 같은 에셋을 적용했습니다.
 
 ## 실제 판매 연결 전 필요한 작업
 
