@@ -3,6 +3,7 @@ import { Header, Footer } from "@/components/chrome";
 import { ShopProvider } from "@/components/shop-provider";
 import "./globals.css";
 import "./unboxed.css";
+import "./showcase.css";
 
 export const metadata: Metadata = {
   title: {

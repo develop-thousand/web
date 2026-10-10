@@ -7,7 +7,7 @@ test("home images, navigation, and responsive layout", async ({
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: /PIE\.\s*UNBOXED\./ }),
+    page.getByRole("heading", { name: "A little slice of happiness." }),
   ).toBeVisible();
   await page.evaluate(async () => {
     await document.fonts.ready;
@@ -15,7 +15,7 @@ test("home images, navigation, and responsive layout", async ({
   await expect
     .poll(() =>
       page
-        .locator(".focus-photo img")
+        .locator(".cabinet-photo")
         .evaluate(
           (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
         ),
@@ -54,41 +54,42 @@ test("home images, navigation, and responsive layout", async ({
   expect(errors).toEqual([]);
 });
 
-test("studio spread, detail zoom, keyboard selection and correct cart item", async ({
+test("showcase selection, motion controls, keyboard and correct cart item", async ({
   page,
 }, testInfo) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "다음 추천 파이" }).click();
-  await expect(page.locator(".selected-detail")).toHaveAttribute(
+  await expect(page.locator(".pie-pin")).toHaveCount(5);
+  await page.getByRole("button", { name: "피칸 파이 선택" }).click();
+  await expect(page.locator(".counter-closeup")).toHaveAttribute(
+    "href",
+    "/pies/pecan",
+  );
+  await expect(page.locator(".counter-product-copy h2")).toHaveText(
+    "피칸 파이",
+  );
+  await page.getByRole("button", { name: "모션 끄기" }).click();
+  await expect(page.locator(".showroom")).toHaveClass(/motion-off/);
+  await expect(page.locator(".counter-product-reveal")).toHaveCSS(
+    "animation-name",
+    "none",
+  );
+  await page.screenshot({
+    path: `artifacts/showcase-selected-${testInfo.project.name}.png`,
+  });
+  await page.getByRole("button", { name: "선택한 피칸 파이 담기" }).click();
+  await expect(page.locator(".bag-line h3")).toHaveText("피칸 파이");
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "피칸 파이 선택" }).focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".counter-closeup")).toHaveAttribute(
     "href",
     "/pies/blueberry",
   );
-  await page.getByRole("button", { name: "디테일 보기", exact: true }).click();
-  await expect(page.locator(".focus-photo")).toHaveClass(/is-zoomed/);
-  await page.getByRole("button", { name: "펼쳐 보기", exact: true }).click();
-  await expect(page.locator(".spread-print")).toHaveCount(4);
-  await page.screenshot({
-    path: `artifacts/spread-${testInfo.project.name}.png`,
-  });
-  await page.getByRole("button", { name: "피칸 파이 집중해서 보기" }).click();
-  await expect(page.locator(".focus-photo img")).toHaveAttribute(
-    "alt",
-    "피칸 파이",
-  );
-  await expect(page.locator(".focus-photo")).not.toHaveClass(/is-zoomed/);
-  await page.getByRole("button", { name: "추천 피칸 파이 담기" }).click();
-  await expect(page.locator(".bag-line h3")).toHaveText("피칸 파이");
-  await page.keyboard.press("Escape");
-  await page.locator(".focus-photo").focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(page.locator(".selected-detail")).toHaveAttribute(
-    "href",
-    "/pies/mud",
-  );
-  await page.keyboard.press("ArrowRight");
-  await expect(page.locator(".selected-detail")).toHaveAttribute(
-    "href",
-    "/pies/banana-cream",
+  await page.getByRole("button", { name: "모션 켜기" }).click();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator(".counter-product-reveal")).toHaveCSS(
+    "animation-name",
+    "none",
   );
 });
 

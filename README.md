@@ -1,6 +1,6 @@
 # THOUSAND — A pie house from Seoul
 
-따우전드의 실제 파이 사진을 중심으로 만든 Next.js App Router 쇼핑몰입니다. PIE, UNBOXED 콘셉트로 대형 파이 사진, 펼쳐 보는 컬렉션, 레드·코발트·버터 옐로의 인쇄물 구성을 적용했습니다. 실제 목재 매장 사진으로 미국 파이 하우스의 온기를 담았습니다.
+따우전드의 실제 파이 사진을 중심으로 만든 Next.js App Router 쇼핑몰입니다. 사용자가 제공한 실제 진열장 사진을 인터랙티브 쇼케이스로 구성했습니다. 황동 프레임과 목재 질감, 유리 반사광, 상품 선택에 따라 이동하는 조명과 상세 사진 전환을 적용했습니다.
 
 ## 실행
 
@@ -24,7 +24,7 @@ npm run test:e2e
 
 ## 화면과 기능
 
-- `/`: 집중/펼쳐 보기, 디테일 확대, 방향키·스와이프 탐색, 선택 상품 담기, 상품 목록, 매장과 협업 이야기
+- `/`: 실제 진열장의 상품 위치 선택, 방향키 탐색, 선택 상품 담기, 모션 켜기/끄기, 상품 목록, 매장과 협업 이야기
 - `/shop`: 카테고리 필터, 가격 정렬, 빠른 장바구니 담기
 - `/pies/[slug]`: 8개 상품 상세, 수량 선택, 관련 상품, 판매 단위 및 식품 안내
 - 전역 검색: 한글/영문 이름과 재료 검색, 검색 결과 없음 처리
@@ -38,7 +38,7 @@ npm run test:e2e
 
 상품, 가격, 판매 상태, 매장 정보는 `src/lib/catalog.ts`에서 관리합니다. 이미지는 `public/images/`에 보관하며 Next Image에서 반응형 크기 및 WebP/AVIF 최적화를 처리합니다. 출처는 `docs/asset-sources.md`에 기록했습니다.
 
-글꼴은 Google Fonts의 Archivo Black, DM Sans, Playfair Display를 사용하며 네트워크 실패 시 시스템 서체로 대체됩니다. `src/app/unboxed.css`가 브랜드 색상과 편집 레이아웃을 적용합니다. `src/components/pie-studio.tsx`는 갤러리 상태와 키보드·포인터 인터랙션을 관리합니다. 지도는 지도 보기 선택 시 Google Maps iframe을 로드합니다.
+글꼴은 Google Fonts의 Archivo Black, DM Sans, Libre Caslon Display 등을 사용하며 네트워크 실패 시 시스템 서체로 대체됩니다. `src/app/unboxed.css`가 공통 편집 레이아웃을, `src/app/showcase.css`가 메인 진열장과 소재·모션을 적용합니다. `src/components/pie-showcase.tsx`가 상품 위치 선택과 상세 패널을 관리합니다. 유리 반사광은 최초 진입 시 한 번 재생되며 상품 선택 조명과 상세 전환은 사용자 입력에 반응합니다. 모션 끄기와 prefers-reduced-motion을 지원합니다. 지도는 지도 보기 선택 시 Google Maps iframe을 로드합니다.
 
 ## 실제 판매 연결 전 필요한 작업
 

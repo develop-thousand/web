@@ -4,29 +4,31 @@
 
 모든 로컬 JPG의 원본 URL은 `https://thousandpie.com/thousand/<파일명>.jpg`입니다.
 
-| 파일명 | 표시 대상 |
-| --- | --- |
-| ts044 | 홈 메인: 여러 종류의 파이 |
-| ts043 | 테이블 위 파이 모음 / 팝업 자료 사진 |
-| ts-menu-banana | 바나나 크림 파이 |
-| ts-menu-blueberry | 치즈 블루베리 파이 |
-| ts-menu-pumpkin | 펌킨 파이 |
-| ts-menu-pecan | 피칸 파이 |
-| ts-menu-apple | 애플 파이 / 아이스크림 연출 |
-| ts-menu-mud | 머드 파이 |
-| ts-menu-fig | 피그레이 파이 |
-| ts-menu-strawberry | 스트로베리 파이 |
-| ts004 | 군자점 |
-| ts-sinsa-2 | 신사점 |
-| ts-seongsoo-7 | 성수점 실내 |
-| ts-members | 팀 단체 사진 |
-| ts006, ts024 | 고객과 파이 박스 |
-| collabo_fruit_3 | 프룻오브더룸 협업 포스터 |
+| 파일명                     | 표시 대상                                 |
+| -------------------------- | ----------------------------------------- |
+| ts044                      | 홈 메인: 여러 종류의 파이                 |
+| ts043                      | 테이블 위 파이 모음 / 팝업 자료 사진      |
+| ts-menu-banana             | 바나나 크림 파이                          |
+| ts-menu-blueberry          | 치즈 블루베리 파이                        |
+| ts-menu-pumpkin            | 펌킨 파이                                 |
+| ts-menu-pecan              | 피칸 파이                                 |
+| ts-menu-apple              | 애플 파이 / 아이스크림 연출               |
+| ts-menu-mud                | 머드 파이                                 |
+| ts-menu-fig                | 피그레이 파이                             |
+| ts-menu-strawberry         | 스트로베리 파이                           |
+| ts004                      | 군자점                                    |
+| ts-sinsa-2                 | 신사점                                    |
+| ts-seongsoo-7              | 성수점 실내                               |
+| ts-members                 | 팀 단체 사진                              |
+| ts006, ts024               | 고객과 파이 박스                          |
+| collabo_fruit_3            | 프룻오브더룸 협업 포스터                  |
 | ts031, ts-menu-oreo, ts017 | 추가 확보한 참고 이미지, 현재 화면 미사용 |
 
 원본의 사진 내용과 해상도를 직접 확인했으며 현재 상품 사진은 모두 1080px 폭입니다. 사진을 임의의 다른 상품으로 표시하지 않았습니다. 자료 사진은 하와이 현장 사진으로 주장하지 않습니다.
 
 ## 사실 근거
+
+메인 진열장 배경 `public/images/pie-showcase-reference.png`는 2026-10-10 사용자가 직접 첨부한 860×580 사진입니다. 원본을 변경하지 않고 웹에서 표시하며 상품 선택 버튼, 프레임, 반사광과 조명은 HTML/CSS로 별도 구현했습니다. 3D 모델이 아닌 사진 기반 인터랙티브 장면이며 상업 공개 전 고해상도 원본으로 교체하는 편이 좋습니다. 상품 위치는 사진 속 명패를 기준으로 바나나·머드·피칸·블루베리·펌킨을 연결했습니다.
 
 - 브랜드 공식 계정 및 국내 매장 지도 링크: https://www.instagram.com/thousand_official_/
 - 브랜드 웹페이지의 이미지·매장·스토리: https://thousandpie.com/

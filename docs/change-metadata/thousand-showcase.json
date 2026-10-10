@@ -1,0 +1,280 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261010-111810-interactive-thousand-shop-counter",
+  "created_at": "2026-10-10T11:18:10+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "7926862ec3c4d7c36ade14028e8bf2a641e32203",
+  "request": "Make the homepage feel like the supplied real pie showcase and add beautiful motion using the feed audit",
+  "title": "Interactive THOUSAND shop counter",
+  "purpose": "Replace the collage hero with a warm actual showcase and responsive graphic motion",
+  "files": [
+    {
+      "path": "src/app/layout.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 6,
+          "new_end": 6
+        }
+      ],
+      "working_tree_sha256": "75875d8f9f4d94e2e109e36fd3374ea3544aa4aa750af1277167c931ac46c512",
+      "symbols": [
+        "RootLayout"
+      ],
+      "purpose": "Load the new counter visual layer.",
+      "previous_behavior": "Loaded globals and unboxed styles.",
+      "new_behavior": "Also loads showcase.css; homepage styles are scoped to the showroom.",
+      "data_impact": "None: presentation changes only; no catalog schema or persisted data format changes.",
+      "access_control_impact": "None: no authentication or permissions changed.",
+      "risks": [
+        "CSS cascade could affect shared page chrome."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, homepage import and style layer; existing browser cart data remains compatible."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 5,
+          "old_end": 5,
+          "new_start": 5,
+          "new_end": 5
+        },
+        {
+          "old_start": 10,
+          "old_end": 16,
+          "new_start": 10,
+          "new_end": 11
+        }
+      ],
+      "working_tree_sha256": "bb00c5d628769da6ec2c0d27b68af6aec976782cda8c96fbd060f4c2556f6272",
+      "symbols": [
+        "Home",
+        "/"
+      ],
+      "purpose": "Make the real shop counter the primary shopping entry.",
+      "previous_behavior": "Collage studio hero and red slogan strip.",
+      "new_behavior": "PieShowcase hero replaces studio and slogan strip; catalog and location links remain.",
+      "data_impact": "None: presentation changes only; no catalog schema or persisted data format changes.",
+      "access_control_impact": "None: no authentication or permissions changed.",
+      "risks": [
+        "Large backdrop adds image weight."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, homepage import and style layer; existing browser cart data remains compatible."
+    },
+    {
+      "path": "src/app/showcase.css",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 707
+        }
+      ],
+      "working_tree_sha256": "fddec671a3abc05af43e6a65df1714799966148eb937c62c4796836e1a8c7957",
+      "symbols": [
+        ".showroom",
+        ".counter-frame",
+        ".cabinet-focus",
+        ".glass-reflection",
+        ".counter-product-reveal",
+        "responsive and reduced motion rules"
+      ],
+      "purpose": "Render warm material cues and action-driven motion.",
+      "previous_behavior": "No showcase stylesheet; home used red/cobalt collage styling.",
+      "new_behavior": "Wood/brass enclosure, cream product panel, one-shot reflection, moving selection glow, product reveal, motion override and responsive layouts.",
+      "data_impact": "None: presentation changes only; no catalog schema or persisted data format changes.",
+      "access_control_impact": "None: no authentication or permissions changed.",
+      "risks": [
+        "Source backdrop is 860x580 and looks softer on large high-density screens."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, homepage import and style layer; existing browser cart data remains compatible."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 202
+        }
+      ],
+      "working_tree_sha256": "5507e7d2e8274e9e1e07e40bac24cb33d7803f47e52f50736139c4c2ba96dcce",
+      "symbols": [
+        "PieShowcase",
+        "display",
+        "choose"
+      ],
+      "purpose": "Connect visible pies to catalog items and cart.",
+      "previous_behavior": "No photo-based interactive counter.",
+      "new_behavior": "Five named product hotspots map to catalog slugs; arrows and keyboard change selection, detail links and cart use selected item, motion can be disabled.",
+      "data_impact": "Reads static catalog; selected-item add uses the existing localStorage cart provider to store product ID and quantity. No server or personal-data writes.",
+      "access_control_impact": "None: no authentication or permissions changed.",
+      "risks": [
+        "Photo hotspot coordinates depend on the current photo; replacement photos need coordinate review."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, homepage import and style layer; existing browser cart data remains compatible."
+    },
+    {
+      "path": "src/components/pie-studio.tsx",
+      "change_type": "deleted",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 255,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": null,
+      "symbols": [
+        "PieStudio"
+      ],
+      "purpose": "Remove the superseded collage hero.",
+      "previous_behavior": "Four-product spread and focus gallery with zoom.",
+      "new_behavior": "Removed in favor of the real counter composition and selected product panel.",
+      "data_impact": "None: presentation changes only; no catalog schema or persisted data format changes.",
+      "access_control_impact": "None: no authentication or permissions changed.",
+      "risks": [
+        "Stale imports would fail compilation; the sole homepage import was replaced."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, homepage import and style layer; existing browser cart data remains compatible."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 10,
+          "new_end": 10
+        },
+        {
+          "old_start": 18,
+          "old_end": 18,
+          "new_start": 18,
+          "new_end": 18
+        },
+        {
+          "old_start": 57,
+          "old_end": 57,
+          "new_start": 57,
+          "new_end": 57
+        },
+        {
+          "old_start": 61,
+          "old_end": 62,
+          "new_start": 61,
+          "new_end": 63
+        },
+        {
+          "old_start": 64,
+          "old_end": 64,
+          "new_start": 65,
+          "new_end": 65
+        },
+        {
+          "old_start": 66,
+          "old_end": 75,
+          "new_start": 67,
+          "new_end": 67
+        },
+        {
+          "old_start": 78,
+          "old_end": 79,
+          "new_start": 70,
+          "new_end": 79
+        },
+        {
+          "old_start": 82,
+          "old_end": 82,
+          "new_start": 82,
+          "new_end": 82
+        },
+        {
+          "old_start": 84,
+          "old_end": 84,
+          "new_start": 84,
+          "new_end": 84
+        },
+        {
+          "old_start": 86,
+          "old_end": 86,
+          "new_start": 86,
+          "new_end": 86
+        },
+        {
+          "old_start": 88,
+          "old_end": 91,
+          "new_start": 88,
+          "new_end": 92
+        }
+      ],
+      "working_tree_sha256": "2db13adbb012b8919f74255b7576a9f0d56573599c7aa0403501f134831d71e7",
+      "symbols": [
+        "home images, navigation, and responsive layout",
+        "showcase selection, motion controls, keyboard and correct cart item"
+      ],
+      "purpose": "Verify interactive counter behavior and retain shopping regression coverage.",
+      "previous_behavior": "Asserted collage heading, spread mode and zoom.",
+      "new_behavior": "Asserts showcase image, five hotspots, selected detail/cart identity, keyboard changes, manual and OS reduced motion.",
+      "data_impact": "Isolated browser contexts use local demo cart data. No production data accessed.",
+      "access_control_impact": "None: no authentication or permissions changed.",
+      "risks": [
+        "Chromium emulation does not cover native Safari behavior."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, homepage import and style layer; existing browser cart data remains compatible."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data was read or modified; a user-supplied image was copied into local public assets.",
+    "schema_migration": "None; catalog and cart formats unchanged.",
+    "external_side_effects": [
+      "No deployment, messages, real orders or payments. Local browsers may load existing Google fonts and map embeds."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Final production build compiled and typechecked; 16 static pages generated."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "10/10 desktop and mobile Chromium tests passed in 15.9s, including counter selection, cart, motion overrides, checkout, locator and 404."
+    },
+    {
+      "command": "node artifacts/record-showcase.cjs",
+      "result": "passed",
+      "evidence": "360, 768 and 1024 px checks found no horizontal overflow; desktop interaction video recorded."
+    },
+    {
+      "command": "Visual inspection of preview-desktop.png, preview-mobile.png and showcase-1024.png",
+      "result": "passed",
+      "evidence": "Showcase, labels, product photography and purchase controls visible; source image proportions retained on mobile."
+    }
+  ],
+  "residual_risks": [
+    "This is a photo-based interactive scene rather than a 3D model; the supplied 860x580 screenshot retains embedded UI and limited resolution. Replace with an approved clean high-resolution photo for public launch.",
+    "Production ordering, payment and inventory remain demo-only.",
+    "Native Safari and physical touch hardware were not tested.",
+    "Google font availability affects fallback typography."
+  ],
+  "commit": "same-as-metadata-file"
+}

@@ -2,18 +2,13 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Catalog } from "@/components/catalog";
-import { PieStudio } from "@/components/pie-studio";
+import { PieShowcase } from "@/components/pie-showcase";
 import { photo } from "@/lib/catalog";
 
 export default function Home() {
   return (
-    <main id="main" className="unboxed-home">
-      <PieStudio />
-      <div className="brand-tape" aria-hidden="true">
-        <span>NOT JUST A PIE.</span>
-        <span>IT’S YOUR KIND OF PIE.</span>
-        <span>NOT JUST A PIE.</span>
-      </div>
+    <main id="main" className="unboxed-home showroom-home">
+      <PieShowcase />
       <section className="collection section-wrap" id="collection">
         <div className="collection-title">
           <h2>
