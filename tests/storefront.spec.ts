@@ -7,7 +7,7 @@ test("home images, navigation, and responsive layout", async ({
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Life tastes better with pie." }),
+    page.getByRole("heading", { name: /PIE\.\s*UNBOXED\./ }),
   ).toBeVisible();
   await page.evaluate(async () => {
     await document.fonts.ready;
@@ -15,7 +15,7 @@ test("home images, navigation, and responsive layout", async ({
   await expect
     .poll(() =>
       page
-        .locator(".arch-photo img")
+        .locator(".focus-photo img")
         .evaluate(
           (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
         ),
@@ -54,33 +54,41 @@ test("home images, navigation, and responsive layout", async ({
   expect(errors).toEqual([]);
 });
 
-test("cabinet selection changes the featured product and adds that pie", async ({
+test("studio spread, detail zoom, keyboard selection and correct cart item", async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto("/");
   await page.getByRole("button", { name: "다음 추천 파이" }).click();
-  await expect(page.locator(".brass-plaque strong")).toHaveText(
-    "Cheese blueberry pie",
-  );
-  await expect(page.locator(".arch-detail")).toHaveAttribute(
+  await expect(page.locator(".selected-detail")).toHaveAttribute(
     "href",
     "/pies/blueberry",
   );
-  await page.locator(".menu-choices button").last().click();
-  await expect(page.locator(".arch-photo img")).toHaveAttribute(
+  await page.getByRole("button", { name: "디테일 보기", exact: true }).click();
+  await expect(page.locator(".focus-photo")).toHaveClass(/is-zoomed/);
+  await page.getByRole("button", { name: "펼쳐 보기", exact: true }).click();
+  await expect(page.locator(".spread-print")).toHaveCount(4);
+  await page.screenshot({
+    path: `artifacts/spread-${testInfo.project.name}.png`,
+  });
+  await page.getByRole("button", { name: "피칸 파이 집중해서 보기" }).click();
+  await expect(page.locator(".focus-photo img")).toHaveAttribute(
     "alt",
     "피칸 파이",
   );
-  await expect(page.locator(".menu-choices button").last()).toHaveAttribute(
-    "aria-pressed",
-    "true",
-  );
+  await expect(page.locator(".focus-photo")).not.toHaveClass(/is-zoomed/);
   await page.getByRole("button", { name: "추천 피칸 파이 담기" }).click();
   await expect(page.locator(".bag-line h3")).toHaveText("피칸 파이");
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "다음 추천 파이" }).click();
-  await expect(page.locator(".brass-plaque strong")).toHaveText(
-    "Banana cream pie",
+  await page.locator(".focus-photo").focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".selected-detail")).toHaveAttribute(
+    "href",
+    "/pies/mud",
+  );
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".selected-detail")).toHaveAttribute(
+    "href",
+    "/pies/banana-cream",
   );
 });
 

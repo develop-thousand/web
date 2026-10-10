@@ -1,0 +1,445 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261010-111035-thousand-pie-unboxed-interactive-collection",
+  "created_at": "2026-10-10T11:10:35+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "bd720b9b01340c3926f5982c4cca4da15f3c6646",
+  "request": "Create a distinctive design with the originality of Ader Error while keeping real pies central",
+  "title": "THOUSAND PIE UNBOXED interactive collection",
+  "purpose": "Give the storefront distinctive brand-led visual composition and product exploration",
+  "files": [
+    {
+      "path": "src/app/heritage.css",
+      "change_type": "deleted",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 1356,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": null,
+      "symbols": [
+        "heritage theme"
+      ],
+      "purpose": "Remove the ornamental cabinet theme superseded by the new art direction.",
+      "previous_behavior": "Burgundy, wood, grain and brass decorations styled the entire storefront.",
+      "new_behavior": "Removed; unboxed.css supplies the red/cobalt editorial presentation.",
+      "data_impact": "None: presentation-only changes; catalog and existing browser-local cart format remain unchanged.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Global style removal may affect secondary page spacing."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 5,
+          "old_end": 5,
+          "new_start": 5,
+          "new_end": 5
+        }
+      ],
+      "working_tree_sha256": "f6159447b597206fd3cefddf97bdaa5e9c9544a9a507e69362a1910cd2796337",
+      "symbols": [
+        "RootLayout"
+      ],
+      "purpose": "Load the replacement visual system.",
+      "previous_behavior": "Imported heritage.css after globals.css.",
+      "new_behavior": "Imports unboxed.css after globals.css for every route.",
+      "data_impact": "None: presentation-only changes; catalog and existing browser-local cart format remain unchanged.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Stylesheet ordering could affect shared navigation and dialogs."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 5,
+          "old_end": 5,
+          "new_start": 5,
+          "new_end": 5
+        },
+        {
+          "old_start": 10,
+          "old_end": 19,
+          "new_start": 10,
+          "new_end": 28
+        },
+        {
+          "old_start": 22,
+          "old_end": 26,
+          "new_start": 31,
+          "new_end": 47
+        },
+        {
+          "old_start": 29,
+          "old_end": 31,
+          "new_start": 50,
+          "new_end": 50
+        },
+        {
+          "old_start": 34,
+          "old_end": 34,
+          "new_start": 53,
+          "new_end": 53
+        },
+        {
+          "old_start": 36,
+          "old_end": 36,
+          "new_start": 55,
+          "new_end": 55
+        },
+        {
+          "old_start": 38,
+          "old_end": 38,
+          "new_start": 57,
+          "new_end": 61
+        },
+        {
+          "old_start": 40,
+          "old_end": 41,
+          "new_start": 63,
+          "new_end": 65
+        },
+        {
+          "old_start": 43,
+          "old_end": 43,
+          "new_start": 67,
+          "new_end": 67
+        },
+        {
+          "old_start": 45,
+          "old_end": 45,
+          "new_start": 69,
+          "new_end": 69
+        },
+        {
+          "old_start": 48,
+          "old_end": 48,
+          "new_start": 72,
+          "new_end": 72
+        },
+        {
+          "old_start": 50,
+          "old_end": 52,
+          "new_start": 74,
+          "new_end": 74
+        },
+        {
+          "old_start": 54,
+          "old_end": 62,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 64,
+          "old_end": 70,
+          "new_start": 77,
+          "new_end": 86
+        },
+        {
+          "old_start": 72,
+          "old_end": 95,
+          "new_start": 88,
+          "new_end": 88
+        },
+        {
+          "old_start": 97,
+          "old_end": 110,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 91,
+          "new_end": 103
+        },
+        {
+          "old_start": 116,
+          "old_end": 116,
+          "new_start": 108,
+          "new_end": 112
+        },
+        {
+          "old_start": 118,
+          "old_end": 118,
+          "new_start": 114,
+          "new_end": 114
+        },
+        {
+          "old_start": 126,
+          "old_end": 126,
+          "new_start": 122,
+          "new_end": 122
+        },
+        {
+          "old_start": 128,
+          "old_end": 128,
+          "new_start": 124,
+          "new_end": 124
+        },
+        {
+          "old_start": 131,
+          "old_end": 131,
+          "new_start": 127,
+          "new_end": 127
+        },
+        {
+          "old_start": 133,
+          "old_end": 133,
+          "new_start": 129,
+          "new_end": 129
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 133,
+          "new_end": 133
+        },
+        {
+          "old_start": 140,
+          "old_end": 140,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 145,
+          "old_end": 145,
+          "new_start": 141,
+          "new_end": 141
+        },
+        {
+          "old_start": 147,
+          "old_end": 147,
+          "new_start": 143,
+          "new_end": 143
+        },
+        {
+          "old_start": 150,
+          "old_end": 150,
+          "new_start": 146,
+          "new_end": 146
+        },
+        {
+          "old_start": 152,
+          "old_end": 152,
+          "new_start": 148,
+          "new_end": 148
+        }
+      ],
+      "working_tree_sha256": "ea845b6e440f6948d4d48e3106e60218a440abcbd57fba232f476d68fa8147ce",
+      "symbols": [
+        "Home",
+        "/"
+      ],
+      "purpose": "Compose a pie-centered campaign with a distinctive exploration entry point.",
+      "previous_behavior": "Cabinet hero and antique menu-book sections.",
+      "new_behavior": "PieStudio hero, brand tape, clean collection, cobalt culture spread and store invitation ticket.",
+      "data_impact": "None: presentation-only changes; catalog and existing browser-local cart format remain unchanged.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Large photographs may delay first paint on slow connections."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    },
+    {
+      "path": "src/app/unboxed.css",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 1357
+        }
+      ],
+      "working_tree_sha256": "8a75e30f0faf33bd725131112017b9123d361805f752d3190f9ba55707f57d1f",
+      "symbols": [
+        ".pie-studio",
+        ".spread-board",
+        ".focus-photo",
+        ".pie-culture",
+        ".store-world",
+        "responsive media queries"
+      ],
+      "purpose": "Implement the brand palette and asymmetric photographic composition across screen sizes.",
+      "previous_behavior": "File absent; heritage.css provided antique ornaments.",
+      "new_behavior": "Red typography, cream paper, cobalt sections, tilted prints, spread view and reduced-motion responsive styling.",
+      "data_impact": "None: presentation-only changes; catalog and existing browser-local cart format remain unchanged.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Font fallback and unusual viewport sizes may shift rotated text and print edges."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-cabinet.tsx",
+      "change_type": "deleted",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 156,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": null,
+      "symbols": [
+        "PieCabinet"
+      ],
+      "purpose": "Remove the replaced hero implementation.",
+      "previous_behavior": "Three-product cabinet selection with arrow navigation and add-to-bag.",
+      "new_behavior": "Removed; PieStudio provides a four-product gallery and existing cart integration.",
+      "data_impact": "None: presentation-only changes; catalog and existing browser-local cart format remain unchanged.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Any stale imports would fail the build; the only homepage import was replaced."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-studio.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 255
+        }
+      ],
+      "working_tree_sha256": "385b42e2c1e560fb01f252f1c088c5059da1911abde6a56efc938d9f94efb8de",
+      "symbols": [
+        "PieStudio",
+        "move",
+        "finishSwipe"
+      ],
+      "purpose": "Make selecting a pie an interactive photographic experience.",
+      "previous_behavior": "File absent; cabinet interaction only selected three featured pies.",
+      "new_behavior": "Focus/spread modes, four pie choices, detail zoom, keyboard and pointer swipe selection, selected detail link and cart action.",
+      "data_impact": "Reads the static catalog; add action writes product ID and quantity through the existing localStorage cart provider. No server writes or personal data.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Pointer gesture behavior can vary on physical mobile devices."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 10,
+          "new_end": 10
+        },
+        {
+          "old_start": 18,
+          "old_end": 18,
+          "new_start": 18,
+          "new_end": 18
+        },
+        {
+          "old_start": 57,
+          "old_end": 57,
+          "new_start": 57,
+          "new_end": 57
+        },
+        {
+          "old_start": 59,
+          "old_end": 59,
+          "new_start": 59,
+          "new_end": 59
+        },
+        {
+          "old_start": 62,
+          "old_end": 65,
+          "new_start": 62,
+          "new_end": 62
+        },
+        {
+          "old_start": 69,
+          "old_end": 70,
+          "new_start": 66,
+          "new_end": 74
+        },
+        {
+          "old_start": 74,
+          "old_end": 77,
+          "new_start": 78,
+          "new_end": 78
+        },
+        {
+          "old_start": 81,
+          "old_end": 83,
+          "new_start": 82,
+          "new_end": 91
+        }
+      ],
+      "working_tree_sha256": "5907033ba001ccd64f324159d57f1f024a4b46399f164412bad091bcbc0c9372",
+      "symbols": [
+        "home images, navigation, and responsive layout",
+        "studio spread, detail zoom, keyboard selection and correct cart item"
+      ],
+      "purpose": "Verify the replacement hero and retain commerce regression checks.",
+      "previous_behavior": "Checked cabinet plaque and menu choices.",
+      "new_behavior": "Checks new heading/image, spread selection, zoom reset, selected cart item and keyboard wrap; captures both views.",
+      "data_impact": "Uses isolated browser test contexts and local demo cart data only; no production writes.",
+      "access_control_impact": "None: no authentication, roles or permission checks changed.",
+      "risks": [
+        "Chromium emulation does not cover all Safari touch behavior."
+      ],
+      "rollback": "Revert this commit as a unit to restore the prior component, stylesheet and imports; no data migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data was read, created, updated or deleted. Existing local public assets were reused.",
+    "schema_migration": "None; static catalog and localStorage format remain compatible.",
+    "external_side_effects": [
+      "No deployment, order transmission, payment or messages. Local test browsers may request existing Google fonts and store map embeds."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Next.js production compilation and TypeScript checks completed; all 16 static pages generated."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "10/10 Chromium desktop and iPhone-sized tests passed in 15.2s; gallery, images, overflow, search, cart persistence, checkout demo, locator, malformed storage and 404."
+    },
+    {
+      "command": "Visual review of artifacts/preview-desktop.png, preview-mobile.png, home-desktop.png and spread-desktop.png",
+      "result": "passed",
+      "evidence": "Actual pie images dominate the composition; desktop and mobile text is readable; spread cards and store interiors are visible."
+    }
+  ],
+  "residual_risks": [
+    "Payment, backend ordering and live inventory remain unimplemented demo functionality.",
+    "Physical mobile swipe and Safari are not covered by the Chromium test suite.",
+    "Google Fonts needs network access; fallback fonts may alter wrapping.",
+    "Existing photographs and final commercial product data still need owner confirmation before production launch."
+  ],
+  "commit": "same-as-metadata-file"
+}
