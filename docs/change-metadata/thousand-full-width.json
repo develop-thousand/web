@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261010-134747-full-width-storefront-composition",
+  "created_at": "2026-10-10T13:47:47+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "5519a9f9515e20fc8c073b244b760dd8122f1022",
+  "request": "Reduce whitespace and use large edge-to-edge website layouts",
+  "title": "Full-width storefront composition",
+  "purpose": "Use the full viewport for product imagery and reduce excess spacing",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 25,
+          "old_end": 25,
+          "new_start": 25,
+          "new_end": 25
+        },
+        {
+          "old_start": 28,
+          "old_end": 28,
+          "new_start": 28,
+          "new_end": 28
+        },
+        {
+          "old_start": 49,
+          "old_end": 49,
+          "new_start": 49,
+          "new_end": 49
+        },
+        {
+          "old_start": 53,
+          "old_end": 53,
+          "new_start": 53,
+          "new_end": 53
+        },
+        {
+          "old_start": 58,
+          "old_end": 58,
+          "new_start": 58,
+          "new_end": 58
+        },
+        {
+          "old_start": 79,
+          "old_end": 79,
+          "new_start": 79,
+          "new_end": 79
+        },
+        {
+          "old_start": 117,
+          "old_end": 118,
+          "new_start": 117,
+          "new_end": 118
+        },
+        {
+          "old_start": 121,
+          "old_end": 121,
+          "new_start": 121,
+          "new_end": 121
+        },
+        {
+          "old_start": 152,
+          "old_end": 152,
+          "new_start": 152,
+          "new_end": 152
+        },
+        {
+          "old_start": 243,
+          "old_end": 243,
+          "new_start": 243,
+          "new_end": 243
+        },
+        {
+          "old_start": 249,
+          "old_end": 250,
+          "new_start": 249,
+          "new_end": 250
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 799,
+          "new_end": 908
+        }
+      ],
+      "working_tree_sha256": "66873de000feaddcff5adf98ade6d4e985c541eaa9bc3c2a2742c1ed26505a1d",
+      "symbols": [
+        ".header",
+        ".pie-atelier",
+        ".atelier-heading",
+        ".asset-cabinet",
+        ".asset-shelf",
+        ".pie-object",
+        ".atelier-selection",
+        ".atelier-home full-width sections",
+        "mobile overrides"
+      ],
+      "purpose": "Increase product scale and remove unused outer space from the homepage.",
+      "previous_behavior": "Cabinet and selection panel capped at 1440px inside 4% gutters; pies capped at 210px height; large section and header spacing.",
+      "new_behavior": "Cabinet spans viewport at every checked width; pie height scales with cabinet; reduced header/title spacing; homepage catalog and editorial/store imagery extend edge to edge while text retains small readable insets.",
+      "data_impact": "None: CSS only; no data reads, writes or schema changes.",
+      "access_control_impact": "None: presentation changes do not affect permissions.",
+      "risks": [
+        "Large-screen cabinet height scales with width; text and controls keep inner padding."
+      ],
+      "rollback": "Revert this commit to restore the former width constraints and spacing; no data migration needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed.",
+    "schema_migration": "None; styling only.",
+    "external_side_effects": [
+      "No deployment or external writes. Browser verification may load existing fonts."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Next production compilation, typecheck and 16 static pages succeeded."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "10 desktop/mobile tests passed in 18.5 seconds, including hover/cart/checkout/store flows."
+    },
+    {
+      "command": "node artifacts/check-full-width.cjs",
+      "result": "passed",
+      "evidence": "390/1440/1920px cabinet width equals viewport width; no horizontal overflow."
+    },
+    {
+      "command": "Visual review of full-width-1440.png and home-desktop.png",
+      "result": "passed",
+      "evidence": "Edge-to-edge cabinet, enlarged pies, collection images, story photo and store photo render without clipping."
+    }
+  ],
+  "residual_risks": [
+    "Native Safari and physical devices not tested; Chromium responsive checks passed.",
+    "Existing ordering and payment remain demo functionality."
+  ],
+  "commit": "same-as-metadata-file"
+}

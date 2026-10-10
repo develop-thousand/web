@@ -22,10 +22,10 @@ h3 {
   display: none;
 }
 .header {
-  height: 84px;
+  height: 68px;
   background: #f4f0e7;
   border-bottom: 1px solid #d6cfc2;
-  padding: 0 4%;
+  padding: 0 24px;
 }
 .wordmark {
   font-family: var(--display);
@@ -46,16 +46,16 @@ h3 {
   gap: 20px;
 }
 .pie-atelier {
-  padding: 0 4% 38px;
+  padding: 0;
   background: #eae3d5;
 }
 .atelier-heading {
-  max-width: 1440px;
+  max-width: none;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 0 24px;
+  padding: 16px 24px;
 }
 .atelier-heading p {
   font-size: 12px;
@@ -76,7 +76,7 @@ h3 {
   color: #6c6153;
 }
 .asset-cabinet {
-  max-width: 1440px;
+  max-width: none;
   margin: auto;
   position: relative;
   aspect-ratio: 2.15;
@@ -114,11 +114,11 @@ h3 {
 }
 .asset-shelf {
   position: absolute;
-  left: 5%;
-  right: 5%;
+  left: 3%;
+  right: 3%;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 2%;
+  gap: 1%;
 }
 .shelf-0 {
   top: 9%;
@@ -149,7 +149,7 @@ h3 {
   display: block;
   width: 100%;
   height: calc(100% - 44px);
-  max-height: 210px;
+  max-height: none;
   transition:
     transform 0.65s cubic-bezier(0.18, 0.8, 0.22, 1),
     filter 0.65s;
@@ -240,14 +240,14 @@ h3 {
   letter-spacing: 1px;
 }
 .atelier-selection {
-  max-width: 1440px;
+  max-width: none;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 25px;
-  min-height: 110px;
-  padding: 22px 26px;
+  min-height: 84px;
+  padding: 16px 24px;
   background: #f9f5eb;
   border: 1px solid #d3c6ae;
   border-top: 0;
@@ -794,6 +794,116 @@ h3 {
   }
   .store-detail h2 {
     font-size: 26px;
+  }
+}
+.atelier-home .section-wrap {
+  max-width: none;
+  padding: 36px 0;
+}
+.atelier-home .collection-heading,
+.atelier-home .catalog-tools,
+.atelier-home .store-heading,
+.atelier-home .journal .section-heading {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.atelier-home .product-grid {
+  gap: 28px 6px;
+}
+.atelier-home .product-name,
+.atelier-home .product-meta {
+  margin-left: 14px;
+  margin-right: 14px;
+}
+.atelier-home .pie-visual img {
+  padding: 8px;
+}
+.atelier-home .atelier-story {
+  padding: 0;
+  gap: 0;
+}
+.atelier-home .atelier-story > div:last-child {
+  padding: 36px 8%;
+}
+.atelier-home .atelier-store-image {
+  height: clamp(420px, 43vw, 740px);
+}
+.atelier-home .journal {
+  padding-top: 0;
+}
+.atelier-home .journal-grid {
+  gap: 6px;
+}
+.atelier-home .journal-image {
+  height: clamp(340px, 36vw, 600px);
+}
+.atelier-home .journal-card > p,
+.atelier-home .journal-card > h3 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+@media (max-width: 700px) {
+  .header {
+    height: 86px;
+    padding: 10px 16px;
+  }
+  .pie-atelier {
+    padding: 0;
+  }
+  .atelier-heading {
+    padding: 16px;
+  }
+  .asset-shelves {
+    inset: 4% 4% 12%;
+  }
+  .asset-shelf {
+    gap: 8px;
+  }
+  .pie-object {
+    max-height: none;
+  }
+  .atelier-selection {
+    margin: 0;
+    padding: 16px;
+  }
+  .atelier-home .section-wrap {
+    padding: 28px 0;
+  }
+  .atelier-home .collection-heading,
+  .atelier-home .catalog-tools,
+  .atelier-home .store-heading,
+  .atelier-home .journal .section-heading {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .atelier-home .product-grid {
+    gap: 22px 4px;
+  }
+  .atelier-home .product-name,
+  .atelier-home .product-meta {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .atelier-home .pie-visual img {
+    padding: 4px;
+  }
+  .atelier-home .atelier-story {
+    gap: 0;
+  }
+  .atelier-home .atelier-story > div:last-child {
+    padding: 28px 16px;
+  }
+  .atelier-home .atelier-store-image {
+    height: 380px;
+  }
+  .atelier-home .journal {
+    padding-top: 0;
+  }
+  .atelier-home .journal-grid {
+    gap: 28px;
+  }
+  .atelier-home .journal-image {
+    height: 340px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
