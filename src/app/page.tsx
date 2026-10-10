@@ -1,110 +1,82 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Catalog } from "@/components/catalog";
+import { PieCabinet } from "@/components/pie-cabinet";
 import { photo } from "@/lib/catalog";
 
 export default function Home() {
   return (
-    <main id="main">
-      <section className="hero" aria-label="따우전드 파이 컬렉션">
-        <div className="hero-main">
-          <Image
-            src={photo("ts044")}
-            alt="크림이 풍성하게 올라간 따우전드의 다양한 홀 파이"
-            fill
-            priority
-            sizes="(max-width: 700px) 100vw, 65vw"
-          />
-          <div className="hero-shade" />
-          <div className="hero-caption">
-            <p>American classics, reimagined.</p>
-            <h1>
-              A little slice.
-              <br />A whole feeling.
-            </h1>
-            <Link href="/shop" className="button light">
-              파이 쇼핑하기 <ArrowUpRight size={19} />
-            </Link>
+    <main id="main" className="heritage-home">
+      <PieCabinet />
+      <section className="collection menu-book section-wrap" id="collection">
+        <div className="menu-book-title">
+          <span>Something for every sweet tooth</span>
+          <h2>The pie menu.</h2>
+          <p>취향대로 고르고, 한 조각씩 나누는 행복.</p>
+          <div className="menu-book-rule" aria-hidden="true">
+            ✦
           </div>
-          <span className="hero-index">The pie collection / Seoul</span>
-        </div>
-        <div className="hero-side">
-          <Image
-            src={photo("ts-menu-banana")}
-            alt="캐러멜빛 바나나를 올린 바나나 크림 파이"
-            fill
-            priority
-            sizes="35vw"
-          />
-          <Link href="/pies/banana-cream" className="hero-side-label">
-            <span>
-              Meet the signature.
-              <br />
-              <strong>Banana cream pie</strong>
-            </span>
-            <ArrowUpRight size={25} />
-          </Link>
-          <span className="round-seal">
-            Baked for
-            <br />
-            <i>good</i>
-            <br />
-            times.
-          </span>
-        </div>
-      </section>
-      <div className="intro-strip">
-        <span>Good pie. Good company.</span>
-        <p>파이 한 조각이면 충분한 순간들.</p>
-        <a href="#collection" aria-label="파이 컬렉션으로 이동">
-          <ArrowDown size={20} />
-        </a>
-      </div>
-      <section className="collection section-wrap" id="collection">
-        <div className="section-heading">
-          <h2>Find your favorite.</h2>
-          <p>매일 떠올리고 싶은, 나만의 한 조각.</p>
         </div>
         <Catalog compact />
+        <div className="menu-colophon">
+          <span>Made for your coffee break.</span>
+          <span>조각마다 다른 이야기, 모두 따우전드.</span>
+          <Link href="/shop">
+            전체 메뉴 펼쳐보기 <ArrowUpRight size={16} />
+          </Link>
+        </div>
       </section>
-      <section className="editorial">
-        <div className="editorial-photo">
+      <section className="editorial recipe-table">
+        <div className="editorial-photo recipe-photo">
           <Image
             src={photo("ts043")}
             alt="테이블 위에 펼쳐진 다양한 따우전드 파이"
             fill
-            sizes="(max-width: 700px) 100vw, 55vw"
+            sizes="(max-width: 700px) 90vw, 50vw"
           />
-          <span className="photo-note">A table worth gathering around.</span>
+          <span className="photo-note">The more, the merrier.</span>
         </div>
         <div className="editorial-copy">
-          <span className="small-note">From our table to yours</span>
+          <span className="small-note">A note from our kitchen</span>
           <h2>
-            Made to
+            Some things
             <br />
-            be shared.
+            never get old.
           </h2>
           <p>
-            좋아하는 사람들과 마주 앉아
+            좋아하는 사람과 마주 앉는 일.
             <br />
-            서로 다른 취향을 한 테이블에.
+            커피가 식기 전에 파이를 한 입 베어 무는 일.
             <br />
-            우리의 좋은 시간에는 언제나 파이가 있습니다.
+            따우전드는 그런 오래도록 좋은 순간을 굽습니다.
           </p>
-          <Link href="/shop" className="underlined">
-            당신의 파이를 찾아보세요 <ArrowUpRight size={18} />
+          <Link href="/story" className="underlined">
+            우리의 이야기 <ArrowUpRight size={18} />
           </Link>
-          <div className="editorial-sign">With love, Thousand.</div>
+          <div className="editorial-sign">Yours, Thousand.</div>
+          <span className="recipe-stamp" aria-hidden="true">
+            GOOD PIE
+            <br />
+            GOOD COMPANY
+          </span>
         </div>
       </section>
-      <section className="store-teaser section-wrap">
+      <section className="store-teaser parlor section-wrap">
         <div className="section-heading">
-          <h2>
-            Come for the pie.
+          <div>
+            <span className="parlor-eyebrow">The doors are open.</span>
+            <h2>
+              Behind
+              <br />
+              the red door.
+            </h2>
+          </div>
+          <p>
+            짙은 나무와 따뜻한 조명,
             <br />
-            Stay for a while.
-          </h2>
+            파이 향이 머무는 우리의 공간.
+          </p>
           <Link href="/stores" className="underlined">
             매장 찾기 <ArrowUpRight size={18} />
           </Link>
@@ -118,18 +90,32 @@ export default function Home() {
           />
           <div className="store-wide-caption">
             <span>Seongsu, Seoul</span>
-            <h3>Your kind of place.</h3>
+            <h3>Pull up a chair.</h3>
             <span>
               군자 · 신사 · 성수 <ArrowUpRight size={23} />
             </span>
           </div>
         </Link>
+        <div className="parlor-addresses">
+          <Link href="/stores">
+            <strong>Gunja</strong>
+            <span>우리의 첫 번째 한 걸음</span>
+          </Link>
+          <Link href="/stores">
+            <strong>Sinsa</strong>
+            <span>도시 속 작은 파이 하우스</span>
+          </Link>
+          <Link href="/stores">
+            <strong>Seongsu</strong>
+            <span>오래 머물고 싶은 테이블</span>
+          </Link>
+        </div>
       </section>
       <section className="journal section-wrap">
         <div className="section-heading">
-          <h2>Beyond the pie.</h2>
+          <h2>From the scrapbook.</h2>
           <Link className="underlined" href="/story">
-            우리의 이야기 <ArrowUpRight size={18} />
+            더 많은 이야기 <ArrowUpRight size={18} />
           </Link>
         </div>
         <div className="journal-grid">
@@ -139,7 +125,7 @@ export default function Home() {
                 src={photo("ts006")}
                 alt="따우전드 파이 박스를 들고 있는 손님들"
                 fill
-                sizes="(max-width: 700px) 100vw, 50vw"
+                sizes="(max-width: 700px) 90vw, 45vw"
               />
             </div>
             <p>People & places</p>
@@ -158,12 +144,12 @@ export default function Home() {
                 src={photo("collabo_fruit_3")}
                 alt="프룻오브더룸과 따우전드의 Fruit of the Pie 협업 포스터"
                 fill
-                sizes="(max-width: 700px) 100vw, 50vw"
+                sizes="(max-width: 700px) 90vw, 45vw"
               />
             </div>
             <p>Collaborations</p>
             <h3>
-              Two American classics. One sweet story. <ArrowUpRight size={20} />
+              Two classics. One sweet story. <ArrowUpRight size={20} />
             </h3>
           </a>
         </div>

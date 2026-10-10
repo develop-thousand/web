@@ -1,0 +1,393 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261010-105955-redesign-thousand-as-an-antique-pie-house",
+  "created_at": "2026-10-10T10:59:55+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "c6043855372a1e6cec12e9da87727f733583be3b",
+  "request": "Make the UI more special and antique with pie imagery remaining central",
+  "title": "Redesign THOUSAND as an antique pie house",
+  "purpose": "Replace the restrained generic storefront with an antique cabinet, menu book and warm material design while preserving commerce flows",
+  "files": [
+    {
+      "path": "next.config.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 4,
+          "new_end": 4
+        }
+      ],
+      "working_tree_sha256": "f7831eba23bedbd2705c045e332481df10dbc5738698fb1b06cb080d03112797",
+      "symbols": [
+        "NextConfig.devIndicators"
+      ],
+      "purpose": "Hide the development badge in the design preview.",
+      "previous_behavior": "Local development displayed the Next.js indicator.",
+      "new_behavior": "Development previews omit the framework badge; production behavior is unchanged.",
+      "data_impact": "none: visual changes read the existing bundled catalog and photos; no production data or database changes.",
+      "access_control_impact": "none: public demo routes and existing permissions are unchanged.",
+      "risks": [
+        "Typography and decorative transforms can affect layout at untested sizes; desktop and mobile Chromium were inspected."
+      ],
+      "rollback": "Revert this redesign commit with its metadata to restore the previous interface; no data migration or cart storage conversion necessary."
+    },
+    {
+      "path": "src/app/heritage.css",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 1356
+        }
+      ],
+      "working_tree_sha256": "88808c2f6fd005928ae78d256f0d2ce12bc196c739003ad0294d131d25528395",
+      "symbols": [
+        "heritage palette, cabinet, menu, responsive and shared commerce styles"
+      ],
+      "purpose": "Translate antique store materials into a coherent responsive interface.",
+      "previous_behavior": "No heritage-specific styling existed.",
+      "new_behavior": "Walnut backgrounds, CSS paper grain, brass plaque, framed typography and wax seal support real pie photography; mobile places the image before introductory copy and reduced motion disables the transition.",
+      "data_impact": "none: visual changes read the existing bundled catalog and photos; no production data or database changes.",
+      "access_control_impact": "none: public demo routes and existing permissions are unchanged.",
+      "risks": [
+        "Typography and decorative transforms can affect layout at untested sizes; desktop and mobile Chromium were inspected."
+      ],
+      "rollback": "Revert this redesign commit with its metadata to restore the previous interface; no data migration or cart storage conversion necessary."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 5,
+          "new_end": 5
+        }
+      ],
+      "working_tree_sha256": "44a293bae30085275999389a3e4c282efddc6cdc56d24e329460ab97eea362bb",
+      "symbols": [
+        "RootLayout stylesheet imports"
+      ],
+      "purpose": "Apply the antique visual language consistently to every route.",
+      "previous_behavior": "Only the original plain editorial stylesheet was loaded.",
+      "new_behavior": "The heritage theme is loaded after base layout styling on all routes.",
+      "data_impact": "none: visual changes read the existing bundled catalog and photos; no production data or database changes.",
+      "access_control_impact": "none: public demo routes and existing permissions are unchanged.",
+      "risks": [
+        "Typography and decorative transforms can affect layout at untested sizes; desktop and mobile Chromium were inspected."
+      ],
+      "rollback": "Revert this redesign commit with its metadata to restore the previous interface; no data migration or cart storage conversion necessary."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 1,
+          "new_start": 1,
+          "new_end": 1
+        },
+        {
+          "old_start": 3,
+          "old_end": 3,
+          "new_start": 3,
+          "new_end": 3
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 5,
+          "new_end": 5
+        },
+        {
+          "old_start": 9,
+          "old_end": 28,
+          "new_start": 10,
+          "new_end": 18
+        },
+        {
+          "old_start": 30,
+          "old_end": 30,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 32,
+          "old_end": 46,
+          "new_start": 21,
+          "new_end": 26
+        },
+        {
+          "old_start": 48,
+          "old_end": 54,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 57,
+          "old_end": 72,
+          "new_start": 30,
+          "new_end": 31
+        },
+        {
+          "old_start": 77,
+          "old_end": 77,
+          "new_start": 36,
+          "new_end": 36
+        },
+        {
+          "old_start": 79,
+          "old_end": 79,
+          "new_start": 38,
+          "new_end": 38
+        },
+        {
+          "old_start": 82,
+          "old_end": 82,
+          "new_start": 41,
+          "new_end": 41
+        },
+        {
+          "old_start": 84,
+          "old_end": 84,
+          "new_start": 43,
+          "new_end": 43
+        },
+        {
+          "old_start": 86,
+          "old_end": 86,
+          "new_start": 45,
+          "new_end": 45
+        },
+        {
+          "old_start": 89,
+          "old_end": 89,
+          "new_start": 48,
+          "new_end": 48
+        },
+        {
+          "old_start": 91,
+          "old_end": 91,
+          "new_start": 50,
+          "new_end": 50
+        },
+        {
+          "old_start": 93,
+          "old_end": 93,
+          "new_start": 52,
+          "new_end": 52
+        },
+        {
+          "old_start": 95,
+          "old_end": 96,
+          "new_start": 54,
+          "new_end": 55
+        },
+        {
+          "old_start": 98,
+          "old_end": 98,
+          "new_start": 57,
+          "new_end": 62
+        },
+        {
+          "old_start": 101,
+          "old_end": 101,
+          "new_start": 65,
+          "new_end": 65
+        },
+        {
+          "old_start": 103,
+          "old_end": 104,
+          "new_start": 67,
+          "new_end": 76
+        },
+        {
+          "old_start": 106,
+          "old_end": 107,
+          "new_start": 78,
+          "new_end": 79
+        },
+        {
+          "old_start": 121,
+          "old_end": 121,
+          "new_start": 93,
+          "new_end": 93
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 99,
+          "new_end": 112
+        },
+        {
+          "old_start": 130,
+          "old_end": 130,
+          "new_start": 116,
+          "new_end": 116
+        },
+        {
+          "old_start": 132,
+          "old_end": 132,
+          "new_start": 118,
+          "new_end": 118
+        },
+        {
+          "old_start": 142,
+          "old_end": 142,
+          "new_start": 128,
+          "new_end": 128
+        },
+        {
+          "old_start": 161,
+          "old_end": 161,
+          "new_start": 147,
+          "new_end": 147
+        },
+        {
+          "old_start": 166,
+          "old_end": 166,
+          "new_start": 152,
+          "new_end": 152
+        }
+      ],
+      "working_tree_sha256": "b87eb9e2f42044ee7712774d2cb175fe66d876ef551fe06e2cf3f4df1ba55c7a",
+      "symbols": [
+        "Home"
+      ],
+      "purpose": "Replace the generic split hero and plain sections with a distinctive pie-house composition.",
+      "previous_behavior": "Home used a split-photo hero, minimal product grid and flat editorial sections.",
+      "new_behavior": "Home includes an interactive cabinet, printed menu book, recipe photograph, wood-toned store parlor and scrapbook collaboration cards.",
+      "data_impact": "none: visual changes read the existing bundled catalog and photos; no production data or database changes.",
+      "access_control_impact": "none: public demo routes and existing permissions are unchanged.",
+      "risks": [
+        "Typography and decorative transforms can affect layout at untested sizes; desktop and mobile Chromium were inspected."
+      ],
+      "rollback": "Revert this redesign commit with its metadata to restore the previous interface; no data migration or cart storage conversion necessary."
+    },
+    {
+      "path": "src/components/pie-cabinet.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 156
+        }
+      ],
+      "working_tree_sha256": "df3ae703010cf9a9df74d7840ba72a93c773d6db0a2d543d60284ff7e7b85749",
+      "symbols": [
+        "PieCabinet, favorites, move"
+      ],
+      "purpose": "Make the main photograph an interactive product display.",
+      "previous_behavior": "Hero photos were static and did not select products.",
+      "new_behavior": "Menu choices and previous/next controls select one of three products; photo, plaque, details URL and add-to-cart all refer to the selected product.",
+      "data_impact": "Featured selection stays in React memory. Explicit add-to-cart uses the existing validated localStorage cart; no new fields, remote calls or customer data.",
+      "access_control_impact": "none: public demo routes and existing permissions are unchanged.",
+      "risks": [
+        "Future changes to the favorites list must preserve nonempty catalog references and available products."
+      ],
+      "rollback": "Revert this redesign commit with its metadata to restore the previous interface; no data migration or cart storage conversion necessary."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 10,
+          "new_end": 10
+        },
+        {
+          "old_start": 18,
+          "old_end": 18,
+          "new_start": 18,
+          "new_end": 18
+        },
+        {
+          "old_start": 47,
+          "old_end": 47,
+          "new_start": 47,
+          "new_end": 49
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 57,
+          "new_end": 86
+        },
+        {
+          "old_start": 72,
+          "old_end": 72,
+          "new_start": 104,
+          "new_end": 107
+        },
+        {
+          "old_start": 87,
+          "old_end": 87,
+          "new_start": 122,
+          "new_end": 125
+        }
+      ],
+      "working_tree_sha256": "26411e684327aaaf69027dfbe10896e26c22e2366e1be9f45f873641471509bc",
+      "symbols": [
+        "home and cabinet selection scenarios"
+      ],
+      "purpose": "Verify the new interaction while retaining existing purchase and locator regression coverage.",
+      "previous_behavior": "Tests targeted the original hero and covered eight desktop/mobile cases.",
+      "new_behavior": "Ten cases cover image loading, responsive overflow, cabinet selection and wrapping, selected-product cart behavior plus the original purchase and store flows.",
+      "data_impact": "Only isolated browser state and ignored screenshot artifacts are written.",
+      "access_control_impact": "none: public demo routes and existing permissions are unchanged.",
+      "risks": [
+        "Typography and decorative transforms can affect layout at untested sizes; desktop and mobile Chromium were inspected."
+      ],
+      "rollback": "Revert this redesign commit with its metadata to restore the previous interface; no data migration or cart storage conversion necessary."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No operational records were read or changed. Existing bundled brand assets were reused.",
+    "schema_migration": "none: no backend, schema or storage-key changes.",
+    "external_side_effects": [
+      "Google Fonts requests for display typography during preview.",
+      "No publishing, real ordering, payment or messaging occurred."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Final Next.js production build and TypeScript checks passed; all existing routes and eight product details generated."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "10/10 desktop/mobile Chromium cases passed after final edits in 29.1 seconds against local preview; selection, cart, demo checkout, image loading, locator and 404 recovery verified."
+    },
+    {
+      "command": "Visual inspection of artifacts/preview-desktop.png, preview-mobile.png and home-desktop.png",
+      "result": "passed",
+      "evidence": "Confirmed new antique cabinet and complete page composition; mobile reordered to lead with the pie photograph; no horizontal page overflow."
+    }
+  ],
+  "residual_risks": [
+    "The existing checkout remains a demonstration; no live payment, inventory or administrator integration was added.",
+    "External Google fonts require network access and fall back to system serif fonts.",
+    "Tests use Chromium desktop and mobile emulation; other browser engines and physical devices were not tested.",
+    "Existing reference prices, food information and image publication rights still require operator confirmation."
+  ],
+  "commit": "same-as-metadata-file"
+}

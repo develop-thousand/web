@@ -7,7 +7,7 @@ test("home images, navigation, and responsive layout", async ({
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "A little slice. A whole feeling." }),
+    page.getByRole("heading", { name: "Life tastes better with pie." }),
   ).toBeVisible();
   await page.evaluate(async () => {
     await document.fonts.ready;
@@ -15,7 +15,7 @@ test("home images, navigation, and responsive layout", async ({
   await expect
     .poll(() =>
       page
-        .locator(".hero-main img")
+        .locator(".arch-photo img")
         .evaluate(
           (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
         ),
@@ -44,12 +44,44 @@ test("home images, navigation, and responsive layout", async ({
   );
   expect(overflow).toBe(false);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await page.screenshot({ path: `artifacts/preview-${testInfo.project.name}.png` });
+  await page.screenshot({
+    path: `artifacts/preview-${testInfo.project.name}.png`,
+  });
   await page.screenshot({
     path: `artifacts/home-${testInfo.project.name}.png`,
     fullPage: true,
   });
   expect(errors).toEqual([]);
+});
+
+test("cabinet selection changes the featured product and adds that pie", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "다음 추천 파이" }).click();
+  await expect(page.locator(".brass-plaque strong")).toHaveText(
+    "Cheese blueberry pie",
+  );
+  await expect(page.locator(".arch-detail")).toHaveAttribute(
+    "href",
+    "/pies/blueberry",
+  );
+  await page.locator(".menu-choices button").last().click();
+  await expect(page.locator(".arch-photo img")).toHaveAttribute(
+    "alt",
+    "피칸 파이",
+  );
+  await expect(page.locator(".menu-choices button").last()).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.getByRole("button", { name: "추천 피칸 파이 담기" }).click();
+  await expect(page.locator(".bag-line h3")).toHaveText("피칸 파이");
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "다음 추천 파이" }).click();
+  await expect(page.locator(".brass-plaque strong")).toHaveText(
+    "Banana cream pie",
+  );
 });
 
 test("filter, search, persisted cart and demo pickup flow", async ({
@@ -69,7 +101,10 @@ test("filter, search, persisted cart and demo pickup flow", async ({
   await page.locator(".search-result").click();
   await expect(page).toHaveURL(/pies\/banana-cream/);
   await page.locator(".detail-image img").waitFor();
-  await page.screenshot({ path: `artifacts/product-${testInfo.project.name}.png`, fullPage: true });
+  await page.screenshot({
+    path: `artifacts/product-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
   await page.getByRole("button", { name: "수량 늘리기", exact: true }).click();
   await page.getByRole("button", { name: "장바구니 담기 · 15,000원" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -84,7 +119,10 @@ test("filter, search, persisted cart and demo pickup flow", async ({
   await expect(page.locator(".drawer-bottom .total")).toContainText("7,500원");
   await page.getByRole("link", { name: "픽업 주문 체험" }).click();
   await expect(page).toHaveURL(/checkout/);
-  await page.screenshot({ path: `artifacts/checkout-${testInfo.project.name}.png`, fullPage: true });
+  await page.screenshot({
+    path: `artifacts/checkout-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
   await page.getByRole("radio", { name: /성수점/ }).check();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);

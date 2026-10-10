@@ -1,6 +1,6 @@
 # THOUSAND — A pie house from Seoul
 
-따우전드의 실제 파이 사진을 중심으로 만든 Next.js App Router 쇼핑몰 프로젝트입니다.
+따우전드의 실제 파이 사진을 중심으로 만든 Next.js App Router 쇼핑몰 프로젝트입니다. 앤티크 파이 하우스 콘셉트로 월넛·황동·버건디, 인쇄물 질감, 아치형 진열장과 인터랙티브 추천 메뉴를 적용했습니다.
 
 ## 실행
 
@@ -24,7 +24,7 @@ npm run test:e2e
 
 ## 화면과 기능
 
-- `/`: 실제 파이 사진 중심의 홈, 대표 상품 필터, 매장과 협업 이야기
+- `/`: 메뉴와 이전/다음 버튼으로 실제 파이 사진이 바뀌는 진열장, 선택 상품 담기, 메뉴북 형태의 상품 목록, 매장과 협업 이야기
 - `/shop`: 카테고리 필터, 가격 정렬, 빠른 장바구니 담기
 - `/pies/[slug]`: 8개 상품 상세, 수량 선택, 관련 상품, 판매 단위 및 식품 안내
 - 전역 검색: 한글/영문 이름과 재료 검색, 검색 결과 없음 처리
@@ -38,7 +38,7 @@ npm run test:e2e
 
 상품, 가격, 판매 상태, 매장 정보는 `src/lib/catalog.ts`에서 관리합니다. 이미지는 `public/images/`에 보관하며 Next Image에서 반응형 크기 및 WebP/AVIF 최적화를 처리합니다. 출처는 `docs/asset-sources.md`에 기록했습니다.
 
-글꼴은 Google Fonts의 DM Sans, Libre Caslon Display를 사용하며 네트워크 실패 시 시스템 서체로 대체됩니다. 지도는 지도 보기 선택 시 Google Maps iframe을 로드합니다.
+글꼴은 Google Fonts의 DM Sans, Playfair Display, DM Serif Display 등을 사용하며 네트워크 실패 시 시스템 서체로 대체됩니다. `src/app/heritage.css`는 기본 레이아웃 위에 적용하는 공통 앤티크 테마이며 장바구니·상품 상세·매장·주문 화면에도 적용됩니다. 질감·황동 명판·왁스 인장은 CSS로 작성했습니다. 지도는 지도 보기 선택 시 Google Maps iframe을 로드합니다.
 
 ## 실제 판매 연결 전 필요한 작업
 
