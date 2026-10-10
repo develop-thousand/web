@@ -1,0 +1,653 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261010-104715-build-thousand-image-led-next-js-storefront",
+  "created_at": "2026-10-10T10:47:15+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "88c727e80e53d45c2528933926ad54b31ed76758",
+  "request": "Build a Next.js project for THOUSAND with pie imagery as the primary focus",
+  "title": "Build THOUSAND image-led Next.js storefront",
+  "purpose": "Create a responsive pie storefront with authentic local photography, cart and store locator",
+  "files": [
+    {
+      "path": "next.config.ts",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 8
+        }
+      ],
+      "working_tree_sha256": "e48606b727c610760e7fadd06721aa61120f87888e360c3b60489242da14fe17",
+      "symbols": [
+        "NextConfig"
+      ],
+      "purpose": "Optimize local product images as AVIF/WebP and disable the powered-by header.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Optimize local product images as AVIF/WebP and disable the powered-by header.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "package.json",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 25
+        }
+      ],
+      "working_tree_sha256": "27a95796e542665f02e0c3060f44452b0aa2371e2d0559281898409056528b28",
+      "symbols": [
+        "scripts and dependencies"
+      ],
+      "purpose": "Pin Next.js/React and provide build, loopback preview, typecheck and browser-test commands.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Pin Next.js/React and provide build, loopback preview, typecheck and browser-test commands.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "playwright.config.ts",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 29
+        }
+      ],
+      "working_tree_sha256": "a0a7095768324478e7f3d19614027ed5dffd4d066957e590bc60b656c749a07d",
+      "symbols": [
+        "defineConfig"
+      ],
+      "purpose": "Run production-server browser scenarios at desktop and mobile viewport sizes.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Run production-server browser scenarios at desktop and mobile viewport sizes.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/checkout/page.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 10
+        }
+      ],
+      "working_tree_sha256": "30fbafc985f1c190ef5d309411fafab5b1baf5bf71a76455a6540d7f84e9ba84",
+      "symbols": [
+        "CheckoutPage"
+      ],
+      "purpose": "Expose the cart-aware pickup demonstration at /checkout.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Expose the cart-aware pickup demonstration at /checkout.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/globals.css",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 1861
+        }
+      ],
+      "working_tree_sha256": "50d5c9625f73f86368da2c00a1a92eba52d7eb406c30522217c3065bd63d034c",
+      "symbols": [
+        "responsive layouts and focus states"
+      ],
+      "purpose": "Render an editorial photo-led storefront, responsive product grids, dialogs, forms and reduced-motion support.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Render an editorial photo-led storefront, responsive product grids, dialogs, forms and reduced-motion support.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 30
+        }
+      ],
+      "working_tree_sha256": "a0ec2097f017a66d2a831c53702f795636e59d40a2a21026d32950e9922a3eed",
+      "symbols": [
+        "RootLayout and metadata"
+      ],
+      "purpose": "Share Korean document semantics, navigation, footer, cart state and demo noindex across routes.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Share Korean document semantics, navigation, footer, cart state and demo noindex across routes.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/not-found.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 13
+        }
+      ],
+      "working_tree_sha256": "70f2acb88ec815f5e4773375c203a0aa783a9cbc661e10589e03726c0031d767",
+      "symbols": [
+        "NotFound"
+      ],
+      "purpose": "Show a clear 404 recovery link to the pie collection for unknown routes.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Show a clear 404 recovery link to the pie collection for unknown routes.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 173
+        }
+      ],
+      "working_tree_sha256": "92cd83cf1a259ce80b02a69ca5fe4e5001a3d252d4ad6f9bb1e3de896cbd1558",
+      "symbols": [
+        "Home"
+      ],
+      "purpose": "Lead with real pie photography and connect featured shopping, store discovery and collaboration stories.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Lead with real pie photography and connect featured shopping, store discovery and collaboration stories.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/pies/[slug]/page.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 45
+        }
+      ],
+      "working_tree_sha256": "1b070639d8fe7f46c2ee0ec7a577e6617ef892c75c0ce525ad0eb0169f2ca14c",
+      "symbols": [
+        "generateStaticParams, generateMetadata, DetailPage"
+      ],
+      "purpose": "Render eight static product details and related products; reject unknown slugs with notFound.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Render eight static product details and related products; reject unknown slugs with notFound.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/shop/page.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 27
+        }
+      ],
+      "working_tree_sha256": "233b9131174fba78f17538ea9eb4b97e7d12aeb6f4c4eae8598629e509d89b5c",
+      "symbols": [
+        "Shop"
+      ],
+      "purpose": "Display category and price controls alongside sample-price disclosure.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Display category and price controls alongside sample-price disclosure.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/stores/page.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 23
+        }
+      ],
+      "working_tree_sha256": "a14e334ed50406a2bf1f2f460129ec653e810b2e40e50b880def9543d3a1af38",
+      "symbols": [
+        "StoresPage"
+      ],
+      "purpose": "Provide the domestic store locator and overseas pop-up archive route.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Provide the domestic store locator and overseas pop-up archive route.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/app/story/page.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 100
+        }
+      ],
+      "working_tree_sha256": "6090c084e1ea52c98e85c1aa65163813bfb2d6fa62bde69b67e26ce7dbb0e22f",
+      "symbols": [
+        "Story"
+      ],
+      "purpose": "Present researched brand history and ended Hawaii pop-up with authentic team and customer photography.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Present researched brand history and ended Hawaii pop-up with authentic team and customer photography.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/components/catalog.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 103
+        }
+      ],
+      "working_tree_sha256": "4b3978633e2e94385da52a7176233ab86ebf6741ee1501659d69f6714b931850",
+      "symbols": [
+        "PieCard and Catalog"
+      ],
+      "purpose": "Filter and sort products and allow quick-add only for sample-available products.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Filter and sort products and allow quick-add only for sample-available products.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/components/checkout.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 218
+        }
+      ],
+      "working_tree_sha256": "c3866c26068c909562960d4bc8edf45577281080731b6294910320eee8386f7f",
+      "symbols": [
+        "Checkout and submit"
+      ],
+      "purpose": "Complete a visibly labeled pickup demo with validated date selection and no payment or actual reservation.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Complete a visibly labeled pickup demo with validated date selection and no payment or actual reservation.",
+      "data_impact": "Reads local cart and in-memory pickup choices, then clears local cart on demo completion. No names, contact details or payment data are collected or transmitted.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Demo dates do not reflect actual store capacity; keep the explicit demo notice until live server order verification exists."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/components/chrome.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 116
+        }
+      ],
+      "working_tree_sha256": "a64ff54d6453458403caeef8c8934f10df917ee4e9d06eb9078d09364f84cefb",
+      "symbols": [
+        "Header and Footer"
+      ],
+      "purpose": "Provide responsive route navigation, search, bag counts, social links and a demonstration disclosure.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Provide responsive route navigation, search, bag counts, social links and a demonstration disclosure.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/components/pie-detail.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 101
+        }
+      ],
+      "working_tree_sha256": "367b6b85276be09190e9d8f63f02d6662dd51d0c47ed8c142fb5094b8a0009c0",
+      "symbols": [
+        "PieDetail"
+      ],
+      "purpose": "Show large product photos, explicit slice unit, quantity controls and food/pickup information disclosures.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Show large product photos, explicit slice unit, quantity controls and food/pickup information disclosures.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/components/shop-provider.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 307
+        }
+      ],
+      "working_tree_sha256": "8f86e49ac3bb1348842e7fc89dee5f62df940ffbbbb2b4efb13110fc2a7309b0",
+      "symbols": [
+        "ShopProvider, useShop, readCart, add, update"
+      ],
+      "purpose": "Persist validated cart IDs/quantities locally and provide accessible native search/cart dialogs with focus restoration.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Persist validated cart IDs/quantities locally and provide accessible native search/cart dialogs with focus restoration.",
+      "data_impact": "Reads/writes only product slugs and quantities in localStorage thousand-bag-v1. Invalid IDs, unavailable products and invalid quantities are discarded; no PII or remote write.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Cart state is user-controlled and must never be payment or inventory authority."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/components/store-locator.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 154
+        }
+      ],
+      "working_tree_sha256": "4cc208c156d029655011ea57e4a930f22f891cc4a5c57bebffb5478be6fe04e3",
+      "symbols": [
+        "StoreLocator"
+      ],
+      "purpose": "Switch among three Seoul stores, photos and on-demand maps; separate ended Hawaii pop-up from permanent stores.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Switch among three Seoul stores, photos and on-demand maps; separate ended Hawaii pop-up from permanent stores.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "src/lib/catalog.ts",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 152
+        }
+      ],
+      "working_tree_sha256": "b169beab3cd74e8cf35cd4bb02e4cc24a4ec772ed3e0423c843a424e36dc2dd9",
+      "symbols": [
+        "Pie, pies, stores, money, photo"
+      ],
+      "purpose": "Centralize eight sample products, reference prices, local photo paths and three researched domestic store links.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Centralize eight sample products, reference prices, local photo paths and three researched domestic store links.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Public reference prices and sample seasonal availability require operator confirmation before live sales."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 156
+        }
+      ],
+      "working_tree_sha256": "9d8b7639aaa5456b57a077fb4045eeb9af9bb6961eeb53b04831d1d5775eafe6",
+      "symbols": [
+        "home, purchase, stores and persisted-data tests"
+      ],
+      "purpose": "Verify image loading, responsive overflow, search/filter, cart persistence, totals, demo checkout, store switching, archive and 404 recovery.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Verify image loading, responsive overflow, search/filter, cart persistence, totals, demo checkout, store switching, archive and 404 recovery.",
+      "data_impact": "Isolated browser test localStorage and ignored screenshots/traces only; no production data.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    },
+    {
+      "path": "tsconfig.json",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 27
+        }
+      ],
+      "working_tree_sha256": "d88b60c515bc31b4e69138f4548c378268cb4b1c61e28f632194edf950d22d59",
+      "symbols": [
+        "compilerOptions"
+      ],
+      "purpose": "Enforce strict TypeScript, bundler module resolution and the @ source alias.",
+      "previous_behavior": "This file and feature did not exist in the empty project baseline.",
+      "new_behavior": "Enforce strict TypeScript, bundler module resolution and the @ source alias.",
+      "data_impact": "none: bundled public catalog and photo reads only; no production database or customer records.",
+      "access_control_impact": "none: public demonstration, no authentication or privileged write endpoint.",
+      "risks": [
+        "Changes to catalog content or layout may regress the tested customer paths."
+      ],
+      "rollback": "Revert the implementation commit together with this metadata to restore the baseline. No production migration or data rollback is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No private operational data read, created, modified or deleted. Only public brand content and isolated local browser state were used.",
+    "schema_migration": "none: no database, schema or backfill.",
+    "external_side_effects": [
+      "Downloaded public brand JPG assets for local design review.",
+      "Installed npm dependencies and Chromium for verification.",
+      "Google Fonts and on-demand Google Maps use external read-only requests.",
+      "No deployment, order, payment, email or social message was sent."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Next.js 16.4.0 production compilation and TypeScript succeeded; all storefront routes and eight product pages generated."
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "passed",
+      "evidence": "tsc --noEmit returned no diagnostics; final build also checked the added tests."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "8/8 passed after final source edits in 14.9 seconds on desktop/mobile Chromium. Initially missing Chromium was installed before verification."
+    },
+    {
+      "command": "Inspect desktop/mobile home, desktop preview, product and store screenshots",
+      "result": "passed",
+      "evidence": "Real pie images loaded, responsive composition verified, and clipped footer wordmark corrected and rechecked."
+    }
+  ],
+  "residual_risks": [
+    "No backend, live payment processing, authentication, inventory or administrator UI; checkout is explicitly a demonstration.",
+    "Operator confirmation needed for prices, seasonal availability, food labeling, pickup capacity and photo commercial usage permission.",
+    "Source photos are 1080px wide; very large displays can expose resolution limits.",
+    "External Google fonts/maps require network access; system fonts and official external directions links remain available.",
+    "Browser coverage uses Chromium desktop/mobile emulation, not physical Safari/Firefox devices."
+  ],
+  "commit": "same-as-metadata-file",
+  "supplemental_authored_files": [
+    {
+      "path": ".gitignore",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 11
+        }
+      ],
+      "working_tree_sha256": "6e6ba96c49c4d1c1679e78669b39a662b48df5c3dbb3468031feb9337ee0b47d",
+      "symbols": [
+        "ignore patterns"
+      ],
+      "purpose": "Exclude secrets, dependencies, build output and test artifacts from Git.",
+      "previous_behavior": "File did not exist.",
+      "new_behavior": "Exclude secrets, dependencies, build output and test artifacts from Git.",
+      "data_impact": "none: static repository or visual resource.",
+      "access_control_impact": "none: no runtime authorization behavior.",
+      "risks": [
+        "none: no operational data interaction."
+      ],
+      "rollback": "Revert the implementation commit; no data migration."
+    },
+    {
+      "path": "src/app/icon.svg",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 1
+        }
+      ],
+      "working_tree_sha256": "fa1e03895db9a7481962f1171904a50095a55c60745d5097e344b8c88a91f2f2",
+      "symbols": [
+        "T monogram"
+      ],
+      "purpose": "Provide an authored brand-colored browser icon.",
+      "previous_behavior": "File did not exist.",
+      "new_behavior": "Provide an authored brand-colored browser icon.",
+      "data_impact": "none: static repository or visual resource.",
+      "access_control_impact": "none: no runtime authorization behavior.",
+      "risks": [
+        "none: no operational data interaction."
+      ],
+      "rollback": "Revert the implementation commit; no data migration."
+    }
+  ]
+}
