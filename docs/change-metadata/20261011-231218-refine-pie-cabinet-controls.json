@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-231218-refine-pie-cabinet-controls",
+  "created_at": "2026-10-11T23:12:18+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "5df1e06b2442b1ae88bf1ec4214cc87b2e5bdf85",
+  "request": "Refine the stiff buttons, category labels, product plaques, and lower typography while keeping the header aesthetic",
+  "title": "Refine pie cabinet controls",
+  "purpose": "Bring cabinet filters, product labels, and purchase bar into the storefront's antique visual language",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 1,
+          "new_start": 1,
+          "new_end": 1
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1282,
+          "new_end": 1466
+        }
+      ],
+      "working_tree_sha256": "461686882df02f5c88e0a7a9e3bf1f9f46cf5ebd484cce9b8379669b1031677c",
+      "symbols": [
+        "PieShowcase cabinet filters",
+        "PieShowcase shelf labels",
+        "PieShowcase selection bar"
+      ],
+      "purpose": "Bring cabinet filters, product labels, and purchase bar into the storefront's antique visual language",
+      "previous_behavior": "Bright rectangular filter buttons and cream product cards contrasted sharply with the dark cabinet; the selection bar used mostly uniform sans-serif type and a flat red add button.",
+      "new_behavior": "Cabinet filters use a brass rule and active underline; product labels look like dark engraved plaques; the selection bar uses restrained Korean serif typography and a framed oxblood action. Responsive sizing and focus outlines remain available.",
+      "data_impact": "None; presentation CSS only, with no data reads, writes, or schema changes.",
+      "access_control_impact": "None; no role, permission, or authentication logic changed.",
+      "risks": [
+        "The Google hosted serif font may fall back when unavailable, changing text widths slightly; narrow screen sizes may need further visual adjustment."
+      ],
+      "rollback": "Revert this commit to restore the earlier CSS. No data compatibility steps apply because the change is presentation only."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production operational data was read, created, updated, or deleted.",
+    "schema_migration": "None; CSS change only.",
+    "external_side_effects": [
+      "None; local preview and screenshot checks only."
+    ]
+  },
+  "verification": [
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "evidence": "TypeScript completed with exit code 0."
+    },
+    {
+      "command": "Playwright Chromium screenshots at 1920x910 and 390x844 against local port 3101",
+      "result": "passed",
+      "evidence": "Visually checked cabinet controls, four plaques, bottom bar, and mobile fit."
+    },
+    {
+      "command": "Playwright Chromium: select Cream filter and Blueberry pie at 390x844",
+      "result": "passed",
+      "evidence": "Filter aria-pressed became true and detail link changed to /pies/blueberry."
+    }
+  ],
+  "residual_risks": [
+    "Serif font fallback can shift spacing when Google Fonts cannot load."
+  ],
+  "commit": "same-as-metadata-file"
+}
