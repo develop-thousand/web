@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-231014-mouse-drag-for-pie-shelves",
+  "created_at": "2026-10-11T23:10:14+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "106c387ce033ee38123bd57605038943e83e8b5a",
+  "request": "Make mouse interaction work like touch dragging",
+  "title": "Mouse drag for pie shelves",
+  "purpose": "Support direct mouse dragging alongside native touch scrolling",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1268,
+          "new_end": 1281
+        }
+      ],
+      "working_tree_sha256": "5e3b3170e7fd1a16c67822d12bc54e6373f8e2eee4e3c3b0c64bcf909d66dcaa",
+      "symbols": [
+        "Drag cursor styles"
+      ],
+      "purpose": "Communicate direct manipulation",
+      "previous_behavior": "Pointer cursor and hover lift during movement",
+      "new_behavior": "Grab/grabbing cursor and no text selection; hover lift suppressed during drag",
+      "data_impact": "No production data or schema changes; existing local cart only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Fine pointer media query varies on hybrid devices"
+      ],
+      "rollback": "Revert this commit; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 141,
+          "new_end": 193
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 198,
+          "new_end": 206
+        }
+      ],
+      "working_tree_sha256": "64f025c79650fc239c35d7da2c13d9c113aaafcf25fb50e9a002027f2af98605",
+      "symbols": [
+        "Shelf pointer handlers"
+      ],
+      "purpose": "Add mouse dragging without accidental product selection",
+      "previous_behavior": "Wheel and native touch worked, but mouse hold-and-drag did not",
+      "new_behavior": "Primary mouse drags update shelf scroll directly with capture; clicks suppressed after drag; outside release, cancellation and blur clean up; native touch unchanged",
+      "data_impact": "No production data or schema changes; existing local cart only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Unusual pointer devices may behave differently"
+      ],
+      "rollback": "Revert this commit; no data migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 166,
+          "new_end": 212
+        }
+      ],
+      "working_tree_sha256": "09ea13c7f7a6627887f668efd44371efcf058bee765cf77e802d42efbfa34ada",
+      "symbols": [
+        "Mouse drag interaction test"
+      ],
+      "purpose": "Verify movement and click separation",
+      "previous_behavior": "No mouse dragging regression coverage",
+      "new_behavior": "Tests verify pointer-following scroll, independent rows, unchanged selection, normal click recovery and outside release",
+      "data_impact": "No production data or schema changes; existing local cart only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Mobile mouse-specific case intentionally skipped; touch tested separately"
+      ],
+      "rollback": "Revert this commit; no data migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed. Browser-local demo state used in tests.",
+    "schema_migration": "None: UI only.",
+    "external_side_effects": [
+      "Local preview restarted; no deployment or external writes."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production build and TypeScript passed."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "13 passed; mobile mouse-only test intentionally skipped. Native mobile touch case passed."
+    }
+  ],
+  "residual_risks": [
+    "Physical Safari and hybrid pen devices not tested."
+  ],
+  "commit": "same-as-metadata-file"
+}

@@ -138,10 +138,72 @@ function Shelf({
         e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? node.clientWidth : 1;
       node.scrollLeft += delta * unit;
     };
+    let drag: { id: number; x: number; scroll: number; moved: boolean } | null =
+      null;
+    let suppressClick = false;
+    const down = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      // Keep pointer focus from selecting a product before a drag is distinguished.
+      e.preventDefault();
+      suppressClick = false;
+      node.scrollTo({ left: node.scrollLeft, behavior: "instant" });
+      drag = {
+        id: e.pointerId,
+        x: e.clientX,
+        scroll: node.scrollLeft,
+        moved: false,
+      };
+    };
+    const move = (e: PointerEvent) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const distance = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(distance) < 5) return;
+      if (!drag.moved) {
+        drag.moved = true;
+        suppressClick = true;
+        node.setPointerCapture(e.pointerId);
+        node.classList.add("is-dragging");
+      }
+      node.scrollLeft = drag.scroll - distance;
+    };
+    const finish = () => {
+      if (drag && node.hasPointerCapture(drag.id))
+        node.releasePointerCapture(drag.id);
+      drag = null;
+      node.classList.remove("is-dragging");
+    };
+    const up = (e: PointerEvent) => {
+      if (drag?.id === e.pointerId) finish();
+    };
+    const click = (e: MouseEvent) => {
+      if (suppressClick && e.detail !== 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        suppressClick = false;
+      }
+    };
+    const nativeDrag = (e: DragEvent) => e.preventDefault();
+    node.addEventListener("pointerdown", down);
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
+    window.addEventListener("blur", finish);
+    node.addEventListener("lostpointercapture", finish);
+    node.addEventListener("click", click, true);
+    node.addEventListener("dragstart", nativeDrag);
     const observer = new ResizeObserver(measure);
     observer.observe(node);
     node.addEventListener("wheel", wheel, { passive: false });
     return () => {
+      finish();
+      node.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+      window.removeEventListener("blur", finish);
+      node.removeEventListener("lostpointercapture", finish);
+      node.removeEventListener("click", click, true);
+      node.removeEventListener("dragstart", nativeDrag);
       observer.disconnect();
       node.removeEventListener("wheel", wheel);
     };

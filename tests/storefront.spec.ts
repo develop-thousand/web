@@ -163,6 +163,53 @@ test("continuous independent shelves and touch browsing", async ({
   expect(await x(top)).toBeLessThan(box.width * 0.6);
 });
 
+test("mouse drag tracks pointer without selecting a pie", async ({
+  page,
+}, info) => {
+  test.skip(
+    info.project.name !== "desktop",
+    "Mouse-specific interaction; native touch covered separately",
+  );
+  await page.goto("/");
+  const top = page.locator(".lane-0 .shelf-viewport");
+  const bottom = page.locator(".lane-1 .shelf-viewport");
+  const original = await page
+    .locator(".selection-actions a")
+    .getAttribute("href");
+  const second = (await page
+    .locator(".lane-0 .shelf-product")
+    .nth(1)
+    .boundingBox())!;
+  const x = second.x + second.width / 2,
+    y = second.y + second.height / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x - 220, y, { steps: 12 });
+  await expect(top).toHaveClass(/is-dragging/);
+  expect(await top.evaluate((el) => el.scrollLeft)).toBeGreaterThan(200);
+  expect(await bottom.evaluate((el) => el.scrollLeft)).toBe(0);
+  await page.mouse.up();
+  await expect(top).not.toHaveClass(/is-dragging/);
+  await expect(page.locator(".selection-actions a")).toHaveAttribute(
+    "href",
+    original!,
+  );
+  await page.locator(".lane-0 .shelf-product").nth(1).click();
+  await expect(page.locator(".selection-actions a")).toHaveAttribute(
+    "href",
+    "/pies/blueberry",
+  );
+  // Release outside the shelf, then verify subsequent movement no longer drags.
+  await page.mouse.move(400, y);
+  await page.mouse.down();
+  await page.mouse.move(250, y, { steps: 8 });
+  await page.mouse.move(250, 80);
+  await page.mouse.up();
+  const end = await top.evaluate((el) => el.scrollLeft);
+  await page.mouse.move(900, y);
+  expect(await top.evaluate((el) => el.scrollLeft)).toBe(end);
+});
+
 test("filter, search, persisted cart and demo pickup flow", async ({
   page,
 }, testInfo) => {

@@ -1265,3 +1265,17 @@ body:has(.atelier-home) {
 .shelf-paging {
   z-index: 4;
 }
+@media (pointer: fine) {
+  .shelf-viewport,
+  .continuous-shelf .shelf-product {
+    cursor: grab;
+    user-select: none;
+  }
+  .shelf-viewport.is-dragging,
+  .shelf-viewport.is-dragging .shelf-product {
+    cursor: grabbing;
+  }
+  .shelf-viewport.is-dragging .pie-object {
+    transform: none !important;
+  }
+}
