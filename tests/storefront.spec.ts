@@ -6,9 +6,15 @@ test("home images, navigation, and responsive layout", async ({
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  await expect(
-    page.getByRole("heading", { name: "THE PIE ROOM" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "THE PIE ROOM" })).toHaveCount(
+    1,
+  );
+  const cabinet = await page.locator(".asset-cabinet").boundingBox();
+  const viewport = page.viewportSize()!;
+  expect(cabinet?.x).toBe(0);
+  expect(cabinet?.y).toBe(0);
+  expect(cabinet?.width).toBe(viewport.width);
+  expect(cabinet?.height).toBe(viewport.height);
   await page.evaluate(async () => {
     await document.fonts.ready;
   });
