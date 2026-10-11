@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-231707-open-pie-details-on-click-and-tap",
+  "created_at": "2026-10-11T23:17:07+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "7ab42b80266b56e5cabca0e21109d0ed58792e4e",
+  "request": "Click and mobile tap must show details while dragging still works",
+  "title": "Open pie details on click and tap",
+  "purpose": "Separate product activation from shelf dragging",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1467,
+          "new_end": 1577
+        }
+      ],
+      "working_tree_sha256": "8157ae5f2b50d0007d7f092c90b955324cc1096104dba8d4345908d9d9fbd253",
+      "symbols": [
+        "pie-preview, preview-copy, cursor"
+      ],
+      "purpose": "Style desktop detail panel and mobile bottom sheet",
+      "previous_behavior": "No immediate detail preview and grab cursor on products",
+      "new_behavior": "Responsive modal and mobile sheet with pointer cursor for activation and grabbing during drag",
+      "data_impact": "No schema or production data change; existing browser-local demo cart only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Very short mobile screens require scrolling inside sheet"
+      ],
+      "rollback": "Revert this commit as a unit; no migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 5,
+          "old_end": 5,
+          "new_start": 5,
+          "new_end": 5
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 15,
+          "new_end": 21
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 69,
+          "new_end": 69
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 98,
+          "new_end": 147
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 157,
+          "new_end": 157
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 163,
+          "new_end": 163
+        },
+        {
+          "old_start": 229,
+          "old_end": 229,
+          "new_start": 289,
+          "new_end": 289
+        }
+      ],
+      "working_tree_sha256": "0e6216dc521d25abb9858ea28e8228c55d4de3ea8fb89044cf3ca2d9475f5835",
+      "symbols": [
+        "PieShowcase preview dialog, Shelf activation"
+      ],
+      "purpose": "Make click and tap show useful detail",
+      "previous_behavior": "Activation only changed bottom summary while drag was available",
+      "new_behavior": "Click, tap and keyboard activation open native modal with image, description, price and add; drag stays separate; modal closes before cart opens and restores focus",
+      "data_impact": "No schema or production data change; existing browser-local demo cart only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Dialog transitions depend on native browser focus behavior"
+      ],
+      "rollback": "Revert this commit as a unit; no migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 81,
+          "new_end": 85
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 107,
+          "new_end": 108
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 200,
+          "new_end": 200
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 210,
+          "new_end": 211
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 223,
+          "new_end": 249
+        }
+      ],
+      "working_tree_sha256": "8b8a980e7ea066b4205c900a38f4ffabb66ff57a53f18a8bd07cd9a20bfc19a4",
+      "symbols": [
+        "Preview activation and drag regression tests"
+      ],
+      "purpose": "Verify tap/click and drag separation",
+      "previous_behavior": "No direct preview activation tested",
+      "new_behavior": "Desktop click, mobile tap, keyboard, close/focus return, correct cart item and no preview after drag tested",
+      "data_impact": "No schema or production data change; existing browser-local demo cart only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Physical Safari not exercised"
+      ],
+      "rollback": "Revert this commit as a unit; no migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed. Test carts remain browser-local.",
+    "schema_migration": "None: UI only.",
+    "external_side_effects": [
+      "Local preview restarted; no deployment or external mutation."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production compilation and TypeScript passed."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "15 passed; mobile mouse-only test intentionally skipped. Native tap, preview cart, swipe, keyboard and drag passed."
+    },
+    {
+      "command": "Inspect desktop and mobile detail screenshots",
+      "result": "passed",
+      "evidence": "Product photo, description, price, close and purchase action visible."
+    }
+  ],
+  "residual_risks": [
+    "Physical Safari not tested. Commerce remains a demo."
+  ],
+  "commit": "same-as-metadata-file"
+}

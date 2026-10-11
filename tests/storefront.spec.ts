@@ -78,6 +78,11 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
     "href",
     "/pies/pecan",
   );
+  await expect(page.locator(".pie-preview")).toBeVisible();
+  await expect(page.locator("#pie-preview-title")).toHaveText(
+    await page.locator(".selection-copy h2").innerText(),
+  );
+  await page.locator(".preview-close").click();
   await expect(page.locator(".selection-copy h2")).toHaveText("피칸 파이");
   await page.screenshot({
     path: `artifacts/showcase-selected-${testInfo.project.name}.png`,
@@ -99,6 +104,8 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
   await expect(
     page.getByRole("button", { name: "선택한 스트로베리 파이 담기" }),
   ).toBeDisabled();
+  await expect(page.locator(".preview-add")).toBeDisabled();
+  await page.locator(".preview-close").click();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator(".pie-object").first()).toHaveCSS(
     "transition-duration",
@@ -190,6 +197,7 @@ test("mouse drag tracks pointer without selecting a pie", async ({
   expect(await bottom.evaluate((el) => el.scrollLeft)).toBe(0);
   await page.mouse.up();
   await expect(top).not.toHaveClass(/is-dragging/);
+  await expect(page.locator(".pie-preview")).not.toBeVisible();
   await expect(page.locator(".selection-actions a")).toHaveAttribute(
     "href",
     original!,
@@ -199,6 +207,8 @@ test("mouse drag tracks pointer without selecting a pie", async ({
     "href",
     "/pies/blueberry",
   );
+  await expect(page.locator(".pie-preview")).toBeVisible();
+  await page.locator(".preview-close").click();
   // Release outside the shelf, then verify subsequent movement no longer drags.
   await page.mouse.move(400, y);
   await page.mouse.down();
@@ -208,6 +218,33 @@ test("mouse drag tracks pointer without selecting a pie", async ({
   const end = await top.evaluate((el) => el.scrollLeft);
   await page.mouse.move(900, y);
   expect(await top.evaluate((el) => el.scrollLeft)).toBe(end);
+});
+
+test("tap or click opens details and adds the chosen pie", async ({
+  page,
+}, info) => {
+  await page.goto("/");
+  const pie = page.locator(".lane-0 .shelf-product").nth(1);
+  if (info.project.name === "mobile") await pie.tap();
+  else await pie.click();
+  await expect(page.locator(".pie-preview")).toBeVisible();
+  await expect(page.locator(".preview-copy a")).toHaveAttribute(
+    "href",
+    "/pies/blueberry",
+  );
+  await page.locator(".preview-add").click();
+  await expect(page.locator(".pie-preview")).not.toBeVisible();
+  await expect(page.locator(".bag-line")).toHaveCount(1);
+  await expect(page.locator(".bag-line a").first()).toHaveAttribute(
+    "href",
+    "/pies/blueberry",
+  );
+  await page.keyboard.press("Escape");
+  await pie.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator(".pie-preview")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(pie).toBeFocused();
 });
 
 test("filter, search, persisted cart and demo pickup flow", async ({

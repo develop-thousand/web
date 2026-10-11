@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Plus, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Plus, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { pies, money, type Pie } from "@/lib/catalog";
 import { useShop } from "./shop-provider";
 export const pieAsset = (slug: string) => `/images/atelier/${slug}.png`;
@@ -12,6 +12,13 @@ export function PieShowcase() {
   const [category, setCategory] = useState(categories[0]);
   const [selected, setSelected] = useState(pies[0].slug);
   const { add } = useShop();
+  const detail = useRef<HTMLDialogElement>(null);
+  const opener = useRef<HTMLButtonElement | null>(null);
+  function openDetail(slug: string, button: HTMLButtonElement) {
+    setSelected(slug);
+    opener.current = button;
+    detail.current?.showModal();
+  }
   const filtered = useMemo(
     () =>
       pies.filter((p) => category === categories[0] || p.category === category),
@@ -59,6 +66,7 @@ export function PieShowcase() {
             items={items}
             selected={selected}
             setSelected={setSelected}
+            openDetail={openDetail}
           />
         ))}
         <div className="cabinet-glass" aria-hidden="true" />
@@ -87,6 +95,56 @@ export function PieShowcase() {
           </button>
         </div>
       </div>
+      <dialog
+        ref={detail}
+        className="pie-preview"
+        aria-labelledby="pie-preview-title"
+        onClose={() => opener.current?.focus({ preventScroll: true })}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) detail.current?.close();
+        }}
+      >
+        <div className="pie-preview-content">
+          <button
+            className="preview-close"
+            aria-label="상세 닫기"
+            onClick={() => detail.current?.close()}
+          >
+            <X size={22} />
+          </button>
+          <div className="preview-image">
+            <Image
+              src={pieAsset(pie.slug)}
+              alt={pie.name}
+              fill
+              sizes="(max-width:700px) 85vw, 340px"
+            />
+          </div>
+          <div className="preview-copy">
+            <span>{pie.category}</span>
+            <h2 id="pie-preview-title">{pie.name}</h2>
+            <p className="preview-note">{pie.note}</p>
+            <p>{pie.description}</p>
+            <strong className="preview-price">{money(pie.price)}</strong>
+            <button
+              className="preview-add button dark"
+              disabled={!pie.available}
+              onClick={() => {
+                detail.current?.close();
+                add(pie.slug);
+              }}
+            >
+              {pie.available ? "한 조각 담기" : "시즌 종료"}
+            </button>
+            <Link
+              href={`/pies/${pie.slug}`}
+              onClick={() => detail.current?.close()}
+            >
+              상품 페이지 보기 <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </dialog>
     </section>
   );
 }
@@ -96,11 +154,13 @@ function Shelf({
   items,
   selected,
   setSelected,
+  openDetail,
 }: {
   row: number;
   items: Pie[];
   selected: string;
   setSelected: (slug: string) => void;
+  openDetail: (slug: string, button: HTMLButtonElement) => void;
 }) {
   const viewport = useRef<HTMLDivElement>(null);
   const buttons = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -226,7 +286,7 @@ function Shelf({
               aria-label={`${p.name} 선택`}
               aria-pressed={selected === p.slug}
               onFocus={() => setSelected(p.slug)}
-              onClick={() => setSelected(p.slug)}
+              onClick={(e) => openDetail(p.slug, e.currentTarget)}
               onKeyDown={(e) => {
                 if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
                 e.preventDefault();
