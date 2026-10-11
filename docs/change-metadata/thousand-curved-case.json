@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261012-002043-curved-glass-pie-showcase",
+  "created_at": "2026-10-12T00:20:43+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "2f4a2bbc843f6e51a58599ede1fdf45f1e811cb0",
+  "request": "Use the display cabinet section feel from the supplied reference",
+  "title": "Curved glass pie showcase",
+  "purpose": "Match the reference pastry case with curved glass and lit metal decks",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1622,
+          "new_end": 1664
+        }
+      ],
+      "working_tree_sha256": "69d468399bf1edc281fc912bc0a10a42d4755a541481da84d6201a24877a0959",
+      "symbols": [
+        "Curved case shelf and label styles"
+      ],
+      "purpose": "Align product layers and cream labels with new shelves",
+      "previous_behavior": "Wood-framed background with prior shelf alignment",
+      "new_behavior": "Curved brass/glass case with illuminated metal shelves, matching product alignment and cream labels",
+      "data_impact": "No operational data changes. Versioned generated background and prompt provenance stored in repository.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Generated geometry stretches to mobile viewport; screenshots reviewed."
+      ],
+      "rollback": "Revert this commit; original cabinet.png is retained and no migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 21,
+          "old_end": 23,
+          "new_start": 21,
+          "new_end": 26
+        },
+        {
+          "old_start": 72,
+          "old_end": 72,
+          "new_start": 75,
+          "new_end": 75
+        }
+      ],
+      "working_tree_sha256": "076636e0139de4431113fec937b3db5c48e68c53332a5ebb6a53bc40d46e04ca",
+      "symbols": [
+        "PieShowcase background"
+      ],
+      "purpose": "Use versioned curved-glass background",
+      "previous_behavior": "Wood-framed background with prior shelf alignment",
+      "new_behavior": "Curved brass/glass case with illuminated metal shelves, matching product alignment and cream labels",
+      "data_impact": "No operational data changes. Versioned generated background and prompt provenance stored in repository.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Generated geometry stretches to mobile viewport; screenshots reviewed."
+      ],
+      "rollback": "Revert this commit; original cabinet.png is retained and no migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed. Local demo browser tests only.",
+    "schema_migration": "None: UI and static asset change.",
+    "external_side_effects": [
+      "One built-in image_gen generation using the user-provided style reference. No deployment or external writes."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production build and TypeScript passed."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "15 tests passed; one mobile mouse-only case skipped intentionally. Drag, swipe, tap detail, cart and fixed viewport verified."
+    },
+    {
+      "command": "Inspect desktop/mobile screenshots and generated background",
+      "result": "passed",
+      "evidence": "Two empty curved-glass levels, bright shelf lights and separate product overlays visible."
+    }
+  ],
+  "residual_risks": [
+    "Physical Safari not tested. Generated backdrop is a design asset rather than an actual store photograph."
+  ],
+  "commit": "same-as-metadata-file"
+}

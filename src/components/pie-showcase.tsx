@@ -18,9 +18,12 @@ export function PieShowcase() {
   const detail = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement | null>(null);
   const previewTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => {
-    if (previewTimer.current) clearTimeout(previewTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (previewTimer.current) clearTimeout(previewTimer.current);
+    },
+    [],
+  );
   function openDetail(slug: string, button: HTMLButtonElement) {
     setSelected(slug);
     setRevealed(slug);
@@ -69,7 +72,7 @@ export function PieShowcase() {
       <div className="asset-cabinet">
         <Image
           className="empty-cabinet"
-          src="/images/atelier/cabinet.png"
+          src="/images/atelier/cabinet-curved-v2.png"
           alt=""
           fill
           priority

@@ -1619,3 +1619,46 @@ body:has(.atelier-home) {
     margin: 14px 0;
   }
 }
+/* Align independent pie layers with the curved case's illuminated metal decks. */
+.atelier-home .empty-cabinet {
+  opacity: 1;
+}
+.atelier-home .lane-0 {
+  top: 15%;
+  height: 31%;
+}
+.atelier-home .lane-1 {
+  top: 48%;
+  height: 28%;
+}
+.atelier-home .shelf-label,
+.atelier-home .continuous-shelf .shelf-product.is-active .shelf-label {
+  background: #e9dfc7;
+  color: #3b3023;
+  border: 1px solid #aa9065;
+  box-shadow: 0 3px 6px #0005;
+  clip-path: none;
+}
+.atelier-home .shelf-label strong {
+  font-family: var(--sans);
+  color: #3b3023;
+}
+.atelier-home .shelf-label > span {
+  color: #6e5a3d;
+}
+.atelier-home .continuous-shelf .shelf-product.is-active .shelf-label {
+  border-color: #f6d992;
+  box-shadow:
+    0 0 0 1px #f6d992,
+    0 3px 6px #0005;
+}
+@media (max-width: 700px) {
+  .atelier-home .lane-0 {
+    top: 21%;
+    height: 25%;
+  }
+  .atelier-home .lane-1 {
+    top: 48%;
+    height: 28%;
+  }
+}

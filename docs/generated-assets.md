@@ -75,3 +75,11 @@ Machine-readable archive: [image-prompts.json](image-prompts.json). It preserves
 ## Current implementation
 
 The cabinet is a fixed background. Each of its two shelves scrolls independently and continuously using wheel, touch or mouse drag. Clicking or tapping a pie opens its detail panel. Neighboring pies remain visible during selection. The full-pie images represent flavor; the demo purchase unit remains one slice. Strawberry is marked unavailable in the current demo catalog.
+
+## Curved display case revision - 2026-10-12
+
+Current background: `public/images/atelier/cabinet-curved-v2.png`. Original `cabinet.png` is preserved as superseded. Generated with built-in image_gen using the user-supplied reference archived at `docs/asset-references/curved-case-reference.png`; only the pastry case section informed the new empty case. No pixel processing. Transparent background: false.
+
+Exact prompt: [cabinet-curved-v2-prompt.txt](cabinet-curved-v2-prompt.txt). Full settings, reference and output hashes are in [image-prompts.json](image-prompts.json).
+
+The curved case uses thin bronze/brass ribs, bright linear shelf lighting, reflective metal decks and a softly blurred shop interior. Existing cutout pies remain separate and interactive.
