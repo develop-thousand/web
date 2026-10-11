@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@/components/chrome";
 import { ShopProvider } from "@/components/shop-provider";
+import { VisitTracker } from "@/components/visit-tracker";
 import "./globals.css";
 import "./atelier.css";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <ShopProvider>
+          <VisitTracker />
           <Header />
           {children}
           <Footer />

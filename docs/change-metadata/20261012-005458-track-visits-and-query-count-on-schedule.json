@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261012-005458-track-visits-and-query-count-on-schedule",
+  "created_at": "2026-10-12T00:54:58+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "ea130e9d20c62d8f74297b81525197c0f961115e",
+  "request": "Create visitor tracking and have the cron query visitor count",
+  "title": "Track visits and query count on schedule",
+  "purpose": "Count real site visits in Supabase and make the scheduled database activity check read that count",
+  "files": [
+    {
+      "path": ".github/workflows/supabase-keepalive.yml",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 19,
+          "old_end": 19,
+          "new_start": 19,
+          "new_end": 19
+        },
+        {
+          "old_start": 26,
+          "old_end": 27,
+          "new_start": 26,
+          "new_end": 28
+        }
+      ],
+      "working_tree_sha256": "42667616bc1de5fcec26e3f45fe8bbf061392f362898a9adc72ded90a042f3d1",
+      "symbols": [
+        "Supabase activity check query job"
+      ],
+      "purpose": "Query actual visitor counts on schedule",
+      "previous_behavior": "The scheduled job selected a constant value from the database.",
+      "new_behavior": "Each scheduled run reads and prints the sum of recorded visits from the private daily-count table.",
+      "data_impact": "Reads the aggregated count; does not write data.",
+      "access_control_impact": "Uses the existing repository-scoped database URL secret; no new grant.",
+      "risks": [
+        "The schedule fails if the migration is absent or the database is paused."
+      ],
+      "rollback": "Restore the prior SELECT 1 workflow command; leave stored counts intact."
+    },
+    {
+      "path": "package.json",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 13,
+          "new_end": 13
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 15,
+          "new_end": 15
+        },
+        {
+          "old_start": 15,
+          "old_end": 16,
+          "new_start": 17,
+          "new_end": 17
+        },
+        {
+          "old_start": 19,
+          "old_end": 19,
+          "new_start": 20,
+          "new_end": 20
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 22,
+          "new_end": 22
+        },
+        {
+          "old_start": 23,
+          "old_end": 23,
+          "new_start": 25,
+          "new_end": 25
+        }
+      ],
+      "working_tree_sha256": "e6839cb22fc774e9b089fdf5805440a0dab1d0afe680a7e252173a81657aab71",
+      "symbols": [
+        "pg dependency",
+        "@types/pg dev dependency"
+      ],
+      "purpose": "Record actual site visits in the daily aggregate",
+      "previous_behavior": "The app had no PostgreSQL client dependency.",
+      "new_behavior": "The Node route can use pg 8.23.1 with pinned TypeScript definitions.",
+      "data_impact": "No direct data impact; enables server database access.",
+      "access_control_impact": "No direct permission change.",
+      "risks": [
+        "A new runtime dependency must be installed in deployment."
+      ],
+      "rollback": "Remove pg and @types/pg after removing the visit route; reinstall from the prior package lock."
+    },
+    {
+      "path": "src/app/api/visit/route.ts",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 39
+        }
+      ],
+      "working_tree_sha256": "d4ab72b9cbbe3430d71abf1379dbb930191178d7dc1540c41629ddfe92a4037a",
+      "symbols": [
+        "POST /api/visit"
+      ],
+      "purpose": "Record actual site visits in the daily aggregate",
+      "previous_behavior": "No visit recording endpoint existed.",
+      "new_behavior": "Same-origin POSTs increment the Seoul-date count once per 24-hour visit cookie; repeat requests return 204 without incrementing.",
+      "data_impact": "Atomically increments one daily aggregate row per accepted visit; reads the visit cookie.",
+      "access_control_impact": "Public same-origin endpoint uses the server-side database credential; private table remains inaccessible to anon and authenticated database roles.",
+      "risks": [
+        "Cookies can be cleared and automated requests can inflate approximate counts.",
+        "Database failures return 503 and omit that visit."
+      ],
+      "rollback": "Remove the route and tracker; existing aggregate rows can remain or be removed with an explicit data-retention decision."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 4,
+          "new_end": 4
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 25,
+          "new_end": 25
+        }
+      ],
+      "working_tree_sha256": "b17503196093a79820c05228b48757a745ca0538892225ab828a6aaff3f58f47",
+      "symbols": [
+        "RootLayout"
+      ],
+      "purpose": "Record actual site visits in the daily aggregate",
+      "previous_behavior": "The root layout rendered site content without visit tracking.",
+      "new_behavior": "The root layout mounts the visit tracker on site pages.",
+      "data_impact": "Causes client requests to the visit endpoint, which may increment aggregate counts.",
+      "access_control_impact": "No direct permission change.",
+      "risks": [
+        "If the tracker fails to mount, visits are not counted."
+      ],
+      "rollback": "Remove VisitTracker from the layout; existing stored counts remain compatible."
+    },
+    {
+      "path": "src/components/visit-tracker.tsx",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 18
+        }
+      ],
+      "working_tree_sha256": "fcbc2f1fa7ea454e07f083c2b15dfd4adcfb7a44a14149161ba77ad3f9239c2c",
+      "symbols": [
+        "VisitTracker"
+      ],
+      "purpose": "Record actual site visits in the daily aggregate",
+      "previous_behavior": "No client-side visit request existed.",
+      "new_behavior": "A browser mount sends one keepalive POST; a module guard avoids duplicate development-effect requests.",
+      "data_impact": "Initiates a count increment through the API; stores no visitor identity.",
+      "access_control_impact": "No client credentials are exposed.",
+      "risks": [
+        "Blocked JavaScript or failed requests yield undercounts."
+      ],
+      "rollback": "Remove the component and layout import; existing database counts can remain."
+    },
+    {
+      "path": "src/lib/visitor-db.ts",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 20
+        }
+      ],
+      "working_tree_sha256": "979def3815279ba3c4d1dc44ae9e107fa88904a97661124d90eb9b39c1413df6",
+      "symbols": [
+        "getVisitorPool"
+      ],
+      "purpose": "Record actual site visits in the daily aggregate",
+      "previous_behavior": "The app had no server-side PostgreSQL pool.",
+      "new_behavior": "A lazy single-connection pool reads DATABASE_URL for the visit API.",
+      "data_impact": "Enables the API to write daily visit counts.",
+      "access_control_impact": "Database credentials stay server-side; TLS is encrypted without certificate-chain verification for the shared pooler.",
+      "risks": [
+        "Unverified TLS does not protect against an active man-in-the-middle attack.",
+        "Deployment needs DATABASE_URL configured."
+      ],
+      "rollback": "Remove the pool module after removing the API; revoke or rotate credentials if exposed."
+    },
+    {
+      "path": "supabase/migrations/20261011154857_create_site_visit_counts.sql",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 10
+        }
+      ],
+      "working_tree_sha256": "3ebe2d5c238dee6f02126e0ff5a10ed9e9982ac40dcd555e86492332392f7fed",
+      "symbols": [
+        "private schema",
+        "private.site_visit_counts"
+      ],
+      "purpose": "Persist daily visit counts privately",
+      "previous_behavior": "No application visit-count table existed.",
+      "new_behavior": "A private table stores nonnegative daily aggregate counts with date primary key and RLS enabled.",
+      "data_impact": "Creates schema and table; one test visit row has been inserted; no backfill.",
+      "access_control_impact": "Revokes public, anon, and authenticated access to schema/table; postgres owner retains server access.",
+      "risks": [
+        "Dropping the table would permanently delete accumulated counts."
+      ],
+      "rollback": "Stop visit writes and scheduled reads first; retain the table for data preservation, or explicitly export counts before DROP TABLE and DROP SCHEMA."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "Read the production aggregate during verification and inserted one test visit, leaving a count of 1. No visitor identity or existing user records were read, updated, or deleted.",
+    "schema_migration": "Applied 20261011154857_create_site_visit_counts.sql to the Supabase project; no backfill.",
+    "external_side_effects": [
+      "Created private schema and daily visit-count table in Supabase.",
+      "Sent two local API POSTs with one cookie; the first incremented the count and the second did not."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run typecheck",
+      "result": "passed",
+      "evidence": "TypeScript completed without errors."
+    },
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Next.js production build compiled and included the dynamic /api/visit route."
+    },
+    {
+      "command": "POST /api/visit twice with the same WebRequestSession; query count before and after",
+      "result": "passed",
+      "evidence": "Both POSTs returned 204; count changed from 0 to 1."
+    },
+    {
+      "command": "Query pg_class RLS and anon/authenticated table privileges",
+      "result": "passed",
+      "evidence": "RLS enabled; neither anon nor authenticated has SELECT."
+    },
+    {
+      "command": "npx supabase db push --db-url <local secret> --skip-vault --yes",
+      "result": "passed",
+      "evidence": "Migration 20261011154857_create_site_visit_counts.sql applied successfully."
+    },
+    {
+      "command": "gh workflow run supabase-keepalive.yml --repo develop-thousand/web",
+      "result": "not_run",
+      "evidence": "Modified workflow is not yet on the default branch; dispatch will follow push."
+    }
+  ],
+  "residual_risks": [
+    "A browser cookie counts visits approximately, not unique people; JavaScript blocking or deliberate repeated requests affect totals.",
+    "The shared-pooler TLS connection is encrypted but its self-signed chain is not verified by the Node client.",
+    "Deployments require DATABASE_URL in the server environment; the repository only has an ignored local value.",
+    "The scheduled workflow may be delayed or disabled after 60 days of public repository inactivity."
+  ],
+  "commit": "same-as-metadata-file"
+}

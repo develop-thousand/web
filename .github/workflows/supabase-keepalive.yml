@@ -16,12 +16,13 @@ jobs:
       PGCONNECT_TIMEOUT: "10"
       PGSSLMODE: require
     steps:
-      - name: Run a read-only database query
+      - name: Read recorded visitor count
         shell: bash
         run: |
           if [[ -z "$DATABASE_URL" ]]; then
             echo "SUPABASE_KEEPALIVE_DATABASE_URL is not configured" >&2
             exit 1
           fi
-          result="$(psql "$DATABASE_URL" -X -qAt -v ON_ERROR_STOP=1 -c 'select 1')"
-          test "$result" = "1"
+          result="$(psql "$DATABASE_URL" -X -qAt -v ON_ERROR_STOP=1 -c 'select coalesce(sum(visits), 0) from private.site_visit_counts')"
+          [[ "$result" =~ ^[0-9]+$ ]]
+          echo "Recorded visits: $result"
