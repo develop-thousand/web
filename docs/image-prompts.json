@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "purpose": "Reusable generation prompt archive for THOUSAND assets",
+  "updated_at": "2026-10-11",
+  "provenance": "Transcribed without prompt changes from the existing generation record, not reconstructed from appearance.",
+  "reproduction_note": "Use the exact prompt, references and transparency option together. Identical outputs are not guaranteed. Model and seed were not recorded and remain null. Preserve the approved PNGs for exact reuse.",
+  "history_gaps": [
+    "Discarded early banana variants are mentioned in the original record, but their exact prompts and outputs are not preserved here. Do not invent them."
+  ],
+  "future_recording_rule": "For every generated image and revision, record prompt verbatim, tool, available model/settings, reference paths and hashes, date, output path/hash, status and relationship to previous versions. Record edits and rejected variants without overwriting prior prompts.",
+  "assets": [
+    {
+      "id": "blueberry",
+      "file": "public/images/atelier/blueberry.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-blueberry.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole cheese blueberry pie with rustic fluted golden pastry crust, deep purple berry filling, billowy ivory cream generously marbled with purple blueberry sauce and fresh dark blueberries, closely matching reference. No slice removed. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1466,
+      "height": 1073,
+      "bytes": 2513897,
+      "sha256": "baca7fa8fb7d3c4f1a36fbebf02e2931119b5e4253e6fbe313b9bd5309076a16",
+      "reference_sha256": {
+        "public/images/ts-menu-blueberry.jpg": "993e0dccbf694726594578a7b6c178ecc969f2f3a3460c70e09da8da65ac562c"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "pumpkin",
+      "file": "public/images/atelier/pumpkin.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-pumpkin.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole pumpkin pie with golden flaky fluted pastry crust, deep orange pumpkin filling, thick loosely swirled white whipped cream on top dusted lightly with cinnamon, closely matching reference. No slice removed. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1469,
+      "height": 1071,
+      "bytes": 2306565,
+      "sha256": "4357d2ce3d444a502910f0ae7737ef0d1ef5bb481d9e5e4998b5b20f271b1cf4",
+      "reference_sha256": {
+        "public/images/ts-menu-pumpkin.jpg": "4215ced3634659f430bb88ada7a7d88e4ea1631b452c5cbac1e70da1dc8e9b6b"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "pecan",
+      "file": "public/images/atelier/pecan.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-pecan.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole pecan pie with golden flaky irregular fluted pastry crust, dense dark amber pecan filling and glossy caramelized pecan halves covering the top, closely matching reference. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1468,
+      "height": 1071,
+      "bytes": 2663673,
+      "sha256": "d9c38ed14667848f2e7a6925ff05458f57ae3e53f01c0c137b7971a9654b370e",
+      "reference_sha256": {
+        "public/images/ts-menu-pecan.jpg": "e079fae43f820dfedd8990c4072bd4351780723d6312a102ea02c48beff541d8"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "apple",
+      "file": "public/images/atelier/apple.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-apple.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole apple crumble pie, golden flaky pastry crust, generous coarse golden streusel topping, visible cinnamon apple filling at crust edge, closely matching reference pie. OMIT the ice cream: pie ONLY, no ice cream. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1470,
+      "height": 1070,
+      "bytes": 2477091,
+      "sha256": "06a26a6c78a0cdab5a18e8267921a857270dd2bb168ba149476efa4093e7389b",
+      "reference_sha256": {
+        "public/images/ts-menu-apple.jpg": "eb12a2b30adf7161f4c5d01e74a47b79220494ef7007c7f48b808797d9a17d5a"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "mud",
+      "file": "public/images/atelier/mud.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-mud.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole chocolate mud pie with golden fluted pastry crust, thick deep dark chocolate filling and generous rustic white whipped cream topping dusted cocoa, closely matching reference. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1470,
+      "height": 1070,
+      "bytes": 2574871,
+      "sha256": "bc348750bc841c84aa89a183745d14f4340641e25cbca111d8e73cb6618cdd7a",
+      "reference_sha256": {
+        "public/images/ts-menu-mud.jpg": "fc22902bacd1de16913c57d3801d27d4d3120605355a6817102b36d663a45be5"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "figrey",
+      "file": "public/images/atelier/figrey.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-fig.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole fig and Earl Grey pie, golden crumbly pastry base, ring of piped tan Earl Grey cream rosettes and abundant quartered fresh figs with pink flesh and purple green skins in center, closely matching reference. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 2164661,
+      "sha256": "27d2fd7c5152cbbf6415d93f5c311f1930099768f66aa320345ab3a19e6603fc",
+      "reference_sha256": {
+        "public/images/ts-menu-fig.jpg": "77e5fc3389dc085dc0e701ed6624992fdb721212fa3268c955355989203b8894"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "strawberry",
+      "file": "public/images/atelier/strawberry.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-strawberry.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Use case: product-mockup. Generate a bespoke photorealistic website cutout based on reference product. Subject: A whole strawberry cream pie, golden fluted pastry crust, light pink strawberry cream piped rustic rosettes around perimeter and abundant fresh red strawberries filling center, closely matching reference. One intact whole round pie ONLY. Genuine transparent alpha PNG. Absolutely no backdrop, no gradients, no glow, no floor, no shadow outside the silhouette, no plate, tin, utensils, packaging, people or text. Center the entire pie within transparent margins with nothing cropped. Matching eight-asset set: camera three-quarter front view 25 degrees above horizontal, soft warm upper-left studio light, highly realistic pastry and filling texture. Object occupies 75 percent of canvas width and about 55 percent height. Clean sharp cutout edges. No baked checkerboard. ONLY THE PIE, FULLY TRANSPARENT SURROUNDINGS.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1464,
+      "height": 1074,
+      "bytes": 2238142,
+      "sha256": "65514ffe6ebe97293ffbb5705fa7d9d7a6677dcd1028f4b09143496889331eaa",
+      "reference_sha256": {
+        "public/images/ts-menu-strawberry.jpg": "9eb63c9bb8f88bfc5340f95d402ce8a85914edf7d35c49492aa9973df8dace03"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "banana-cream",
+      "file": "public/images/atelier/banana-cream.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [
+        "public/images/ts-menu-banana.jpg"
+      ],
+      "transparent_background": true,
+      "prompt": "Create a new isolated product cutout of the banana cream pie in reference. A whole intact golden fluted pastry pie, generous cream dusted cinnamon, caramelized banana chunks and chocolate specks. Medium-low three-quarter camera angle, fully visible, centered. NO BACKGROUND AT ALL: transparent alpha PNG around the pie, absolutely no brown backdrop or glow. No plate, packaging, tools, text, external shadow or floor. Studio food photography matching a premium 8-pie cutout set. Clean edges. Transparent area around ALL sides of the pie. Match toppings of reference.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1402,
+      "height": 1122,
+      "bytes": 2760795,
+      "sha256": "6abc0c540614220e81ac3b940075850135daab7290d802d4520feaccf8dfb0aa",
+      "reference_sha256": {
+        "public/images/ts-menu-banana.jpg": "23062a8821072ea5c14df776d6fb02a3de295323a8ab208b40f2f1c4f74574e0"
+      },
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    },
+    {
+      "id": "cabinet",
+      "file": "public/images/atelier/cabinet.png",
+      "status": "in_use",
+      "generation_date": "2026-10-10",
+      "tool": "image_gen",
+      "model": null,
+      "seed": null,
+      "references": [],
+      "transparent_background": false,
+      "prompt": "Generate a premium photorealistic EMPTY antique American bakery display cabinet viewed perfectly straight-on, symmetrical, wide landscape 3:2. This is a website background plate, food and labels will be composited later. Rich dark cherry wood surround with very thin brushed antique brass trim, warm amber concealed shelf lights, softly reflective deep olive brown interior back wall, subtle glass reflection. Exactly TWO empty display levels divided by ONE thin horizontal brass glass shelf at 51% image height; lower floor shelf at 94% image height. Large open uninterrupted spaces for four products across each level. Very slim outer frame, cabinet fills image edge to edge. No counter in foreground. No vertical divider posts. NO FOOD, no pies, no plates, no stands, no objects, no packaging, no signs, no lettering, no logo. Calm high-end heritage patisserie, realistic aged wood and brass, warm dim inviting light, architectural product photograph, excellent detail. Leave 95% width usable for compositing.",
+      "prompt_source": "docs/generated-assets.md",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2097758,
+      "sha256": "a48a8e89e20e409f04742a4100b34215e515e6d553234eafaf07aba85e515de4",
+      "reference_sha256": {},
+      "postprocessing": "No pixel edits recorded; copied as independent runtime asset."
+    }
+  ]
+}

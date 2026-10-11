@@ -60,6 +60,16 @@ No reference image. transparent_background: false.
 
 Generate a premium photorealistic EMPTY antique American bakery display cabinet viewed perfectly straight-on, symmetrical, wide landscape 3:2. This is a website background plate, food and labels will be composited later. Rich dark cherry wood surround with very thin brushed antique brass trim, warm amber concealed shelf lights, softly reflective deep olive brown interior back wall, subtle glass reflection. Exactly TWO empty display levels divided by ONE thin horizontal brass glass shelf at 51% image height; lower floor shelf at 94% image height. Large open uninterrupted spaces for four products across each level. Very slim outer frame, cabinet fills image edge to edge. No counter in foreground. No vertical divider posts. NO FOOD, no pies, no plates, no stands, no objects, no packaging, no signs, no lettering, no logo. Calm high-end heritage patisserie, realistic aged wood and brass, warm dim inviting light, architectural product photograph, excellent detail. Leave 95% width usable for compositing.
 
-## Use and review
+## Reuse and recording policy
 
-The full pies communicate flavor; the demo purchase unit is still one slice. Final production appearance, recipe and portions need brand review. Supplied store screenshot is no longer used. Desktop uses two rows of four pies, mobile uses four rows of two. Hover and focus isolate and enlarge the actual transparent pie element; selection persists when moving toward the add button. Sold-out strawberry remains browseable but cannot be added. Reduced motion follows the OS setting without a visible motion control.
+Machine-readable archive: [image-prompts.json](image-prompts.json). It preserves the nine prompts above verbatim and links them to output hashes, dimensions, references and transparency settings.
+
+- Reuse the approved PNG when the exact same image is needed. Regeneration with the same prompt may produce a different result.
+- For a new generation, attach the listed reference image and pass the full prompt with its recorded transparent_background value. The cabinet used no reference image input.
+- Model version and seed were not recorded. They are unknown; do not invent values.
+- Record every future generation and edit before adopting its output: exact prompt, references, available generation settings, date, output path, checksum, status and previous version. Keep rejected variants as separate records; never overwrite their history.
+- The original record mentions discarded banana variants, but their exact prompts and outputs are unavailable in this archive. The final accepted banana prompt is preserved above.
+
+## Current implementation
+
+The cabinet is a fixed background. Each of its two shelves scrolls independently and continuously using wheel, touch or mouse drag. Clicking or tapping a pie opens its detail panel. Neighboring pies remain visible during selection. The full-pie images represent flavor; the demo purchase unit remains one slice. Strawberry is marked unavailable in the current demo catalog.
