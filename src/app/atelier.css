@@ -197,28 +197,6 @@ h3 {
   border-color: #fff4cd;
   background: #fff2d6;
 }
-.is-exploring .empty-cabinet {
-  opacity: 0.06;
-  filter: saturate(0.6);
-}
-.is-exploring .shelf-product:not(.is-active) {
-  opacity: 0;
-  filter: blur(2px);
-}
-.is-exploring .shelf-product.is-active {
-  z-index: 5;
-}
-.is-exploring .shelf-product.is-active .pie-object {
-  transform: translateY(-14px) scale(1.32) rotate(-3deg);
-  filter: drop-shadow(0 13px 12px #0007);
-}
-.is-exploring .shelf-product.is-active .shelf-label {
-  opacity: 0;
-  transform: translateY(8px);
-}
-.is-exploring .shelf-product.is-active .object-shadow {
-  opacity: 0;
-}
 .shelf-product:focus-visible {
   outline: 2px solid #e8c995;
   outline-offset: 0;
@@ -654,9 +632,6 @@ h3 {
     display: block;
     font-size: 8px;
     margin: 5px 0 0;
-  }
-  .is-exploring .shelf-product.is-active .pie-object {
-    transform: translateY(-6px) scale(1.14) rotate(-3deg);
   }
   .atelier-selection {
     display: block;
@@ -1232,4 +1207,61 @@ body:has(.atelier-home) {
 .shelf-viewport {
   overflow: visible;
   clip-path: inset(-100vh 0);
+}
+/* Continuous shelf browsing keeps the physical cabinet and neighboring pies visible. */
+.shelf-lane {
+  touch-action: auto;
+}
+.shelf-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  clip-path: none;
+  scrollbar-width: none;
+  touch-action: pan-x pinch-zoom;
+  overscroll-behavior-x: contain;
+}
+.shelf-viewport::-webkit-scrollbar {
+  display: none;
+}
+.continuous-shelf {
+  display: flex;
+  gap: 2%;
+  height: 100%;
+  padding: 14px 3% 10px;
+}
+.continuous-shelf .shelf-product {
+  flex: 0 0 46%;
+  height: 100%;
+  scroll-margin-inline: 24px;
+}
+.continuous-shelf .pie-object {
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+  transform-origin: center;
+}
+.continuous-shelf .shelf-product.is-active .pie-object {
+  transform: translateY(-5px) scale(1.025);
+}
+.continuous-shelf .shelf-product.is-active .shelf-label {
+  border-color: #d9a654;
+  box-shadow:
+    0 0 0 2px #d9a65470,
+    0 3px 8px #0004;
+}
+@media (hover: hover) {
+  .continuous-shelf .shelf-product:hover .pie-object {
+    transform: translateY(-8px) scale(1.045);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .continuous-shelf .pie-object {
+    transition: none;
+  }
+}
+.atelier-home .asset-cabinet {
+  touch-action: pan-x pinch-zoom;
+}
+.shelf-paging {
+  z-index: 4;
 }

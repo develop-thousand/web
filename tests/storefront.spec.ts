@@ -58,23 +58,20 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
   page,
 }, testInfo) => {
   await page.goto("/");
-  await expect(
-    page.locator(".cabinet-bay:not([inert]) .shelf-product"),
-  ).toHaveCount(4);
+  await expect(page.locator(".shelf-product")).toHaveCount(8);
   await expect(page.getByRole("button", { name: /모션/ })).toHaveCount(0);
   if (testInfo.project.name === "desktop") {
     await page.getByRole("button", { name: "치즈 블루베리 파이 선택" }).hover();
-    await expect(page.locator(".asset-cabinet")).toHaveClass(/is-exploring/);
     await expect(page.locator(".shelf-product").first()).toHaveCSS(
       "opacity",
-      "0",
+      "1",
     );
-    await page.screenshot({ path: "artifacts/atelier-hover.png" });
-    await page.locator(".selection-actions").hover();
+    await expect(page.locator(".empty-cabinet")).toHaveCSS("opacity", "1");
     await expect(page.locator(".selection-actions a")).toHaveAttribute(
       "href",
-      "/pies/blueberry",
+      "/pies/banana-cream",
     );
+    await page.screenshot({ path: "artifacts/atelier-hover.png" });
   }
   await page.getByRole("button", { name: "피칸 파이 선택" }).click();
   await expect(page.locator(".selection-actions a")).toHaveAttribute(
@@ -109,65 +106,61 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
   );
 });
 
-test("independent shelf paging, filters and swipe", async ({ page }, info) => {
+test("continuous independent shelves and touch browsing", async ({
+  page,
+}, info) => {
   await page.goto("/");
-  const top = page.locator(".lane-0"),
-    bottom = page.locator(".lane-1");
+  const top = page.locator(".lane-0 .shelf-viewport"),
+    bottom = page.locator(".lane-1 .shelf-viewport");
+  const x = (locator: typeof top) => locator.evaluate((el) => el.scrollLeft);
   const background = page.locator(".empty-cabinet");
-  await expect(background).toHaveCount(1);
   const before = await background.boundingBox();
-  const lowerTransform = await bottom
-    .locator(".cabinet-track")
-    .getAttribute("style");
-  const upperBox = (await top.boundingBox())!;
-  await page.mouse.move(15, upperBox.y + upperBox.height / 2);
-  await page.mouse.wheel(0, 700);
-  await expect(top.locator(".shelf-paging span")).toHaveText("2 / 2");
-  await expect(bottom.locator(".shelf-paging span")).toHaveText("1 / 2");
-  expect(await bottom.locator(".cabinet-track").getAttribute("style")).toBe(
-    lowerTransform,
-  );
-  expect(await background.boundingBox()).toEqual(before);
-  expect(await page.evaluate(() => window.scrollY)).toBe(0);
-  const upperTransform = await top
-    .locator(".cabinet-track")
-    .getAttribute("style");
+  const box = (await top.boundingBox())!;
+  await page.mouse.move(box.x + 30, box.y + box.height / 2);
+  await page.mouse.wheel(0, 70);
+  await expect.poll(() => x(top)).toBeGreaterThan(0);
+  const first = await x(top);
+  expect(first).toBeLessThan(box.width / 2);
+  await page.mouse.wheel(0, 35);
+  await expect.poll(() => x(top)).toBeGreaterThan(first);
+  expect(await x(bottom)).toBe(0);
+  const upper = await x(top);
   if (info.project.name === "mobile") {
-    const box = (await bottom.boundingBox())!;
-    const y = box.y + box.height / 2;
+    const lower = (await bottom.boundingBox())!;
+    const y = lower.y + lower.height / 2;
     const cdp = await page.context().newCDPSession(page);
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchStart",
-      touchPoints: [{ x: 330, y }],
+      touchPoints: [{ x: 320, y }],
     });
-    await cdp.send("Input.dispatchTouchEvent", {
-      type: "touchMove",
-      touchPoints: [{ x: 60, y }],
-    });
+    for (const x of [280, 230, 180, 130, 80]) {
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ x, y }],
+      });
+      await page.waitForTimeout(30);
+    }
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchEnd",
       touchPoints: [],
     });
   } else {
-    await bottom.locator(".shelf-paging button").last().click();
+    await page.locator(".lane-1 .shelf-paging button").last().click();
   }
-  await expect(bottom.locator(".shelf-paging span")).toHaveText("2 / 2");
-  expect(await top.locator(".cabinet-track").getAttribute("style")).toBe(
-    upperTransform,
-  );
-  await top.locator(".shelf-paging button").first().click();
-  await expect(top.locator(".shelf-paging span")).toHaveText("1 / 2");
-  await expect(bottom.locator(".shelf-paging span")).toHaveText("2 / 2");
+  await expect.poll(() => x(bottom)).toBeGreaterThan(40);
+  expect(await x(top)).toBe(upper);
+  expect(await background.boundingBox()).toEqual(before);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
   await page.locator(".cabinet-filters button").last().click();
+  await expect(page.locator(".shelf-product")).toHaveCount(2);
   await expect(page.locator(".shelf-paging")).toHaveCount(0);
-  await expect(
-    page.locator(".cabinet-bay:not([inert]) .shelf-product"),
-  ).toHaveCount(2);
   await page.locator(".cabinet-filters button").first().click();
-  await expect(page.locator(".shelf-paging span")).toHaveText([
-    "1 / 2",
-    "1 / 2",
-  ]);
+  expect(await x(top)).toBe(0);
+  expect(await x(bottom)).toBe(0);
+  await page.locator(".lane-0 .shelf-paging button").last().click();
+  await expect.poll(() => x(top)).toBeGreaterThan(box.width * 0.3);
+  await page.waitForTimeout(500);
+  expect(await x(top)).toBeLessThan(box.width * 0.6);
 });
 
 test("filter, search, persisted cart and demo pickup flow", async ({

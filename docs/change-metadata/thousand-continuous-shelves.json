@@ -1,0 +1,348 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-230507-continuous-shelves-and-subtle-selection",
+  "created_at": "2026-10-11T23:05:07+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "38966d289124ed80a65d6dac50465e7ba44f0532",
+  "request": "Remove paired paging and awkward isolated pie selection",
+  "title": "Continuous shelves and subtle selection",
+  "purpose": "Browse pies continuously without hiding the cabinet on selection",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 200,
+          "old_end": 221,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 658,
+          "old_end": 660,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1211,
+          "new_end": 1267
+        }
+      ],
+      "working_tree_sha256": "160b9190cb405e739622e9b71460d1f6ca5869c2728fcf872f3d1759665530a6",
+      "symbols": [
+        "continuous-shelf and selection styles"
+      ],
+      "purpose": "Keep neighboring products visible during selection",
+      "previous_behavior": "Other pies disappeared and cabinet dimmed",
+      "new_behavior": "All products stay visible with subtle lift and label border; continuous flex strip and touch scrolling; controls above images",
+      "data_impact": "No production or schema changes. Existing browser-local demo cart remains.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Short viewports can compress product height"
+      ],
+      "rollback": "Revert this commit as a unit; no migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 14,
+          "old_end": 14,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 38,
+          "old_end": 38,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 48,
+          "old_end": 48,
+          "new_start": 46,
+          "new_end": 46
+        },
+        {
+          "old_start": 64,
+          "old_end": 64,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 102,
+          "old_end": 102,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 108,
+          "old_end": 108,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 110,
+          "old_end": 113,
+          "new_start": 105,
+          "new_end": 105
+        },
+        {
+          "old_start": 115,
+          "old_end": 120,
+          "new_start": 107,
+          "new_end": 127
+        },
+        {
+          "old_start": 123,
+          "old_end": 123,
+          "new_start": 130,
+          "new_end": 130
+        },
+        {
+          "old_start": 125,
+          "old_end": 125,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 129,
+          "old_end": 137,
+          "new_start": 135,
+          "new_end": 139
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 141,
+          "new_end": 142
+        },
+        {
+          "old_start": 140,
+          "old_end": 141,
+          "new_start": 144,
+          "new_end": 148
+        },
+        {
+          "old_start": 144,
+          "old_end": 144,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 148,
+          "old_end": 158,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 160,
+          "old_end": 170,
+          "new_start": 155,
+          "new_end": 184
+        },
+        {
+          "old_start": 172,
+          "old_end": 232,
+          "new_start": 186,
+          "new_end": 200
+        },
+        {
+          "old_start": 236,
+          "old_end": 236,
+          "new_start": 204,
+          "new_end": 204
+        },
+        {
+          "old_start": 240,
+          "old_end": 241,
+          "new_start": 208,
+          "new_end": 209
+        },
+        {
+          "old_start": 245,
+          "old_end": 247,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 250,
+          "old_end": 251,
+          "new_start": 215,
+          "new_end": 216
+        }
+      ],
+      "working_tree_sha256": "08b6b2223f0363d9762615e3bc6b17c22fa1480770654df21d1b40375e232b6b",
+      "symbols": [
+        "PieShowcase, Shelf"
+      ],
+      "purpose": "Allow continuous browsing and intentional selection",
+      "previous_behavior": "Two-item page steps; hover selected and isolated a pie",
+      "new_behavior": "Native independent scroll containers respond to each wheel delta and touch; arrows move one item; click or focus selects; hover does not change cart target",
+      "data_impact": "No production or schema changes. Existing browser-local demo cart remains.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Native touch momentum varies across devices"
+      ],
+      "rollback": "Revert this commit as a unit; no migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 61,
+          "old_end": 63,
+          "new_start": 61,
+          "new_end": 61
+        },
+        {
+          "old_start": 67,
+          "old_end": 67,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 70,
+          "old_end": 70,
+          "new_start": 67,
+          "new_end": 67
+        },
+        {
+          "old_start": 72,
+          "old_end": 73,
+          "new_start": 69,
+          "new_end": 69
+        },
+        {
+          "old_start": 76,
+          "old_end": 76,
+          "new_start": 72,
+          "new_end": 72
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 74,
+          "new_end": 74
+        },
+        {
+          "old_start": 112,
+          "old_end": 112,
+          "new_start": 109,
+          "new_end": 111
+        },
+        {
+          "old_start": 114,
+          "old_end": 115,
+          "new_start": 113,
+          "new_end": 115
+        },
+        {
+          "old_start": 117,
+          "old_end": 117,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 119,
+          "old_end": 134,
+          "new_start": 118,
+          "new_end": 127
+        },
+        {
+          "old_start": 136,
+          "old_end": 137,
+          "new_start": 129,
+          "new_end": 130
+        },
+        {
+          "old_start": 141,
+          "old_end": 145,
+          "new_start": 134,
+          "new_end": 134
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 136,
+          "new_end": 142
+        },
+        {
+          "old_start": 152,
+          "old_end": 152,
+          "new_start": 148,
+          "new_end": 148
+        },
+        {
+          "old_start": 154,
+          "old_end": 160,
+          "new_start": 150,
+          "new_end": 153
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 155,
+          "new_end": 155
+        },
+        {
+          "old_start": 163,
+          "old_end": 165,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 167,
+          "old_end": 170,
+          "new_start": 158,
+          "new_end": 163
+        }
+      ],
+      "working_tree_sha256": "6fd62c8dc5a094b45dbc1aca3ccc0e59fa794b665fc55c7ea44688f416aab1c6",
+      "symbols": [
+        "Continuous shelf tests"
+      ],
+      "purpose": "Check direct motion and preserved surroundings",
+      "previous_behavior": "Tests asserted paged motion and hidden neighbors",
+      "new_behavior": "Checks small incremental scroll, one-item arrow movement, independent touch, filter reset, visible neighbors and unchanged hover purchase target",
+      "data_impact": "No production or schema changes. Existing browser-local demo cart remains.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Physical Safari not tested"
+      ],
+      "rollback": "Revert this commit as a unit; no migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed. Tests used local browser state.",
+    "schema_migration": "None: UI only.",
+    "external_side_effects": [
+      "Local preview only; no deployment or external mutations."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production build and TypeScript passed."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "All 12 desktop/mobile tests passed after correcting arrow stacking; continuous wheel, native touch, independent rows, selection, cart, filtering and reduced motion verified."
+    }
+  ],
+  "residual_risks": [
+    "Native touch momentum varies by browser; physical Safari not tested. Checkout remains a demo."
+  ],
+  "commit": "same-as-metadata-file"
+}
