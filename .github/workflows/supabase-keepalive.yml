@@ -1,0 +1,27 @@
+name: Supabase activity check
+
+on:
+  schedule:
+    - cron: "17 0,8,16 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  query:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      DATABASE_URL: ${{ secrets.SUPABASE_KEEPALIVE_DATABASE_URL }}
+      PGCONNECT_TIMEOUT: "10"
+      PGSSLMODE: require
+    steps:
+      - name: Run a read-only database query
+        shell: bash
+        run: |
+          if [[ -z "$DATABASE_URL" ]]; then
+            echo "SUPABASE_KEEPALIVE_DATABASE_URL is not configured" >&2
+            exit 1
+          fi
+          result="$(psql "$DATABASE_URL" -X -qAt -v ON_ERROR_STOP=1 -c 'select 1')"
+          test "$result" = "1"

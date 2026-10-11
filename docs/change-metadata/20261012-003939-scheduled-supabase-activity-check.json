@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261012-003939-scheduled-supabase-activity-check",
+  "created_at": "2026-10-12T00:39:39+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "d3c2836ceb893270ec10c9a66b724686a578a03c",
+  "request": "Create a cron job so the Supabase project is less likely to pause from inactivity",
+  "title": "Scheduled Supabase activity check",
+  "purpose": "Generate recurring external user database activity for the free Supabase project",
+  "files": [
+    {
+      "path": ".github/workflows/supabase-keepalive.yml",
+      "change_type": "added",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1,
+          "new_end": 27
+        }
+      ],
+      "working_tree_sha256": "43073addea0d9887bb5c1e6d300ed111b9387613885ab661e66f08d2ae7127f1",
+      "symbols": [
+        "Supabase activity check workflow",
+        "query job"
+      ],
+      "purpose": "Generate recurring external user database activity for the free Supabase project",
+      "previous_behavior": "File did not exist in the baseline commit.",
+      "new_behavior": "GitHub Actions runs SELECT 1 against the project's database three times daily and allows a manual run. A missing secret or failed query fails the job.",
+      "data_impact": "Reads only a constant expression from the production database; no table rows are read or written and no schema changes occur.",
+      "access_control_impact": "The workflow receives a repository-scoped Actions secret containing the database connection URL. No database grants or application permissions change.",
+      "risks": [
+        "A public repository's scheduled workflow may be disabled after 60 days without repository activity.",
+        "Scheduled user queries lower pause risk but Supabase does not guarantee free projects will remain active.",
+        "Repository writers can change this workflow and thereby use its database credential."
+      ],
+      "rollback": "Delete or disable the workflow and remove the SUPABASE_KEEPALIVE_DATABASE_URL repository secret. No data rollback is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production table data was read, created, updated, or deleted during implementation. Future runs read a constant through the database connection.",
+    "schema_migration": "None; no migration or backfill was run.",
+    "external_side_effects": [
+      "Created the repository-scoped GitHub Actions secret SUPABASE_KEEPALIVE_DATABASE_URL."
+    ]
+  },
+  "verification": [
+    {
+      "command": "python -c \"import yaml; from pathlib import Path; yaml.safe_load(Path('.github/workflows/supabase-keepalive.yml').read_text())\"",
+      "result": "passed",
+      "evidence": "The workflow parsed successfully and contains the query job."
+    },
+    {
+      "command": "gh secret list --repo develop-thousand/web",
+      "result": "passed",
+      "evidence": "SUPABASE_KEEPALIVE_DATABASE_URL is present as a repository secret; its value was not printed."
+    },
+    {
+      "command": "gh workflow run supabase-keepalive.yml --repo develop-thousand/web",
+      "result": "not_run",
+      "evidence": "The workflow cannot be dispatched until its file is pushed to the default branch."
+    }
+  ],
+  "residual_risks": [
+    "The first remote run remains to be checked after the workflow is pushed.",
+    "Scheduled GitHub Actions can be delayed or disabled, and free-plan activity is not a no-pause guarantee."
+  ],
+  "commit": "same-as-metadata-file"
+}
