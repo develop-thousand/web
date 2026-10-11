@@ -1486,6 +1486,31 @@ body:has(.atelier-home) {
 .continuous-shelf .shelf-product {
   cursor: pointer;
 }
+.continuous-shelf .pie-whole,
+.continuous-shelf .pie-slice {
+  transition:
+    opacity 0.52s ease,
+    transform 0.65s cubic-bezier(0.2, 0.72, 0.2, 1);
+  backface-visibility: hidden;
+}
+.continuous-shelf .pie-slice {
+  opacity: 0;
+  transform: translate(12%, 8%) rotate(-8deg) scale(0.76);
+}
+.continuous-shelf .shelf-product.is-revealed .pie-whole {
+  opacity: 0;
+  transform: translate(-8%, -4%) rotate(-5deg) scale(0.88);
+}
+.continuous-shelf .shelf-product.is-revealed .pie-slice {
+  opacity: 1;
+  transform: translateY(-2%) rotate(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .continuous-shelf .pie-whole,
+  .continuous-shelf .pie-slice {
+    transition: none;
+  }
+}
 .pie-preview {
   position: fixed;
   inset: 0;

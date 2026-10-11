@@ -6,18 +6,33 @@ import { ArrowUpRight, Plus, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { pies, money, type Pie } from "@/lib/catalog";
 import { useShop } from "./shop-provider";
 export const pieAsset = (slug: string) => `/images/atelier/${slug}.png`;
+export const pieSliceAsset = (slug: string) =>
+  `/images/atelier/${slug}-slice.png`;
 const categories = ["전체", "크림", "클래식", "시즌"];
 
 export function PieShowcase() {
   const [category, setCategory] = useState(categories[0]);
   const [selected, setSelected] = useState(pies[0].slug);
+  const [revealed, setRevealed] = useState<string | null>(null);
   const { add } = useShop();
   const detail = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement | null>(null);
+  const previewTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (previewTimer.current) clearTimeout(previewTimer.current);
+  }, []);
   function openDetail(slug: string, button: HTMLButtonElement) {
     setSelected(slug);
+    setRevealed(slug);
     opener.current = button;
-    detail.current?.showModal();
+    if (previewTimer.current) clearTimeout(previewTimer.current);
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : 650;
+    previewTimer.current = setTimeout(() => {
+      detail.current?.showModal();
+      previewTimer.current = null;
+    }, delay);
   }
   const filtered = useMemo(
     () =>
@@ -41,6 +56,7 @@ export function PieShowcase() {
             aria-pressed={category === c}
             onClick={() => {
               setCategory(c);
+              setRevealed(null);
               setSelected(
                 pies.find((p) => c === categories[0] || p.category === c)!.slug,
               );
@@ -65,6 +81,7 @@ export function PieShowcase() {
             row={row}
             items={items}
             selected={selected}
+            revealed={revealed}
             setSelected={setSelected}
             openDetail={openDetail}
           />
@@ -114,8 +131,8 @@ export function PieShowcase() {
           </button>
           <div className="preview-image">
             <Image
-              src={pieAsset(pie.slug)}
-              alt={pie.name}
+              src={pieSliceAsset(pie.slug)}
+              alt={`${pie.name} 조각의 단면`}
               fill
               sizes="(max-width:700px) 85vw, 340px"
             />
@@ -153,12 +170,14 @@ function Shelf({
   row,
   items,
   selected,
+  revealed,
   setSelected,
   openDetail,
 }: {
   row: number;
   items: Pie[];
   selected: string;
+  revealed: string | null;
   setSelected: (slug: string) => void;
   openDetail: (slug: string, button: HTMLButtonElement) => void;
 }) {
@@ -282,7 +301,7 @@ function Shelf({
               ref={(node) => {
                 buttons.current[p.slug] = node;
               }}
-              className={`shelf-product ${selected === p.slug ? "is-active" : ""}`}
+              className={`shelf-product ${selected === p.slug ? "is-active" : ""} ${revealed === p.slug ? "is-revealed" : ""}`}
               aria-label={`${p.name} 선택`}
               aria-pressed={selected === p.slug}
               onFocus={() => setSelected(p.slug)}
@@ -307,10 +326,18 @@ function Shelf({
             >
               <span className="pie-object">
                 <Image
+                  className="pie-whole"
                   src={pieAsset(p.slug)}
                   alt={p.name}
                   fill
                   priority
+                  sizes="(max-width:700px) 44vw, 38vw"
+                />
+                <Image
+                  className="pie-slice"
+                  src={pieSliceAsset(p.slug)}
+                  alt=""
+                  fill
                   sizes="(max-width:700px) 44vw, 38vw"
                 />
                 <span className="object-shadow" />

@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-232814-reveal-pie-slices-on-selection",
+  "created_at": "2026-10-11T23:28:14+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "ffaf58274e8a6d708fb482a23c1af9b2305f95b1",
+  "request": "Animate each selected whole pie into a slice with a visible cross section",
+  "title": "Reveal pie slices on selection",
+  "purpose": "Show each pie's filling and crust cross section before opening its product preview",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1489,
+          "new_end": 1513
+        }
+      ],
+      "working_tree_sha256": "879ef3dbde7d6778193bb867e5055646b4286715126302ce38a4a1d9315bd154",
+      "symbols": [
+        "continuous-shelf pie image layers",
+        "reduced-motion image transition"
+      ],
+      "purpose": "Show each pie's filling and crust cross section before opening its product preview",
+      "previous_behavior": "Shelf pies remained whole when selected; only the existing hover scale changed their appearance.",
+      "new_behavior": "A selected pie crossfades and moves from its whole-pie layer to a transparent cutaway slice; reduced-motion preference removes the transition.",
+      "data_impact": "None; CSS reads no operational data and changes no stored data or schema.",
+      "access_control_impact": "None; styling has no role or permission impact.",
+      "risks": [
+        "Different slice silhouettes may occupy different visual space in the shelf; desktop and mobile layouts were inspected."
+      ],
+      "rollback": "Revert this commit to restore the single whole-pie presentation. No data rollback is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 9,
+          "new_end": 10
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 16,
+          "new_end": 16
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 20,
+          "new_end": 23
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 26,
+          "new_end": 26
+        },
+        {
+          "old_start": 20,
+          "old_end": 20,
+          "new_start": 28,
+          "new_end": 35
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 59,
+          "new_end": 59
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 84,
+          "new_end": 84
+        },
+        {
+          "old_start": 117,
+          "old_end": 118,
+          "new_start": 134,
+          "new_end": 135
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 173,
+          "new_end": 173
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 180,
+          "new_end": 180
+        },
+        {
+          "old_start": 285,
+          "old_end": 285,
+          "new_start": 304,
+          "new_end": 304
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 329,
+          "new_end": 329
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 336,
+          "new_end": 342
+        }
+      ],
+      "working_tree_sha256": "43e35b2a27487bb5b2c66086d99bc36e48a3c388c3f49e3aaa880734da5d4e1c",
+      "symbols": [
+        "PieShowcase",
+        "Shelf",
+        "pieSliceAsset",
+        "openDetail"
+      ],
+      "purpose": "Show each pie's filling and crust cross section before opening its product preview",
+      "previous_behavior": "Clicking or tapping a whole pie immediately opened a preview showing the same whole-pie cutout.",
+      "new_behavior": "Clicking or tapping reveals the matching slice on the shelf, then opens the preview after 650 ms with the slice cross section; reduced-motion users get an immediate preview. Category changes reset the revealed state.",
+      "data_impact": "None; the component only reads existing catalog entries and newly added static image files. It performs no new writes or schema changes.",
+      "access_control_impact": "None; selection and preview remain public and no permissions changed.",
+      "risks": [
+        "A slice image could load after the transition starts on a slow connection; the eight static files and selected image loading were checked locally."
+      ],
+      "rollback": "Revert this commit to return to immediate preview opening with whole-pie imagery. No data compatibility steps apply."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 230,
+          "new_end": 230
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 232,
+          "new_end": 235
+        }
+      ],
+      "working_tree_sha256": "3394419181853ab5e0bdd19cce85d56c269cb1a5c0f08b4fd5c1a6f5c3e5b030",
+      "symbols": [
+        "tap or click opens details and adds the chosen pie"
+      ],
+      "purpose": "Show each pie's filling and crust cross section before opening its product preview",
+      "previous_behavior": "The interaction test checked preview opening and adding a pie but did not verify the selected slice state or preview image.",
+      "new_behavior": "The interaction test also asserts that selection reveals the slice and that the preview uses the matching blueberry slice asset.",
+      "data_impact": "None; this test uses browser demo state and does not touch operational data.",
+      "access_control_impact": "None; test assertions do not change permissions.",
+      "risks": [
+        "A future asset rename will require updating the preview image assertion."
+      ],
+      "rollback": "Revert this commit to remove the additional assertions; no data rollback is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production operational data was read, created, updated, or deleted.",
+    "schema_migration": "None; static imagery and UI behavior only.",
+    "external_side_effects": [
+      "Eight transparent slice assets were generated with the built-in image tool and copied into public/images/atelier. No deployment or external message was sent."
+    ]
+  },
+  "verification": [
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "evidence": "TypeScript finished with exit code 0."
+    },
+    {
+      "command": "pnpm exec playwright test -g \"tap or click opens details|mouse drag tracks pointer\" --project desktop --project mobile",
+      "result": "passed",
+      "evidence": "Three tests passed; the mouse-only test was skipped on mobile as designed."
+    },
+    {
+      "command": "Playwright visual check at 1440x900 and 390x844, plus SHA-256 verification of all eight slice assets",
+      "result": "passed",
+      "evidence": "Slice motion preceded the dialog on both viewports; every generated asset matched its recorded hash."
+    }
+  ],
+  "residual_risks": [
+    "The generated cross sections are illustrative and may differ from the exact appearance of pies served in store."
+  ],
+  "commit": "same-as-metadata-file"
+}

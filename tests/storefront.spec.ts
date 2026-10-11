@@ -227,7 +227,12 @@ test("tap or click opens details and adds the chosen pie", async ({
   const pie = page.locator(".lane-0 .shelf-product").nth(1);
   if (info.project.name === "mobile") await pie.tap();
   else await pie.click();
+  await expect(pie).toHaveClass(/is-revealed/);
   await expect(page.locator(".pie-preview")).toBeVisible();
+  await expect(page.locator(".preview-image img")).toHaveAttribute(
+    "src",
+    /blueberry-slice\.png/,
+  );
   await expect(page.locator(".preview-copy a")).toHaveAttribute(
     "href",
     "/pies/blueberry",

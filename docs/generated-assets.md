@@ -1,5 +1,7 @@
 # Generated THOUSAND assets
 
+The eight transparent cutaway images added for the whole-to-slice selection motion on 2026-10-11 are recorded separately in [slice-image-prompts.json](slice-image-prompts.json). They are illustrative generated views based on the whole-pie assets and are not photographs of served slices.
+
 Built-in image_gen mode, 2026-10-10. These are generated product illustrations grounded in the existing brand photographs, not new photographs of actual stock. No CLI or API fallback was used. Original reference photographs remain under public/images/ts-menu-*.jpg. All final assets are copied into public/images/atelier/ and are independent files; no runtime image generation or background-removal service is used.
 
 The eight product PNGs preserve the tool's original RGBA pixels and alpha. Every product has more than 10% fully transparent pixels. No manual background substitution or image processing was used. The cabinet is an RGB background. The first banana variants had unwanted background glow and were discarded; the final regenerated variant below is used.
