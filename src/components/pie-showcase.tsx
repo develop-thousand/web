@@ -91,6 +91,14 @@ export function PieShowcase() {
           touch.current = null;
         }}
       >
+        <Image
+          className="empty-cabinet"
+          src="/images/atelier/cabinet.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+        />
         <div
           className="cabinet-track"
           style={{ transform: `translateX(-${page * 100}%)` }}
@@ -102,14 +110,6 @@ export function PieShowcase() {
               inert={cabinet !== page}
               aria-hidden={cabinet !== page}
             >
-              <Image
-                className="empty-cabinet"
-                src="/images/atelier/cabinet.png"
-                alt=""
-                fill
-                priority
-                sizes="100vw"
-              />
               <div
                 className="asset-shelves"
                 role="group"
@@ -190,11 +190,7 @@ export function PieShowcase() {
             </div>
           ))}
         </div>
-        <div
-          key={`${page}-${category}`}
-          className="cabinet-glass"
-          aria-hidden="true"
-        />
+        <div className="cabinet-glass" aria-hidden="true" />
         <div className="cabinet-paging">
           <button
             aria-label="이전 진열장"

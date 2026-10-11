@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-223054-keep-cabinet-fixed-during-pie-transitions",
+  "created_at": "2026-10-11T22:30:54+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "9b92943d0f8a93b9cc6c9ab447bb30bccd373edf",
+  "request": "User wants cabinet stationary and pies moving",
+  "title": "Keep cabinet fixed during pie transitions",
+  "purpose": "Move only product cutouts when paging",
+  "files": [
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 94,
+          "new_end": 101
+        },
+        {
+          "old_start": 105,
+          "old_end": 112,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 193,
+          "old_end": 197,
+          "new_start": 193,
+          "new_end": 193
+        }
+      ],
+      "working_tree_sha256": "dba33cf19f0a0c9e741bfb12ec96ca0fd30992fd7e20693467467527cc0fa17c",
+      "symbols": [
+        "PieShowcase"
+      ],
+      "purpose": "Separate stationary cabinet from moving products",
+      "previous_behavior": "Each translated bay carried its own cabinet image; glass remounted on page changes",
+      "new_behavior": "One fixed cabinet image outside translated product bays; glass persists during paging",
+      "data_impact": "None: presentation and browser assertions only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Layer ordering could affect product visibility; browser interaction checks passed."
+      ],
+      "rollback": "Revert this commit; no data migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 116,
+          "new_end": 123
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 127,
+          "new_end": 127
+        }
+      ],
+      "working_tree_sha256": "af0863c1f80486573ff4d968f5bc49e684667c11a967a5a140577b023db57724",
+      "symbols": [
+        "fixed cabinet test"
+      ],
+      "purpose": "Verify stationary cabinet",
+      "previous_behavior": "No background position regression assertion",
+      "new_behavior": "Assert single background outside track with stable bounds after paging",
+      "data_impact": "None: presentation and browser assertions only.",
+      "access_control_impact": "None: permissions unchanged.",
+      "risks": [
+        "Layer ordering could affect product visibility; browser interaction checks passed."
+      ],
+      "rollback": "Revert this commit; no data migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data read or written. Browser-local demo cart used in tests.",
+    "schema_migration": "None: no schema changes.",
+    "external_side_effects": [
+      "Local preview server restarted; no deployment or external mutations."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production build and TypeScript checks passed."
+    },
+    {
+      "command": "npx playwright test --grep \"fixed cabinet|cutout showcase\"",
+      "result": "passed",
+      "evidence": "4 tests passed across desktop and mobile, including background position, paging, swipe, hover and cart."
+    }
+  ],
+  "residual_risks": [
+    "Physical Safari not tested. Existing hover dimming remains intentional."
+  ],
+  "commit": "same-as-metadata-file"
+}
+

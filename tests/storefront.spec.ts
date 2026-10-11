@@ -113,9 +113,18 @@ test("fixed cabinet wheel, paging, filters and swipe", async ({
   page,
 }, info) => {
   await page.goto("/");
+  const background = page.locator(".empty-cabinet");
+  await expect(background).toHaveCount(1);
+  expect(
+    await background.evaluate((el) =>
+      el.parentElement?.classList.contains("asset-cabinet"),
+    ),
+  ).toBe(true);
+  const before = await background.boundingBox();
   await page.mouse.move(30, 300);
   await page.mouse.wheel(0, 700);
   await expect(page.locator(".cabinet-paging span")).toHaveText("2 / 2");
+  expect(await background.boundingBox()).toEqual(before);
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
   await expect(page.locator("footer")).toHaveCount(0);
   await expect(
