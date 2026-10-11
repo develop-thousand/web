@@ -65,6 +65,8 @@ export function Header() {
 }
 
 export function Footer() {
+  const path = usePathname();
+  if (path === "/") return null;
   return (
     <footer className="footer">
       <div className="footer-top">

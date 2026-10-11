@@ -1,113 +1,218 @@
-"use client";
-
-import { useRef, useState } from "react";
+﻿"use client";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { pies, money } from "@/lib/catalog";
 import { useShop } from "./shop-provider";
-
 export const pieAsset = (slug: string) => `/images/atelier/${slug}.png`;
+const categories = ["전체", "크림", "클래식", "시즌"];
 
 export function PieShowcase() {
-  const [selected, setSelected] = useState(0);
-  const [hovered, setHovered] = useState<number | null>(null);
-  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+  const [category, setCategory] = useState("전체");
+  const [page, setPage] = useState(0);
+  const [selected, setSelected] = useState(pies[0].slug);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const scene = useRef<HTMLDivElement>(null);
+  const lastWheel = useRef(0);
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const buttons = useRef<Record<string, HTMLButtonElement | null>>({});
   const { add } = useShop();
-  const active = hovered ?? selected;
-  const pie = pies[active];
-
+  const filtered = useMemo(
+    () => pies.filter((p) => category === "전체" || p.category === category),
+    [category],
+  );
+  const count = Math.ceil(filtered.length / 4);
+  const pie = pies.find((p) => p.slug === selected)!;
+  function go(next: number) {
+    const target = Math.max(0, Math.min(count - 1, next));
+    setPage(target);
+    setHovered(null);
+    setSelected(filtered[target * 4].slug);
+  }
+  useEffect(() => {
+    const node = scene.current;
+    if (!node) return;
+    let distance = 0;
+    const wheel = (event: WheelEvent) => {
+      if (event.ctrlKey) return;
+      event.preventDefault();
+      if (Date.now() - lastWheel.current < 850) return;
+      distance +=
+        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+      if (Math.abs(distance) < 45) return;
+      const next = Math.max(0, Math.min(count - 1, page + Math.sign(distance)));
+      distance = 0;
+      lastWheel.current = Date.now();
+      setPage(next);
+      setHovered(null);
+      setSelected(filtered[next * 4].slug);
+    };
+    node.addEventListener("wheel", wheel, { passive: false });
+    return () => node.removeEventListener("wheel", wheel);
+  }, [page, count, filtered]);
   return (
     <section className="pie-atelier" aria-label="따우전드 파이 진열장">
       <div className="atelier-heading">
-        <div>
-          <p>서울에서 굽는 아메리칸 클래식</p>
-          <h1>THE PIE ROOM</h1>
-        </div>
-        <p className="atelier-intro">
-          눈길이 머무는 파이,
-          <br />
-          당신의 한 조각을 골라보세요.
-        </p>
+        <h1>THE PIE ROOM</h1>
+      </div>
+      <div className="cabinet-filters" aria-label="파이 종류">
+        {categories.map((c) => (
+          <button
+            key={c}
+            aria-pressed={category === c}
+            onClick={() => {
+              setCategory(c);
+              setPage(0);
+              setHovered(null);
+              setSelected(
+                pies.find((p) => c === "전체" || p.category === c)!.slug,
+              );
+            }}
+          >
+            {c}
+          </button>
+        ))}
       </div>
       <div
-        className={`asset-cabinet ${hovered !== null ? "is-exploring" : ""}`}
+        ref={scene}
+        className={`asset-cabinet ${hovered ? "is-exploring" : ""}`}
+        onTouchStart={(e) => {
+          touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }}
+        onTouchEnd={(e) => {
+          if (!touch.current) return;
+          const dx = touch.current.x - e.changedTouches[0].clientX;
+          const dy = touch.current.y - e.changedTouches[0].clientY;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy))
+            go(page + Math.sign(dx));
+          touch.current = null;
+        }}
       >
-        <Image
-          className="empty-cabinet"
-          src="/images/atelier/cabinet.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          aria-hidden="true"
-        />
-        <div className="cabinet-glass" aria-hidden="true" />
-        <div className="asset-shelves" role="group" aria-label="파이 컬렉션">
-          {[0, 1].map((row) => (
-            <div className={`asset-shelf shelf-${row}`} key={row}>
-              {pies.slice(row * 4, row * 4 + 4).map((p, col) => {
-                const index = row * 4 + col;
-                return (
-                  <button
-                    key={p.slug}
-                    ref={(node) => {
-                      buttons.current[index] = node;
-                    }}
-                    className={`shelf-product ${active === index ? "is-active" : ""}`}
-                    aria-label={`${p.name} 선택`}
-                    aria-pressed={selected === index}
-                    onPointerEnter={(e) => {
-                      if (e.pointerType === "mouse") {
-                        setHovered(index);
-                        setSelected(index);
-                      }
-                    }}
-                    onPointerLeave={() => setHovered(null)}
-                    onFocus={() => {
-                      setHovered(index);
-                      setSelected(index);
-                    }}
-                    onBlur={() => setHovered(null)}
-                    onClick={() => setSelected(index)}
-                    onKeyDown={(e) => {
-                      const steps: Record<string, number> = {
-                        ArrowRight: 1,
-                        ArrowLeft: -1,
-                        ArrowDown: 4,
-                        ArrowUp: -4,
-                      };
-                      if (e.key in steps) {
-                        e.preventDefault();
-                        const next =
-                          (index + steps[e.key] + pies.length) % pies.length;
-                        setSelected(next);
-                        buttons.current[next]?.focus();
-                      }
-                    }}
-                  >
-                    <span className="pie-object">
-                      <Image
-                        src={pieAsset(p.slug)}
-                        alt={p.name}
-                        fill
-                        priority={row === 0}
-                        sizes="(max-width:700px) 42vw, 23vw"
-                      />
-                      <span className="object-shadow" />
-                    </span>
-                    <span className="shelf-label">
-                      <strong>{p.name}</strong>
-                      <span>{p.available ? money(p.price) : "시즌 종료"}</span>
-                    </span>
-                  </button>
-                );
-              })}
+        <div
+          className="cabinet-track"
+          style={{ transform: `translateX(-${page * 100}%)` }}
+        >
+          {Array.from({ length: count }, (_, cabinet) => (
+            <div
+              className="cabinet-bay"
+              key={`${category}-${cabinet}`}
+              inert={cabinet !== page}
+              aria-hidden={cabinet !== page}
+            >
+              <Image
+                className="empty-cabinet"
+                src="/images/atelier/cabinet.png"
+                alt=""
+                fill
+                priority
+                sizes="100vw"
+              />
+              <div
+                className="asset-shelves"
+                role="group"
+                aria-label={`진열장 ${cabinet + 1}`}
+              >
+                {[0, 1].map((row) => (
+                  <div className={`asset-shelf shelf-${row}`} key={row}>
+                    {filtered
+                      .slice(cabinet * 4 + row * 2, cabinet * 4 + row * 2 + 2)
+                      .map((p) => (
+                        <button
+                          key={p.slug}
+                          ref={(node) => {
+                            buttons.current[p.slug] = node;
+                          }}
+                          className={`shelf-product ${selected === p.slug ? "is-active" : ""}`}
+                          aria-label={`${p.name} 선택`}
+                          aria-pressed={selected === p.slug}
+                          onPointerEnter={(e) => {
+                            if (e.pointerType === "mouse") {
+                              setHovered(p.slug);
+                              setSelected(p.slug);
+                            }
+                          }}
+                          onPointerLeave={() => setHovered(null)}
+                          onFocus={() => {
+                            setHovered(p.slug);
+                            setSelected(p.slug);
+                          }}
+                          onBlur={() => setHovered(null)}
+                          onClick={() => setSelected(p.slug)}
+                          onKeyDown={(e) => {
+                            const steps: Record<string, number> = {
+                              ArrowRight: 1,
+                              ArrowLeft: -1,
+                              ArrowDown: 2,
+                              ArrowUp: -2,
+                            };
+                            if (!(e.key in steps)) return;
+                            e.preventDefault();
+                            const next = Math.max(
+                              0,
+                              Math.min(
+                                filtered.length - 1,
+                                filtered.indexOf(p) + steps[e.key],
+                              ),
+                            );
+                            setPage(Math.floor(next / 4));
+                            setSelected(filtered[next].slug);
+                            requestAnimationFrame(() =>
+                              buttons.current[filtered[next].slug]?.focus({
+                                preventScroll: true,
+                              }),
+                            );
+                          }}
+                        >
+                          <span className="pie-object">
+                            <Image
+                              src={pieAsset(p.slug)}
+                              alt={p.name}
+                              fill
+                              priority
+                              sizes="(max-width:700px) 44vw, 38vw"
+                            />
+                            <span className="object-shadow" />
+                          </span>
+                          <span className="shelf-label">
+                            <strong>{p.name}</strong>
+                            <span>
+                              {p.available ? money(p.price) : "시즌 종료"}
+                            </span>
+                          </span>
+                        </button>
+                      ))}
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
-        <div className="cabinet-signature" aria-hidden="true">
-          THOUSAND <span>AMERICAN PIE HOUSE</span>
+        <div
+          key={`${page}-${category}`}
+          className="cabinet-glass"
+          aria-hidden="true"
+        />
+        <div className="cabinet-paging">
+          <button
+            aria-label="이전 진열장"
+            disabled={page === 0}
+            onClick={() => go(page - 1)}
+          >
+            <ChevronLeft />
+          </button>
+          <span aria-live="polite">
+            {page + 1} / {count}
+          </span>
+          <button
+            aria-label="다음 진열장"
+            disabled={page === count - 1}
+            onClick={() => go(page + 1)}
+          >
+            <ChevronRight />
+          </button>
         </div>
       </div>
       <div className="atelier-selection">

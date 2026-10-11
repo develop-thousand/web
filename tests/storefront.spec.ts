@@ -22,18 +22,12 @@ test("home images, navigation, and responsive layout", async ({
     .poll(() =>
       page
         .locator(".empty-cabinet")
+        .first()
         .evaluate(
           (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
         ),
     )
     .toBeTruthy();
-  for (const section of [
-    ".collection",
-    ".editorial",
-    ".store-teaser",
-    ".journal",
-  ])
-    await page.locator(section).scrollIntoViewIfNeeded();
   await expect
     .poll(() =>
       page
@@ -64,7 +58,9 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
   page,
 }, testInfo) => {
   await page.goto("/");
-  await expect(page.locator(".shelf-product")).toHaveCount(8);
+  await expect(
+    page.locator(".cabinet-bay:not([inert]) .shelf-product"),
+  ).toHaveCount(4);
   await expect(page.getByRole("button", { name: /모션/ })).toHaveCount(0);
   if (testInfo.project.name === "desktop") {
     await page.getByRole("button", { name: "치즈 블루베리 파이 선택" }).hover();
@@ -111,6 +107,42 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
     "transition-duration",
     "0s",
   );
+});
+
+test("fixed cabinet wheel, paging, filters and swipe", async ({
+  page,
+}, info) => {
+  await page.goto("/");
+  await page.mouse.move(30, 300);
+  await page.mouse.wheel(0, 700);
+  await expect(page.locator(".cabinet-paging span")).toHaveText("2 / 2");
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page.locator("footer")).toHaveCount(0);
+  await expect(
+    page.locator(".cabinet-bay[inert] .shelf-product:focus"),
+  ).toHaveCount(0);
+  await page.locator(".cabinet-paging button").first().click();
+  await expect(page.locator(".cabinet-paging span")).toHaveText("1 / 2");
+  await page.locator(".cabinet-filters").locator("button").last().click();
+  await expect(page.locator(".cabinet-paging span")).toHaveText("1 / 1");
+  await expect(page.locator(".cabinet-paging button").last()).toBeDisabled();
+  await page.locator(".cabinet-filters").locator("button").first().click();
+  if (info.project.name === "mobile") {
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [{ x: 330, y: 300 }],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [{ x: 60, y: 310 }],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [],
+    });
+    await expect(page.locator(".cabinet-paging span")).toHaveText("2 / 2");
+  }
 });
 
 test("filter, search, persisted cart and demo pickup flow", async ({

@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-222507-fixed-interactive-pie-room",
+  "created_at": "2026-10-11T22:25:07+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "160201805a8badc830a99dc3eacc2264d151f352",
+  "request": "Show full interaction of the fixed scrolling cabinet",
+  "title": "Fixed interactive pie room",
+  "purpose": "Keep the cabinet on screen while browsing multiple bays",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 976,
+          "new_end": 1145
+        }
+      ],
+      "working_tree_sha256": "1d823d787321731564622f3204cf09199e3fbfae4edc780eaab4d65836d0c3c5",
+      "symbols": [
+        "Cabinet layout and track"
+      ],
+      "purpose": "Make a fixed room with readable overlay actions",
+      "previous_behavior": "Full-height hero followed by scrolling sections",
+      "new_behavior": "Fixed viewport, animated horizontal bays, responsive overlays and reduced motion",
+      "data_impact": "No schema or operational data changes. Existing cart writes remain browser-local demo state.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Small landscape viewports may compress controls"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 4,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 6,
+          "old_end": 7,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 12,
+          "old_end": 103,
+          "new_start": null,
+          "new_end": null
+        }
+      ],
+      "working_tree_sha256": "017557025f11efe11b0ba19faf5558854b89c3f41473e362316d7a4b2055721e",
+      "symbols": [
+        "Home"
+      ],
+      "purpose": "Remove vertical home content",
+      "previous_behavior": "Catalog and editorial sections followed hero",
+      "new_behavior": "Only the interactive cabinet renders; other pages remain in navigation",
+      "data_impact": "No schema or operational data changes. Existing cart writes remain browser-local demo state.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Home editorial entry points now require navigation"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    },
+    {
+      "path": "src/components/chrome.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 68,
+          "new_end": 69
+        }
+      ],
+      "working_tree_sha256": "0c84afa489ef87c4b4cdf9183c496f970f7a55f47e9633289d81aea8a7241a4c",
+      "symbols": [
+        "Footer"
+      ],
+      "purpose": "Avoid inaccessible footer below fixed home",
+      "previous_behavior": "Footer rendered on every route",
+      "new_behavior": "Footer omitted only on home",
+      "data_impact": "No schema or operational data changes. Existing cart writes remain browser-local demo state.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Home footer information remains on other pages"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 3,
+          "new_start": 1,
+          "new_end": 2
+        },
+        {
+          "old_start": 6,
+          "old_end": 6,
+          "new_start": 5,
+          "new_end": 5
+        },
+        {
+          "old_start": 9,
+          "old_end": 9,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 9,
+          "new_end": 9
+        },
+        {
+          "old_start": 13,
+          "old_end": 15,
+          "new_start": 12,
+          "new_end": 19
+        },
+        {
+          "old_start": 17,
+          "old_end": 19,
+          "new_start": 21,
+          "new_end": 55
+        },
+        {
+          "old_start": 23,
+          "old_end": 31,
+          "new_start": 59,
+          "new_end": 77
+        },
+        {
+          "old_start": 34,
+          "old_end": 34,
+          "new_start": 80,
+          "new_end": 92
+        },
+        {
+          "old_start": 36,
+          "old_end": 105,
+          "new_start": 94,
+          "new_end": 189
+        },
+        {
+          "old_start": 109,
+          "old_end": 110,
+          "new_start": 193,
+          "new_end": 215
+        }
+      ],
+      "working_tree_sha256": "2a0117d7b4f7ec7f12e8ba0effd879487e4d5cfe7a0ac0dfc80d53a22664b83c",
+      "symbols": [
+        "PieShowcase"
+      ],
+      "purpose": "Support catalog growth without shrinking pies",
+      "previous_behavior": "Eight fixed pies without paging",
+      "new_behavior": "Four pies per bay, bounded wheel/swipe/keyboard paging, filters, inert inactive bays and cart actions",
+      "data_impact": "No schema or operational data changes. Existing cart writes remain browser-local demo state.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Trackpad inertia and uncommon touch devices may differ"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 25,
+          "new_end": 25
+        },
+        {
+          "old_start": 30,
+          "old_end": 36,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 67,
+          "old_end": 67,
+          "new_start": 61,
+          "new_end": 63
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 112,
+          "new_end": 147
+        }
+      ],
+      "working_tree_sha256": "258f9ca95638c4685e88118451888a6648a5aba770fc543a1cef7f663f8d30af",
+      "symbols": [
+        "Storefront browser tests"
+      ],
+      "purpose": "Verify fixed room behavior",
+      "previous_behavior": "Tests expected long homepage and eight visible buttons",
+      "new_behavior": "Tests assert four active products, no scrolling, bounded paging, filters and touch gestures",
+      "data_impact": "No schema or operational data changes. Existing cart writes remain browser-local demo state.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Chromium emulation does not replace physical Safari testing"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed. Local browser demo carts used for verification.",
+    "schema_migration": "None: presentation-only changes.",
+    "external_side_effects": [
+      "No deployment, messages or external mutations. Local preview server only."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Next production build and TypeScript checks passed; 16 pages generated."
+    },
+    {
+      "command": "npm run test:e2e; npx playwright test --grep \"fixed cabinet\"",
+      "result": "passed",
+      "evidence": "11 of 12 passed initially; synthetic touch fixture failed. Replaced fixture with Chromium touch input; both paging tests then passed. All 12 scenarios now verified."
+    },
+    {
+      "command": "Desktop and mobile screenshot inspection",
+      "result": "passed",
+      "evidence": "Cabinet fills viewport; four product cutouts, navigation and action bar visible."
+    }
+  ],
+  "residual_risks": [
+    "Physical Safari and very short landscape screens not tested. Commerce remains a demo without real payment."
+  ],
+  "commit": "same-as-metadata-file"
+}
