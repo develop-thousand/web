@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-231741-simplify-showcase-selection-bar",
+  "created_at": "2026-10-11T23:17:41+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "5b172f44152447495c85057a23d5604ea124190d",
+  "request": "Replace the ornate and cramped lower selection bar with a cleaner treatment",
+  "title": "Simplify showcase selection bar",
+  "purpose": "Make selected pie details feel as restrained as the storefront header",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1337,
+          "old_end": 1338,
+          "new_start": 1337,
+          "new_end": 1348
+        },
+        {
+          "old_start": 1358,
+          "old_end": 1358,
+          "new_start": 1368,
+          "new_end": 1371
+        },
+        {
+          "old_start": 1361,
+          "old_end": 1365,
+          "new_start": 1374,
+          "new_end": 1378
+        },
+        {
+          "old_start": 1368,
+          "old_end": 1368,
+          "new_start": 1381,
+          "new_end": 1384
+        },
+        {
+          "old_start": 1371,
+          "old_end": 1376,
+          "new_start": 1387,
+          "new_end": 1387
+        },
+        {
+          "old_start": 1379,
+          "old_end": 1381,
+          "new_start": 1390,
+          "new_end": 1392
+        },
+        {
+          "old_start": 1383,
+          "old_end": 1383,
+          "new_start": 1394,
+          "new_end": 1395
+        },
+        {
+          "old_start": 1386,
+          "old_end": 1388,
+          "new_start": 1398,
+          "new_end": 1401
+        },
+        {
+          "old_start": 1391,
+          "old_end": 1393,
+          "new_start": 1404,
+          "new_end": 1406
+        },
+        {
+          "old_start": 1397,
+          "old_end": 1397,
+          "new_start": 1410,
+          "new_end": 1410
+        },
+        {
+          "old_start": 1401,
+          "old_end": 1403,
+          "new_start": 1414,
+          "new_end": 1416
+        },
+        {
+          "old_start": 1406,
+          "old_end": 1413,
+          "new_start": 1419,
+          "new_end": 1427
+        },
+        {
+          "old_start": 1415,
+          "old_end": 1415,
+          "new_start": 1429,
+          "new_end": 1432
+        },
+        {
+          "old_start": 1418,
+          "old_end": 1418,
+          "new_start": 1435,
+          "new_end": 1437
+        },
+        {
+          "old_start": 1449,
+          "old_end": 1450,
+          "new_start": 1468,
+          "new_end": 1469
+        },
+        {
+          "old_start": 1453,
+          "old_end": 1453,
+          "new_start": 1472,
+          "new_end": 1472
+        },
+        {
+          "old_start": 1456,
+          "old_end": 1456,
+          "new_start": 1475,
+          "new_end": 1475
+        },
+        {
+          "old_start": 1459,
+          "old_end": 1459,
+          "new_start": 1478,
+          "new_end": 1478
+        },
+        {
+          "old_start": 1462,
+          "old_end": 1464,
+          "new_start": 1481,
+          "new_end": 1483
+        }
+      ],
+      "working_tree_sha256": "69c398d9f68f4eb89a538ea5fe692563428c80b2124cc142593e783bf83131cc",
+      "symbols": [
+        "PieShowcase selection bar",
+        "selection-copy",
+        "selection-actions"
+      ],
+      "purpose": "Make selected pie details feel as restrained as the storefront header",
+      "previous_behavior": "The lower bar showed a boxed category marker, Korean serif text, a layered red button, and decorative shadows, creating a crowded appearance.",
+      "new_behavior": "The lower bar presents the pie name and flavor note at left, with price, detail link, and a plain text purchase action at right. A single thin divider separates the bar from the cabinet; mobile spacing is tuned for the smaller viewport.",
+      "data_impact": "None; CSS changes presentation only and do not read or write operational data.",
+      "access_control_impact": "None; no authentication, role, or permission behavior changed.",
+      "risks": [
+        "The unboxed purchase action could be less prominent for some users; the 390px and 1920px layouts were visually checked."
+      ],
+      "rollback": "Revert this commit to restore the prior ornate selection bar styles. There are no data compatibility steps because only presentation rules changed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production operational data was read, created, updated, or deleted.",
+    "schema_migration": "None; no schema or stored data changed.",
+    "external_side_effects": [
+      "None; local preview and screenshot checks only."
+    ]
+  },
+  "verification": [
+    {
+      "command": "pnpm typecheck",
+      "result": "passed",
+      "evidence": "TypeScript completed with exit code 0."
+    },
+    {
+      "command": "Playwright Chromium screenshots at 1920x910 and 390x844 against local development port 3101",
+      "result": "passed",
+      "evidence": "Visually inspected the reduced ornamentation, text hierarchy, and mobile spacing."
+    }
+  ],
+  "residual_risks": [
+    "The plain purchase action may need further visual refinement after user review."
+  ],
+  "commit": "same-as-metadata-file"
+}
