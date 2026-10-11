@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.0",
+  "change_id": "20261011-225929-independent-pie-shelf-motion",
+  "created_at": "2026-10-11T22:59:29+09:00",
+  "repository": "thousand",
+  "branch": "main",
+  "baseline_commit": "ac8769c1f57b2f8c57f8127730d323b4c0ffa262",
+  "request": "The two shelves should move separately",
+  "title": "Independent pie shelf motion",
+  "purpose": "Allow each shelf to browse pies independently",
+  "files": [
+    {
+      "path": "src/app/atelier.css",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 1146,
+          "new_end": 1235
+        }
+      ],
+      "working_tree_sha256": "a129763d2864ad14b0208014361a945d13e7ea7c615312fc37d76bcf2a952474",
+      "symbols": [
+        "shelf-lane, shelf-viewport, shelf-paging"
+      ],
+      "purpose": "Position independent moving tracks inside stationary cabinet",
+      "previous_behavior": "One full-height moving product track",
+      "new_behavior": "Two vertically positioned tracks with per-row arrows and horizontal clipping that preserves hover enlargement",
+      "data_impact": "No schema or production data change. Existing local demo cart behavior retained.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Very short landscape screens not visually verified"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    },
+    {
+      "path": "src/components/pie-showcase.tsx",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 1,
+          "old_end": 1,
+          "new_start": 1,
+          "new_end": 1
+        },
+        {
+          "old_start": 6,
+          "old_end": 6,
+          "new_start": 6,
+          "new_end": 6
+        },
+        {
+          "old_start": 12,
+          "old_end": 13,
+          "new_start": 12,
+          "new_end": 12
+        },
+        {
+          "old_start": 16,
+          "old_end": 19,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 22,
+          "old_end": 22,
+          "new_start": 17,
+          "new_end": 18
+        },
+        {
+          "old_start": 25,
+          "old_end": 25,
+          "new_start": 21,
+          "new_end": 24
+        },
+        {
+          "old_start": 27,
+          "old_end": 55,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 57,
+          "old_end": 57,
+          "new_start": 27,
+          "new_end": 27
+        },
+        {
+          "old_start": 61,
+          "old_end": 61,
+          "new_start": 31,
+          "new_end": 31
+        },
+        {
+          "old_start": 68,
+          "old_end": 68,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 71,
+          "old_end": 71,
+          "new_start": 40,
+          "new_end": 40
+        },
+        {
+          "old_start": 79,
+          "old_end": 93,
+          "new_start": 48,
+          "new_end": 48
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 57,
+          "new_end": 160
+        },
+        {
+          "old_start": 106,
+          "old_end": 106,
+          "new_start": 165,
+          "new_end": 165
+        },
+        {
+          "old_start": 109,
+          "old_end": 111,
+          "new_start": 168,
+          "new_end": 170
+        },
+        {
+          "old_start": 113,
+          "old_end": 187,
+          "new_start": 172,
+          "new_end": 229
+        },
+        {
+          "old_start": 193,
+          "old_end": 194,
+          "new_start": 235,
+          "new_end": 237
+        },
+        {
+          "old_start": 196,
+          "old_end": 196,
+          "new_start": 239,
+          "new_end": 239
+        },
+        {
+          "old_start": 206,
+          "old_end": 206,
+          "new_start": 249,
+          "new_end": 249
+        },
+        {
+          "old_start": 213,
+          "old_end": 238,
+          "new_start": 256,
+          "new_end": 257
+        }
+      ],
+      "working_tree_sha256": "f0574a5ab87a11afb17720aa6f3166349dd9197543d8f85fdd36cf2ec8c8aa3c",
+      "symbols": [
+        "PieShowcase, Shelf"
+      ],
+      "purpose": "Give each shelf independent state and event handling",
+      "previous_behavior": "One page state moved both rows together",
+      "new_behavior": "Each row owns pagination, wheel cooldown, touch and keyboard browsing; category resets both",
+      "data_impact": "No schema or production data change. Existing local demo cart behavior retained.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Uncommon trackpad gestures may differ from Chromium emulation"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    },
+    {
+      "path": "tests/storefront.spec.ts",
+      "change_type": "modified",
+      "previous_path": null,
+      "line_ranges": [
+        {
+          "old_start": 99,
+          "old_end": 99,
+          "new_start": 99,
+          "new_end": 99
+        },
+        {
+          "old_start": 112,
+          "old_end": 114,
+          "new_start": 112,
+          "new_end": 112
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 114,
+          "new_end": 115
+        },
+        {
+          "old_start": 118,
+          "old_end": 122,
+          "new_start": null,
+          "new_end": null
+        },
+        {
+          "old_start": 124,
+          "old_end": 124,
+          "new_start": 119,
+          "new_end": 123
+        },
+        {
+          "old_start": 126,
+          "old_end": 126,
+          "new_start": 125,
+          "new_end": 129
+        },
+        {
+          "old_start": 129,
+          "old_end": 138,
+          "new_start": 132,
+          "new_end": 134
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 136,
+          "new_end": 137
+        },
+        {
+          "old_start": 143,
+          "old_end": 143,
+          "new_start": 141,
+          "new_end": 141
+        },
+        {
+          "old_start": 147,
+          "old_end": 147,
+          "new_start": 145,
+          "new_end": 145
+        },
+        {
+          "old_start": 153,
+          "old_end": 153,
+          "new_start": 151,
+          "new_end": 152
+        },
+        {
+          "old_start": null,
+          "old_end": null,
+          "new_start": 154,
+          "new_end": 170
+        }
+      ],
+      "working_tree_sha256": "ca1765267991163e6ffe31379d2bcdb621a6f867e24d9ee7da33b9b49bcab79e",
+      "symbols": [
+        "independent shelf paging tests"
+      ],
+      "purpose": "Verify one row never moves the other",
+      "previous_behavior": "Tests expected shared pagination",
+      "new_behavior": "Tests assert unchanged sibling track for wheel, touch and buttons plus filter reset",
+      "data_impact": "No schema or production data change. Existing local demo cart behavior retained.",
+      "access_control_impact": "None: public routes and permissions unchanged.",
+      "risks": [
+        "Physical Safari not exercised"
+      ],
+      "rollback": "Revert this commit as a unit; no data migration is needed."
+    }
+  ],
+  "production_safety": {
+    "operational_data": "No production data accessed or changed. Tests used browser-local demo state.",
+    "schema_migration": "None: presentation-only change.",
+    "external_side_effects": [
+      "Local preview restarted. No deployment or external mutations."
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "evidence": "Production compilation and TypeScript checks passed."
+    },
+    {
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "evidence": "12 desktop and mobile scenarios passed."
+    },
+    {
+      "command": "npx playwright test --grep \"independent shelf|cutout showcase\"",
+      "result": "passed",
+      "evidence": "4 cases passed again after hover clipping refinement."
+    }
+  ],
+  "residual_risks": [
+    "Physical Safari and short landscape viewports remain untested. Checkout remains a demo."
+  ],
+  "commit": "same-as-metadata-file"
+}

@@ -1143,3 +1143,93 @@ body:has(.atelier-home) {
     transition: none;
   }
 }
+.shelf-lane {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 36%;
+  touch-action: pinch-zoom;
+}
+.lane-0 {
+  top: 12%;
+}
+.lane-1 {
+  top: 46%;
+}
+.shelf-viewport {
+  position: absolute;
+  inset: 0 3%;
+  overflow: hidden;
+}
+.atelier-home .shelf-lane .asset-shelf {
+  inset: 0 5% 0;
+  height: 100%;
+  padding: 0 0 12px;
+  grid-template-rows: 1fr;
+}
+.shelf-paging {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: #f5e2be;
+}
+.shelf-paging button {
+  position: absolute;
+  top: 45%;
+  width: 36px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: #25170dc9;
+  color: inherit;
+  border: 1px solid #b1976970;
+  pointer-events: auto;
+}
+.shelf-paging button:first-child {
+  left: 1%;
+}
+.shelf-paging button:last-child {
+  right: 1%;
+}
+.shelf-paging button:disabled {
+  opacity: 0.3;
+}
+.shelf-paging span {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+}
+@media (max-width: 700px) {
+  .shelf-lane {
+    height: 29%;
+  }
+  .lane-0 {
+    top: 20%;
+  }
+  .lane-1 {
+    top: 49%;
+  }
+  .shelf-viewport {
+    inset: 0 2%;
+  }
+  .atelier-home .shelf-lane .asset-shelf {
+    inset: 0 3%;
+    padding-bottom: 16px;
+  }
+  .shelf-paging button {
+    width: 25px;
+    height: 36px;
+  }
+  .shelf-paging button:first-child {
+    left: 0;
+  }
+  .shelf-paging button:last-child {
+    right: 0;
+  }
+}
+.shelf-viewport {
+  overflow: visible;
+  clip-path: inset(-100vh 0);
+}

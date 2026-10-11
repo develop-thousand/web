@@ -96,7 +96,7 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
   await page.keyboard.press("ArrowRight");
   await expect(page.locator(".selection-actions a")).toHaveAttribute(
     "href",
-    "/pies/apple",
+    "/pies/figrey",
   );
   await page.getByRole("button", { name: "스트로베리 파이 선택" }).click();
   await expect(
@@ -109,49 +109,65 @@ test("cutout showcase, hover persistence, keyboard, cart and reduced motion", as
   );
 });
 
-test("fixed cabinet wheel, paging, filters and swipe", async ({
-  page,
-}, info) => {
+test("independent shelf paging, filters and swipe", async ({ page }, info) => {
   await page.goto("/");
+  const top = page.locator(".lane-0"),
+    bottom = page.locator(".lane-1");
   const background = page.locator(".empty-cabinet");
   await expect(background).toHaveCount(1);
-  expect(
-    await background.evaluate((el) =>
-      el.parentElement?.classList.contains("asset-cabinet"),
-    ),
-  ).toBe(true);
   const before = await background.boundingBox();
-  await page.mouse.move(30, 300);
+  const lowerTransform = await bottom
+    .locator(".cabinet-track")
+    .getAttribute("style");
+  const upperBox = (await top.boundingBox())!;
+  await page.mouse.move(15, upperBox.y + upperBox.height / 2);
   await page.mouse.wheel(0, 700);
-  await expect(page.locator(".cabinet-paging span")).toHaveText("2 / 2");
+  await expect(top.locator(".shelf-paging span")).toHaveText("2 / 2");
+  await expect(bottom.locator(".shelf-paging span")).toHaveText("1 / 2");
+  expect(await bottom.locator(".cabinet-track").getAttribute("style")).toBe(
+    lowerTransform,
+  );
   expect(await background.boundingBox()).toEqual(before);
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
-  await expect(page.locator("footer")).toHaveCount(0);
-  await expect(
-    page.locator(".cabinet-bay[inert] .shelf-product:focus"),
-  ).toHaveCount(0);
-  await page.locator(".cabinet-paging button").first().click();
-  await expect(page.locator(".cabinet-paging span")).toHaveText("1 / 2");
-  await page.locator(".cabinet-filters").locator("button").last().click();
-  await expect(page.locator(".cabinet-paging span")).toHaveText("1 / 1");
-  await expect(page.locator(".cabinet-paging button").last()).toBeDisabled();
-  await page.locator(".cabinet-filters").locator("button").first().click();
+  const upperTransform = await top
+    .locator(".cabinet-track")
+    .getAttribute("style");
   if (info.project.name === "mobile") {
+    const box = (await bottom.boundingBox())!;
+    const y = box.y + box.height / 2;
     const cdp = await page.context().newCDPSession(page);
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchStart",
-      touchPoints: [{ x: 330, y: 300 }],
+      touchPoints: [{ x: 330, y }],
     });
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchMove",
-      touchPoints: [{ x: 60, y: 310 }],
+      touchPoints: [{ x: 60, y }],
     });
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchEnd",
       touchPoints: [],
     });
-    await expect(page.locator(".cabinet-paging span")).toHaveText("2 / 2");
+  } else {
+    await bottom.locator(".shelf-paging button").last().click();
   }
+  await expect(bottom.locator(".shelf-paging span")).toHaveText("2 / 2");
+  expect(await top.locator(".cabinet-track").getAttribute("style")).toBe(
+    upperTransform,
+  );
+  await top.locator(".shelf-paging button").first().click();
+  await expect(top.locator(".shelf-paging span")).toHaveText("1 / 2");
+  await expect(bottom.locator(".shelf-paging span")).toHaveText("2 / 2");
+  await page.locator(".cabinet-filters button").last().click();
+  await expect(page.locator(".shelf-paging")).toHaveCount(0);
+  await expect(
+    page.locator(".cabinet-bay:not([inert]) .shelf-product"),
+  ).toHaveCount(2);
+  await page.locator(".cabinet-filters button").first().click();
+  await expect(page.locator(".shelf-paging span")).toHaveText([
+    "1 / 2",
+    "1 / 2",
+  ]);
 });
 
 test("filter, search, persisted cart and demo pickup flow", async ({
